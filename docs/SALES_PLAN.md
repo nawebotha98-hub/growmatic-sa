@@ -26,7 +26,7 @@ Start narrow. Pick ONE vertical for the first 90 days so your message, case stud
 4. **Home services** (solar installers, security, plumbing) — after-hours enquiries, quote follow-up.
 5. **E-commerce & retail** — order queries, WhatsApp support.
 
-**Ideal client profile:** 5–50 staff, already getting leads (Google, Facebook, referrals), owner-managed, based in Gauteng / Western Cape / KZN metros.
+**Ideal client profile:** 5–50 staff, already getting leads (Google, Facebook, referrals), owner-managed, based in **Gqeberha (Nelson Mandela Bay), Eastern Cape** — local focus means you can meet owners face-to-face, demo in person, and build a referral network in one tight business community. See `GQEBERHA_PROSPECTING.md` for the local targeting plan.
 
 ## 3. How we reach them (channels, in order of ROI)
 

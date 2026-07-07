@@ -3,11 +3,12 @@
 Copy-paste scripts for the full outreach sequence. Replace everything in `[brackets]`. Keep emails under 120 words — busy owners read on their phones.
 
 **Rules that make these work:**
-- Personalise the first line (something specific about *their* business — never skip this).
+- **Gqeberha-only targeting** — every prospect must be a Nelson Mandela Bay business. Personalise the first line with something local (their suburb, a nearby landmark, a local Google review) as well as something specific about *their* business — never skip this.
 - One email = one idea = one call to action.
 - Send Tue–Thu, 08:00–10:00 SAST.
 - Follow up: Day 3, Day 7, Day 14, then break-up email. Most replies come from follow-up #2 and #3.
 - POPIA: include the opt-out line, identify yourself honestly, and stop on request.
+- Where it reads naturally, mention you're Gqeberha-based too — local-to-local outreach gets replies that a national-sounding pitch doesn't.
 
 ---
 
@@ -17,13 +18,13 @@ Copy-paste scripts for the full outreach sequence. Replace everything in `[brack
 
 Hi [First Name],
 
-I noticed [something specific — e.g. "you're getting great reviews on Google, and your listings on Property24 are pulling enquiries"]. Quick question: what happens to the enquiries that come in after hours or over weekends?
+I noticed [something specific and local — e.g. "you're right on Beach Road and picking up great reviews from the Summerstrand crowd"]. Quick question: what happens to the enquiries that come in after hours or over weekends?
 
-Most [industry] businesses we speak to lose 30–40% of leads simply because nobody replies in time.
+Most [industry] businesses here in Gqeberha lose 30–40% of leads simply because nobody replies in time.
 
-We built GrowMatic — an AI assistant that replies to every enquiry (website, WhatsApp, Facebook) within seconds, 24/7, and books the appointment straight into your diary.
+I'm based here in Nelson Mandela Bay too — I built GrowMatic, an AI assistant that replies to every enquiry (website, WhatsApp, Facebook) within seconds, 24/7, and books the appointment straight into your diary.
 
-Worth a quick 15-minute call this week to see if it fits [Business Name]? I can show you a live demo answering your own website's enquiries.
+Worth a quick 15-minute call this week, or I could pop in to show you in person? I can demo it live answering your own website's enquiries.
 
 Regards,
 [Your Name]
