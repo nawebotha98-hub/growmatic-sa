@@ -8,11 +8,11 @@ A practical 30/60/90-day plan for getting the first paying clients for GrowMatic
 
 Don't sell "AI automation" — sell the outcome. Lead with one of these packaged offers:
 
-| Package | What the client gets | Suggested price (ZAR) |
+| Package | What the client gets | Price (ZAR) — must match the website |
 |---|---|---|
-| **Lead Response Bot** | AI assistant that replies to website/WhatsApp/Facebook enquiries within seconds, 24/7, and books appointments | R2,500–R4,500/month + R5,000 once-off setup |
-| **Admin Autopilot** | Automated quoting, invoicing follow-ups, and customer reminders | R3,500–R6,000/month |
-| **Custom Automation Build** | Bespoke workflow automation (CRM, email, WhatsApp, sheets) | From R15,000 once-off + support retainer |
+| **Lead Response Bot** (flagship) | AI agent answering WhatsApp, email & website chat 24/7, lead capture & follow-up, booking automation, Missed Call Text-Back, monthly report | R3,500/month + R5,000 once-off setup |
+| **Admin Autopilot** | Everything in Lead Response Bot + automated quoting & invoice follow-ups, customer reminders, Client Dashboard, priority support | R4,500/month + R7,500 once-off setup |
+| **Custom Automation Build** | Bespoke workflow automation (CRM, email, WhatsApp, sheets), business audit, staff training | From R15,000 once-off + custom retainer |
 
 Anchor everything to one number: **"How many enquiries do you miss after hours, and what is one lost job worth?"** If a missed lead is worth R2,000+, a R3,500/month bot pays for itself with two saved leads.
 
