@@ -5,5 +5,4 @@ AI Automation Platform for South African Businesses
 
 `index.html`/`styles.css`/`script.js`/`assets/` here are a static HTML/CSS/JS recreation of the same design, kept for reference, but no longer deployed — the deploy workflow was removed to stop it generating failed-run emails on every push to this repo.
 
-## What's still active here
-- `leads/` — GrowMatic SA's business-development lead tracker and outreach email drafts. See `leads/README.md`.
+The `leads/` business-development tracker has moved to `nawebotha98-hub/growmaticsa-com` for consolidation. This repo has no other active purpose.
