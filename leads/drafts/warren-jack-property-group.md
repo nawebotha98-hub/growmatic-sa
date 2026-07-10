@@ -12,5 +12,12 @@ Would you be open to a free 30-minute call to see if this is a fit for the group
 Let me know if you'd rather not receive further messages like this.
 
 Best,
+
 Ewan Botha
-GrowMatic SA · growmaticsa.com · +27 67 108 2665
+Founder | GrowMatic SA
++27 67 108 2665
+ewan@growmaticsa.com
+growmaticsa.com
+Book a free strategy call on WhatsApp: https://wa.me/27671082665
+
+AI agents & automation for South African businesses — 24/7 lead response, bookings & follow-ups.
