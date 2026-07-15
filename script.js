@@ -108,6 +108,75 @@
       <p>${escapeHtml(f.a)}</p>
     </details>`).join("");
 
+  // ---------- Hero phone: cycle WhatsApp → Email → Website chat ----------
+  (function initPhoneCycle() {
+    const inner = document.getElementById("phone-inner");
+    const tabs = document.getElementById("phone-tabs");
+    if (!inner || !tabs) return;
+
+    const labels = ["WhatsApp", "Email", "Website chat"];
+
+    const wa = [
+      ["in", "Hi, are you open on Sundays?", "14:02", false],
+      ["out", "We're closed Sundays, but open Mon–Sat 9am–9pm 😊", "14:02", true],
+      ["in", "Can I book for 4 on Friday at 7?", "14:03", false],
+      ["out", "Done — Friday 7pm for 4 is confirmed ✅ Reminder set.", "14:03", true]
+    ];
+    const web = [
+      ["in", "Do you work with medical practices?"],
+      ["out", "We do! We help practices cut no-shows and answer patients 24/7."],
+      ["in", "Sounds good 👍"],
+      ["out", "Want a quick demo? I can set it up in 2 minutes 🚀"]
+    ];
+
+    const screenWA = () => `
+      <div class="phone-header">
+        <img src="assets/logo.png" alt="GrowMatic">
+        <div><div class="phone-title">GrowMatic Assistant</div><div class="phone-status">online</div></div>
+      </div>
+      <div class="phone-messages">
+        ${wa.map((m, i) => `<div class="msg msg-${m[0] === "out" ? "out" : "in"}" style="animation-delay:${0.3 + i * 0.5}s">${escapeHtml(m[1])}<div class="msg-time">${escapeHtml(m[2])}${m[3] ? ' <span class="msg-tick">✓✓</span>' : ""}</div></div>`).join("")}
+      </div>`;
+
+    const screenEmail = () => `
+      <div class="mail-header">
+        <div class="mail-icon">✉</div>
+        <div><div class="phone-title" style="color:var(--ink)">Inbox</div><div class="phone-status" style="color:rgba(0,0,0,0.45);opacity:1">Answered automatically · in seconds</div></div>
+      </div>
+      <div class="mail-body">
+        <div class="mail-card" style="animation-delay:.3s">
+          <div class="mail-from"><span>Sarah — Woodlands Dental</span><span style="font-size:10px;color:rgba(0,0,0,0.4);font-weight:400">now</span></div>
+          <div class="mail-sub">Subject: Appointment availability</div>
+          <div class="mail-text">Hi, do you have anything open this week for a check-up?</div>
+        </div>
+        <div class="mail-card reply" style="animation-delay:1.1s">
+          <div class="mail-badge">✓ Replied automatically</div>
+          <div class="mail-text">Hi Sarah! Thanks for reaching out 😊 We've got Thursday 10:30 or Friday 14:00 open — want me to book one in for you?</div>
+        </div>
+      </div>`;
+
+    const screenWeb = () => `
+      <div class="web-header">
+        <div class="web-avatar"><img src="assets/logo.png" alt="Matt"><span class="dot"></span></div>
+        <div><div class="phone-title">Matt</div><div class="phone-status">usually replies in seconds</div></div>
+      </div>
+      <div class="web-body">
+        ${web.map((m, i) => `<div class="web-msg web-${m[0]}" style="animation-delay:${0.3 + i * 0.5}s">${escapeHtml(m[1])}</div>`).join("")}
+      </div>`;
+
+    const screens = [screenWA, screenEmail, screenWeb];
+    let idx = 0;
+    const paint = () => {
+      inner.innerHTML = screens[idx]();
+      tabs.innerHTML = `<div class="phone-dots">${[0, 1, 2].map((k) => `<span class="phone-dot${k === idx ? " active" : ""}"></span>`).join("")}</div><span class="phone-tab-label">${labels[idx]}</span>`;
+    };
+    paint();
+    setInterval(() => {
+      inner.style.opacity = "0";
+      setTimeout(() => { idx = (idx + 1) % 3; paint(); inner.style.opacity = "1"; }, 350);
+    }, 5200);
+  })();
+
   // ---------- Nav scroll effect ----------
   const nav = document.getElementById("nav");
   const onScroll = () => {
