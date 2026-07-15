@@ -189,13 +189,15 @@ img { max-width: 100%; }
   padding: 12px; box-shadow: 0 30px 80px -20px rgba(0,0,0,0.35);
   animation: floatY 7s ease-in-out infinite;
 }
-.phone-screen { border-radius: 36px; overflow: hidden; background: #ECE5DD; height: 580px; display: flex; flex-direction: column; }
+.phone-screen { border-radius: 36px; overflow: hidden; background: #0a0a0a; height: 580px; display: flex; flex-direction: column; }
+.phone-inner { flex: 1; min-height: 0; display: flex; flex-direction: column; opacity: 1; transition: opacity .35s ease; }
 .phone-header { background: #075E54; color: #fff; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
 .phone-header img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: #fff; flex-shrink: 0; display: block; }
 .phone-title { font-size: 14px; font-weight: 500; line-height: 1.2; }
 .phone-status { font-size: 11px; opacity: 0.8; line-height: 1.4; }
 .phone-messages {
-  flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 8px; overflow: hidden;
+  flex: 1; min-height: 0; padding: 16px 12px; display: flex; flex-direction: column; gap: 8px; overflow: hidden;
+  background-color: #ECE5DD;
   background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
   background-size: 14px 14px;
 }
@@ -216,6 +218,36 @@ img { max-width: 100%; }
 .msg-typing span { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.35); animation: blink 1.2s ease infinite; }
 .msg-typing span:nth-child(2) { animation-delay: .2s; }
 .msg-typing span:nth-child(3) { animation-delay: .4s; }
+
+/* ---------- PHONE: email channel ---------- */
+.mail-header { background: #fff; color: var(--ink); padding: 14px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.mail-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(31,157,92,0.12); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.mail-body { flex: 1; min-height: 0; padding: 16px 14px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; background: #f4f4f5; }
+.mail-card { background: #fff; border-radius: 12px; padding: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); opacity: 0; animation: msgIn .4s ease both; }
+.mail-card.reply { background: rgba(31,157,92,0.08); border: 1px solid rgba(31,157,92,0.22); box-shadow: none; }
+.mail-from { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; font-weight: 600; color: var(--ink); }
+.mail-sub { font-size: 11px; color: rgba(0,0,0,0.5); margin: 2px 0 8px; }
+.mail-text { font-size: 12.5px; color: var(--ink); line-height: 1.45; }
+.mail-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 500; color: var(--green); background: rgba(31,157,92,0.14); border-radius: 999px; padding: 2px 8px; margin-bottom: 8px; }
+
+/* ---------- PHONE: website chat channel ---------- */
+.web-header { background: #0a0a0a; padding: 14px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.web-header .phone-title { color: #fff; }
+.web-header .phone-status { color: rgba(255,255,255,0.4); opacity: 1; }
+.web-avatar { position: relative; width: 36px; height: 36px; flex-shrink: 0; }
+.web-avatar img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: #fff; display: block; }
+.web-avatar .dot { position: absolute; bottom: -1px; right: -1px; width: 11px; height: 11px; border-radius: 50%; background: var(--green); border: 2px solid #0a0a0a; }
+.web-body { flex: 1; min-height: 0; padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; background: #0f0f10; }
+.web-msg { max-width: 80%; padding: 8px 14px; border-radius: 16px; font-size: 13px; line-height: 1.5; opacity: 0; animation: msgIn .35s ease both; }
+.web-in { align-self: flex-start; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.9); border-bottom-left-radius: 6px; }
+.web-out { align-self: flex-end; background: var(--green); color: #fff; border-bottom-right-radius: 6px; }
+
+/* ---------- PHONE: channel indicator ---------- */
+.phone-tabs { flex-shrink: 0; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px; background: #0a0a0a; }
+.phone-dots { display: flex; align-items: center; gap: 6px; }
+.phone-dot { height: 6px; width: 6px; border-radius: 999px; background: rgba(255,255,255,0.25); transition: all .3s ease; }
+.phone-dot.active { width: 20px; background: var(--green); }
+.phone-tab-label { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.7); width: 92px; }
 
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes msgIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
