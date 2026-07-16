@@ -97,7 +97,7 @@ img { max-width: 100%; }
   padding: 16px 24px;
 }
 .nav-logo { display: flex; align-items: center; }
-.nav-logo img { height: 120px; width: auto; margin: -42px 0 -42px -20px; display: block; }
+.nav-logo img { height: 132px; width: auto; margin: -46px 0 -46px -22px; display: block; }
 .nav-links { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; justify-content: flex-end; }
 .nav-links > a:not(.btn-nav) { font-size: 13px; font-weight: 500; color: rgba(10,10,10,0.7); }
 .btn-nav {
