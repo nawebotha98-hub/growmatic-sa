@@ -116,7 +116,11 @@ img { max-width: 100%; }
   padding: 170px 24px 130px;
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  /* 8fr/4fr (was 7fr/5fr) gives the heading extra width margin against
+     the phone graphic -- the phone itself is a fixed 320px wide and
+     still fits comfortably within a 4fr share at any width this grid is
+     actually used (see the 1280px breakpoint above). */
+  grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
   gap: 64px;
   align-items: center;
 }
@@ -124,7 +128,14 @@ img { max-width: 100%; }
 .hero-inner h1 {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
-  font-size: clamp(3rem, 7.5vw, 7rem);
+  /* The 7vw term reaches its 5.5rem ceiling at a 1257px viewport --
+     at or before the 1280px width where .hero-inner's own max-width
+     takes over and the container stops growing. Font and container
+     both finish scaling together instead of the font continuing to
+     grow (via raw vw) after the container has already capped out,
+     which is what let a word outgrow its column at some viewport
+     widths despite fitting fine at both smaller and larger ones. */
+  font-size: clamp(2.25rem, 7vw, 5.5rem);
   letter-spacing: -0.04em;
   line-height: 1.02;
   margin: 0;
@@ -405,7 +416,14 @@ img { max-width: 100%; }
 @media (min-width: 640px) {
   .grid-3, .grid-4 { gap: 40px; }
 }
-@media (max-width: 900px) {
+@media (max-width: 1280px) {
+  /* 1280px matches .hero-inner's own max-width (see above) so the
+     two-column layout ONLY ever renders at that one fixed, generously
+     wide internal size -- never a squeezed in-between width. Below
+     900px this "squeeze zone" briefly went untested and a large
+     display-font word ("customers.") didn't fit its column and broke
+     mid-word; single-column below the container's own max-width removes
+     that zone entirely rather than trying to tune around it. */
   .hero-inner { grid-template-columns: 1fr; }
   .phone-wrap { justify-self: stretch; }
   .footer-top { grid-template-columns: 1fr; }
