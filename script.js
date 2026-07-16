@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const WHATSAPP_NUMBER = "27671082665";
+  const WHATSAPP_NUMBER = "27827900255";
   const wa = (text) => "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
   const waCall = wa("Hi! I'd like to book a free business consultation.");
   const waGeneral = wa("Hi! I'd like to learn more about GrowMatic SA.");
