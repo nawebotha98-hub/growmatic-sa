@@ -186,6 +186,19 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  // ---------- Mobile nav toggle ----------
+  const navToggle = document.getElementById("nav-toggle");
+  const navLinks = document.getElementById("nav-links");
+  const closeMenu = () => {
+    nav.classList.remove("menu-open");
+    navToggle.setAttribute("aria-expanded", "false");
+  };
+  navToggle.addEventListener("click", () => {
+    const open = nav.classList.toggle("menu-open");
+    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  navLinks.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
+
   // ---------- Scroll reveals ----------
   const revealShow = (el) => {
     const delay = parseInt(el.dataset.delay || "0", 10);
