@@ -26,7 +26,7 @@
      asset for a while after a deploy; changing the query string makes the
      browser and CDN treat it as a brand new URL, guaranteeing the latest
      file is fetched immediately instead of racing cache propagation. -->
-<link rel="stylesheet" href="styles.css?v=20260716h">
+<link rel="stylesheet" href="styles.css?v=20260720a">
 </head>
 <body>
 
@@ -42,7 +42,7 @@
       <a href="#industries">Industries</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
-      <a href="trades.html">For Trades</a>
+      <a href="trades.html" class="nav-trades">For Trades</a>
       <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20book%20a%20free%20business%20consultation." class="btn-nav wa-call" target="_blank" rel="noopener noreferrer">Book a call</a>
     </div>
   </div>
@@ -115,6 +115,38 @@
   </div>
 </section>
 
+<section class="section section-light" id="cost">
+  <div class="wrap">
+    <div class="section-head reveal" style="max-width:720px">
+      <div class="eyebrow">The cost of a missed call</div>
+      <h2>What are missed calls <span class="accent">costing you?</span></h2>
+      <p class="section-sub">Rough it out with your own numbers — even a conservative estimate usually surprises people.</p>
+    </div>
+    <div class="calc reveal">
+      <div class="calc-inputs">
+        <div class="calc-field">
+          <label for="calls">Calls you miss a week</label>
+          <input id="calls" type="number" min="0" max="500" value="5" inputmode="numeric">
+        </div>
+        <div class="calc-field">
+          <label for="job">Average sale value (R)</label>
+          <input id="job" type="number" min="0" step="100" value="1500" inputmode="numeric">
+        </div>
+      </div>
+      <div class="calc-out">
+        <div class="calc-line"><span>Missed calls a month</span><b id="o-month">≈ 22</b></div>
+        <div class="calc-big">
+          <span>If just 1 in 3 became a sale, you're letting go of</span>
+          <strong id="o-year">R0</strong>
+          <em>a year</em>
+        </div>
+        <div class="calc-sub" id="o-mo">That's about R0/month walking past your door.</div>
+        <p class="calc-note">A rough estimate from your own numbers — not a promise. Recovering even a slice of these is exactly what we set up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section section-light section-border">
   <div class="wrap">
     <div class="grid grid-4">
@@ -180,7 +212,7 @@
       </div>
     </div>
     <div class="coming-soon-cta reveal">
-      <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20early%20access%20to%20the%20Virtual%20Receptionist." class="btn-primary wa-early" target="_blank" rel="noopener noreferrer">Join the early access list</a>
+      <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20try%20your%20AI%20on%20WhatsApp." class="btn-primary" target="_blank" rel="noopener noreferrer">Try our AI now on WhatsApp <span>→</span></a>
       <span class="eyebrow" style="color:rgba(255,255,255,0.4)">Priority pricing for first 20 businesses</span>
     </div>
   </div>
@@ -337,6 +369,6 @@
   </div>
 </div>
 
-<script src="script.js?v=20260716h"></script>
+<script src="script.js?v=20260720a"></script>
 </body>
 </html>

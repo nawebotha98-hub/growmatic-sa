@@ -642,3 +642,26 @@ img { max-width: 100%; }
   .cta-tags { gap: 20px 28px; }
   .coming-soon-cta { justify-content: flex-start; }
 }
+
+/* "For Trades" nav link — highlighted in brand green so trade visitors are
+   drawn to the dedicated /trades landing page. Appended after the base
+   .nav-links rule so it wins on equal specificity. */
+.nav-links > a.nav-trades { color: var(--green); font-weight: 600; }
+.nav-links > a.nav-trades:hover { color: var(--green); opacity: 0.75; }
+
+/* Missed-call cost calculator (used on the homepage and /trades). */
+.calc { display: grid; grid-template-columns: 0.9fr 1.1fr; border: 1px solid var(--border, #e4e4e0); border-radius: 20px; overflow: hidden; background: #fff; box-shadow: 0 24px 60px -34px rgba(10,10,10,.28); max-width: 940px; }
+.calc-inputs { padding: 32px; background: #fafaf8; border-right: 1px solid #e4e4e0; display: flex; flex-direction: column; gap: 22px; justify-content: center; }
+.calc-field label { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #6b6b68; margin-bottom: 8px; }
+.calc-field input { width: 100%; padding: 14px 15px; border: 1px solid #d9d9d3; border-radius: 12px; font-size: 20px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: #0a0a0a; }
+.calc-field input:focus { outline: 2px solid var(--green, #1f9d5c); outline-offset: 1px; border-color: var(--green, #1f9d5c); }
+.calc-out { padding: 32px; display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+.calc-line { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; color: #5c5c58; border-bottom: 1px dotted #e4e4e0; padding-bottom: 12px; }
+.calc-line b { font-family: 'Syne', sans-serif; font-size: 18px; color: #0a0a0a; }
+.calc-big { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
+.calc-big span { font-size: 14px; color: #5c5c58; }
+.calc-big strong { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); color: var(--green, #1f9d5c); line-height: 1.05; letter-spacing: -.02em; }
+.calc-big em { font-style: normal; font-size: 12px; color: #6b6b68; font-family: 'IBM Plex Mono', monospace; letter-spacing: .06em; text-transform: uppercase; margin-top: 2px; }
+.calc-sub { font-size: 15px; color: #0a0a0a; font-weight: 500; }
+.calc-note { font-size: 12.5px; color: #6b6b68; margin: 6px 0 0; line-height: 1.5; }
+@media (max-width: 720px){ .calc { grid-template-columns: 1fr; } .calc-inputs { border-right: none; border-bottom: 1px solid #e4e4e0; } }
