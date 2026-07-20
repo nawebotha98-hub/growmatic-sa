@@ -177,6 +177,30 @@
     }, 5200);
   })();
 
+  // ---------- Missed-call cost calculator ----------
+  (function initCostCalculator() {
+    const calls = document.getElementById("calls");
+    const job = document.getElementById("job");
+    const oMonth = document.getElementById("o-month");
+    const oYear = document.getElementById("o-year");
+    const oMo = document.getElementById("o-mo");
+    if (!calls || !job || !oYear) return;
+
+    const zar = new Intl.NumberFormat("en-ZA", { style: "currency", currency: "ZAR", maximumFractionDigits: 0 });
+    const calc = () => {
+      const c = Math.max(0, Number(calls.value) || 0);
+      const v = Math.max(0, Number(job.value) || 0);
+      const monthly = Math.round(c * 4.33);   // missed calls per month
+      const perMonth = (monthly / 3) * v;      // conservative: 1 in 3 becomes a sale
+      oMonth.textContent = "≈ " + monthly;
+      oYear.textContent = zar.format(perMonth * 12);
+      oMo.textContent = "That's about " + zar.format(perMonth) + "/month walking past your door.";
+    };
+    calls.addEventListener("input", calc);
+    job.addEventListener("input", calc);
+    calc();
+  })();
+
   // ---------- Nav scroll effect ----------
   const nav = document.getElementById("nav");
   const onScroll = () => {

@@ -26,7 +26,7 @@
      asset for a while after a deploy; changing the query string makes the
      browser and CDN treat it as a brand new URL, guaranteeing the latest
      file is fetched immediately instead of racing cache propagation. -->
-<link rel="stylesheet" href="styles.css?v=20260719a">
+<link rel="stylesheet" href="styles.css?v=20260720a">
 </head>
 <body>
 
@@ -110,6 +110,38 @@
         <div class="eyebrow accent">The Trap</div>
         <h3>Stuck working in the business, not on it.</h3>
         <p>The right systems working quietly in the background give you your time back — so you can actually grow instead of just keeping up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-light" id="cost">
+  <div class="wrap">
+    <div class="section-head reveal" style="max-width:720px">
+      <div class="eyebrow">The cost of a missed call</div>
+      <h2>What are missed calls <span class="accent">costing you?</span></h2>
+      <p class="section-sub">Rough it out with your own numbers — even a conservative estimate usually surprises people.</p>
+    </div>
+    <div class="calc reveal">
+      <div class="calc-inputs">
+        <div class="calc-field">
+          <label for="calls">Calls you miss a week</label>
+          <input id="calls" type="number" min="0" max="500" value="5" inputmode="numeric">
+        </div>
+        <div class="calc-field">
+          <label for="job">Average sale value (R)</label>
+          <input id="job" type="number" min="0" step="100" value="1500" inputmode="numeric">
+        </div>
+      </div>
+      <div class="calc-out">
+        <div class="calc-line"><span>Missed calls a month</span><b id="o-month">≈ 22</b></div>
+        <div class="calc-big">
+          <span>If just 1 in 3 became a sale, you're letting go of</span>
+          <strong id="o-year">R0</strong>
+          <em>a year</em>
+        </div>
+        <div class="calc-sub" id="o-mo">That's about R0/month walking past your door.</div>
+        <p class="calc-note">A rough estimate from your own numbers — not a promise. Recovering even a slice of these is exactly what we set up.</p>
       </div>
     </div>
   </div>
@@ -337,6 +369,6 @@
   </div>
 </div>
 
-<script src="script.js?v=20260716h"></script>
+<script src="script.js?v=20260720a"></script>
 </body>
 </html>
