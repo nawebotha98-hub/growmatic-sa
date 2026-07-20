@@ -642,3 +642,9 @@ img { max-width: 100%; }
   .cta-tags { gap: 20px 28px; }
   .coming-soon-cta { justify-content: flex-start; }
 }
+
+/* "For Trades" nav link — highlighted in brand green so trade visitors are
+   drawn to the dedicated /trades landing page. Appended after the base
+   .nav-links rule so it wins on equal specificity. */
+.nav-links > a.nav-trades { color: var(--green); font-weight: 600; }
+.nav-links > a.nav-trades:hover { color: var(--green); opacity: 0.75; }
