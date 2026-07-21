@@ -295,26 +295,24 @@
   }, 6000);
 
   // ---------- Hero canvas ----------
-  // A calm, premium "aurora": a handful of large, very soft green light
-  // blooms that drift and breathe slowly behind the phone — the restrained,
-  // expensive backdrop you see on top SaaS sites. Deliberately quiet: low
-  // alpha, wide radii, slow timing, and weighted to the right so it never
-  // competes with the headline. Retina-scaled; reduced motion draws one
-  // static frame instead of a loop.
+  // The brand logo, brought to life: a rising green bar chart, a growth line
+  // climbing up through it, and a little plant sprouting two leaves at the
+  // top — "business growth" as the logo tells it. It grows in over ~9s, holds,
+  // softly fades and regrows, so it loops seamlessly. Kept quiet (low alpha,
+  // soft green) and positioned to the right so it sits behind/beside the phone
+  // and never competes with the headline. Retina-scaled; reduced motion draws
+  // one fully-grown static frame.
   (function initHeroCanvas() {
     const canvas = document.getElementById("hero-canvas");
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // x,y as fractions of the hero; r as a fraction of the larger side.
-    // ax,ay = drift amplitude (fraction); s = drift speed; peak = max alpha.
-    const blooms = [
-      { x: 0.74, y: 0.40, r: 0.52, col: "31,157,92",  peak: 0.13, ax: 0.05, ay: 0.04, s: 0.045, p: 0.0 },
-      { x: 0.92, y: 0.14, r: 0.34, col: "58,190,120", peak: 0.09, ax: 0.04, ay: 0.05, s: 0.060, p: 1.7 },
-      { x: 0.58, y: 0.74, r: 0.40, col: "31,157,92",  peak: 0.06, ax: 0.06, ay: 0.03, s: 0.038, p: 3.1 },
-      { x: 0.06, y: 0.94, r: 0.42, col: "31,157,92",  peak: 0.045, ax: 0.05, ay: 0.04, s: 0.033, p: 4.6 }
-    ];
+    const GREEN = "31,157,92";
+    const LEAF = "46,178,96";
+    const CYCLE = 9; // seconds per grow→hold→fade loop
+    // Ascending bar heights (fraction of hero height), left→right, like the logo.
+    const BARS = [0.12, 0.16, 0.205, 0.255, 0.305, 0.355];
 
     let w = 0, h = 0;
     const resize = () => {
@@ -322,29 +320,139 @@
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
     };
 
-    const draw = (t) => {
+    const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+    const seg = (p, a, b) => clamp((p - a) / (b - a));
+    const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+    const easeInOut = (x) => x * x * (3 - 2 * x);
+
+    const roundRectPath = (x, y, rw, rh, r) => {
+      const rr = Math.min(r, rw / 2, Math.abs(rh) / 2);
+      if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(x, y, rw, rh, rr); return; }
+      ctx.beginPath();
+      ctx.moveTo(x + rr, y);
+      ctx.arcTo(x + rw, y, x + rw, y + rh, rr);
+      ctx.arcTo(x + rw, y + rh, x, y + rh, rr);
+      ctx.arcTo(x, y + rh, x, y, rr);
+      ctx.arcTo(x, y, x + rw, y, rr);
+      ctx.closePath();
+    };
+
+    const drawLeaf = (x, y, angle, len, alpha) => {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(len * 0.5, -len * 0.44, len, 0);
+      ctx.quadraticCurveTo(len * 0.5, len * 0.44, 0, 0);
+      ctx.closePath();
+      ctx.fillStyle = "rgba(" + LEAF + "," + alpha.toFixed(3) + ")";
+      ctx.fill();
+      ctx.restore();
+    };
+
+    // Draws one frame at loop-progress p (0..1). env scales the whole thing's
+    // opacity for the fade-in / fade-out at the loop seams.
+    const drawFrame = (p, env) => {
       ctx.clearRect(0, 0, w, h);
-      const side = Math.max(w, h);
-      for (const b of blooms) {
-        const cx = (b.x + Math.sin(t * b.s + b.p) * b.ax) * w;
-        const cy = (b.y + Math.cos(t * b.s * 0.9 + b.p) * b.ay) * h;
-        const rad = b.r * side;
-        const breathe = 0.78 + 0.22 * Math.sin(t * b.s * 1.6 + b.p);
-        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rad);
-        g.addColorStop(0, "rgba(" + b.col + "," + (b.peak * breathe).toFixed(3) + ")");
-        g.addColorStop(1, "rgba(" + b.col + ",0)");
-        ctx.fillStyle = g;
-        ctx.fillRect(0, 0, w, h);
+      if (env <= 0.001) return;
+
+      // Chart geometry — sits in the open gap beside the phone so the whole
+      // motif (bars, line and the sprout) stays visible, not hidden behind it.
+      const baseY = 0.72 * h;
+      const x0 = 0.47 * w, x1 = 0.66 * w;
+      const span = x1 - x0;
+      const slot = span / BARS.length;
+      const barW = slot * 0.52;
+
+      // 1) Bars rise one after another.
+      for (let i = 0; i < BARS.length; i++) {
+        const g = easeOut(seg(p, 0.05 + i * 0.035, 0.05 + i * 0.035 + 0.3));
+        const fullH = BARS[i] * h;
+        const bh = fullH * g;
+        if (bh < 0.5) continue;
+        const bx = x0 + i * slot + (slot - barW) / 2;
+        roundRectPath(bx, baseY - bh, barW, bh, Math.min(6, barW / 2));
+        ctx.fillStyle = "rgba(" + GREEN + "," + (0.11 * env).toFixed(3) + ")";
+        ctx.fill();
+      }
+
+      // 2) Growth line climbs up-right, with a faint area fill and a glowing tip.
+      const lp = easeOut(seg(p, 0.12, 0.62));
+      const ly0 = 0.66 * h, ly1 = 0.35 * h;
+      const lineX0 = 0.43 * w, lineX1 = 0.625 * w;
+      const pointAt = (u) => {
+        const x = lineX0 + (lineX1 - lineX0) * u;
+        const y = ly0 + (ly1 - ly0) * easeInOut(u) - Math.sin(u * Math.PI) * 0.02 * h;
+        return [x, y];
+      };
+      if (lp > 0.01) {
+        const steps = 48;
+        const last = Math.max(1, Math.round(steps * lp));
+        // area fill
+        ctx.beginPath();
+        ctx.moveTo(pointAt(0)[0], baseY);
+        for (let s = 0; s <= last; s++) { const [px, py] = pointAt((s / steps)); ctx.lineTo(px, py); }
+        const [ex] = pointAt(last / steps);
+        ctx.lineTo(ex, baseY);
+        ctx.closePath();
+        ctx.fillStyle = "rgba(" + GREEN + "," + (0.05 * env).toFixed(3) + ")";
+        ctx.fill();
+        // line
+        ctx.beginPath();
+        for (let s = 0; s <= last; s++) { const [px, py] = pointAt((s / steps)); if (s === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py); }
+        ctx.strokeStyle = "rgba(" + GREEN + "," + (0.5 * env).toFixed(3) + ")";
+        ctx.lineWidth = 2.4;
+        ctx.stroke();
+        // glowing tip
+        const [tx, ty] = pointAt(last / steps);
+        const glow = ctx.createRadialGradient(tx, ty, 0, tx, ty, 22);
+        glow.addColorStop(0, "rgba(" + LEAF + "," + (0.55 * env).toFixed(3) + ")");
+        glow.addColorStop(1, "rgba(" + LEAF + ",0)");
+        ctx.fillStyle = glow;
+        ctx.fillRect(tx - 24, ty - 24, 48, 48);
+        ctx.beginPath();
+        ctx.arc(tx, ty, 3, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(" + LEAF + "," + (0.85 * env).toFixed(3) + ")";
+        ctx.fill();
+      }
+
+      // 3) Sprout: a stem rises from the line's tip, then two leaves unfurl.
+      const [tipX, tipY] = pointAt(1);
+      const stemP = easeOut(seg(p, 0.5, 0.8));
+      if (stemP > 0.01) {
+        const stemH = 0.095 * h * stemP;
+        ctx.beginPath();
+        ctx.moveTo(tipX, tipY);
+        ctx.quadraticCurveTo(tipX + 6, tipY - stemH * 0.6, tipX + 2, tipY - stemH);
+        ctx.strokeStyle = "rgba(" + LEAF + "," + (0.8 * env).toFixed(3) + ")";
+        ctx.lineWidth = 2.6;
+        ctx.stroke();
+        const topX = tipX + 2, topY = tipY - stemH;
+        const leafP = easeOut(seg(p, 0.66, 0.92));
+        if (leafP > 0.01) {
+          const ll = 0.088 * h * leafP;
+          drawLeaf(topX, topY + 3, -Math.PI * 0.74, ll, 0.85 * env);   // left leaf, up-left
+          drawLeaf(topX, topY + 5, -Math.PI * 0.2, ll * 1.05, 0.85 * env); // right leaf, up-right
+        }
       }
     };
 
     resize();
-    window.addEventListener("resize", () => { resize(); if (reduceMotion) draw(0); });
-    if (reduceMotion) { draw(0); return; }
+    const renderStatic = () => drawFrame(0.86, 1); // fully grown, pre-fade
+    window.addEventListener("resize", () => { resize(); if (reduceMotion) renderStatic(); });
+    if (reduceMotion) { renderStatic(); return; }
 
-    const loop = (now) => { draw(now / 1000); requestAnimationFrame(loop); };
+    const loop = (now) => {
+      const p = ((now / 1000) % CYCLE) / CYCLE;
+      const env = Math.min(seg(p, 0, 0.08), 1 - seg(p, 0.9, 1));
+      drawFrame(p, easeInOut(clamp(env)));
+      requestAnimationFrame(loop);
+    };
     requestAnimationFrame(loop);
   })();
 
