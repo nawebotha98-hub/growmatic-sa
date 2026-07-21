@@ -130,6 +130,12 @@ img { max-width: 100%; }
 .hero-inner {
   max-width: 1280px; margin: 0 auto;
   padding: 170px 24px 130px;
+  /* Fill the viewport so the hero uses the whole page: with align-items:
+     center below, the content spreads evenly instead of bunching at the top
+     (which is what happened once the headline was scaled down). Reset in the
+     <=1280px stacked layout, where forcing full height would leave a hole. */
+  min-height: 100vh;
+  box-sizing: border-box;
   position: relative;
   display: grid;
   /* 8fr/4fr (was 7fr/5fr) gives the heading extra width margin against
@@ -156,8 +162,11 @@ img { max-width: 100%; }
   color: var(--ink);
   overflow-wrap: break-word;
 }
-.hero-sub { margin: 40px 0 0; font-size: 20px; line-height: 1.7; color: var(--gray); font-weight: 300; max-width: 60ch; }
-.hero-ctas { margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap; }
+/* Generous vertical rhythm inside the hero — eyebrow, headline, paragraph
+   and CTAs spaced out to use the full-height section rather than clustering. */
+.hero-inner .eyebrow { margin-bottom: 30px; }
+.hero-sub { margin: 52px 0 0; font-size: 20px; line-height: 1.7; color: var(--gray); font-weight: 300; max-width: 60ch; }
+.hero-ctas { margin-top: 64px; display: flex; gap: 16px; flex-wrap: wrap; }
 
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
@@ -551,7 +560,7 @@ img { max-width: 100%; }
      display-font word ("customers.") didn't fit its column and broke
      mid-word; single-column below the container's own max-width removes
      that zone entirely rather than trying to tune around it. */
-  .hero-inner { grid-template-columns: 1fr; }
+  .hero-inner { grid-template-columns: 1fr; min-height: 0; }
   .phone-wrap { justify-self: stretch; }
   .footer-top { grid-template-columns: 1fr; }
 }
