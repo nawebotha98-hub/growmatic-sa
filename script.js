@@ -108,73 +108,117 @@
       <p>${escapeHtml(f.a)}</p>
     </details>`).join("");
 
-  // ---------- Hero phone: cycle WhatsApp → Email → Website chat ----------
+  // ---------- Hero phone: a LIVE demo of GrowMatic answering ----------
+  // Instead of dropping a whole conversation in at once, each channel now
+  // plays out message-by-message: a customer writes in, a typing indicator
+  // appears, then the automated reply lands — the product doing its job in
+  // real time. Cycles WhatsApp → Email → Website chat and loops.
   (function initPhoneCycle() {
     const inner = document.getElementById("phone-inner");
     const tabs = document.getElementById("phone-tabs");
     if (!inner || !tabs) return;
 
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const labels = ["WhatsApp", "Email", "Website chat"];
 
-    const wa = [
-      ["in", "Hi, are you open on Sundays?", "14:02", false],
-      ["out", "We're closed Sundays, but open Mon–Sat 9am–9pm 😊", "14:02", true],
-      ["in", "Can I book for 4 on Friday at 7?", "14:03", false],
-      ["out", "Done — Friday 7pm for 4 is confirmed ✅ Reminder set.", "14:03", true]
+    // Each channel: a header, a scrolling body, and a scripted sequence of
+    // steps. `in` = customer message (lands immediately); `out` = automated
+    // reply (a typing indicator shows first, then the message).
+    const channels = [
+      {
+        header: `<div class="phone-header">
+            <img src="assets/logo.png" alt="GrowMatic">
+            <div><div class="phone-title">GrowMatic Assistant</div><div class="phone-status">online</div></div>
+          </div>`,
+        bodyClass: "phone-messages",
+        typing: `<div class="msg-typing"><span></span><span></span><span></span></div>`,
+        steps: [
+          { dir: "in",  text: "Hi, are you open on Sundays?", meta: "14:02" },
+          { dir: "out", text: "We're closed Sundays, but open Mon–Sat 9am–9pm 😊", meta: "14:02", tick: true },
+          { dir: "in",  text: "Can I book for 4 on Friday at 7?", meta: "14:03" },
+          { dir: "out", text: "Done — Friday 7pm for 4 is confirmed ✅ Reminder set.", meta: "14:03", tick: true }
+        ],
+        render: (s) => `<div class="msg msg-${s.dir === "out" ? "out" : "in"}">${escapeHtml(s.text)}<div class="msg-time">${escapeHtml(s.meta)}${s.tick ? ' <span class="msg-tick">✓✓</span>' : ""}</div></div>`
+      },
+      {
+        header: `<div class="mail-header">
+            <div class="mail-icon">✉</div>
+            <div><div class="phone-title" style="color:var(--ink)">Inbox</div><div class="phone-status" style="color:rgba(0,0,0,0.45);opacity:1">Answered automatically · in seconds</div></div>
+          </div>`,
+        bodyClass: "mail-body",
+        typing: `<div class="mail-typing"><div class="dots"><span></span><span></span><span></span></div><span class="lbl">Drafting reply…</span></div>`,
+        steps: [
+          { dir: "in",  html: `<div class="mail-card"><div class="mail-from"><span>Sarah — Woodlands Dental</span><span style="font-size:10px;color:rgba(0,0,0,0.4);font-weight:400">now</span></div><div class="mail-sub">Subject: Appointment availability</div><div class="mail-text">Hi, do you have anything open this week for a check-up?</div></div>` },
+          { dir: "out", html: `<div class="mail-card reply"><div class="mail-badge">✓ Replied automatically</div><div class="mail-text">Hi Sarah! Thanks for reaching out 😊 We've got Thursday 10:30 or Friday 14:00 open — want me to book one in for you?</div></div>` }
+        ],
+        render: (s) => s.html
+      },
+      {
+        header: `<div class="web-header">
+            <div class="web-avatar"><img src="assets/logo.png" alt="Matt"><span class="dot"></span></div>
+            <div><div class="phone-title">Matt</div><div class="phone-status">usually replies in seconds</div></div>
+          </div>`,
+        bodyClass: "web-body",
+        typing: `<div class="web-typing"><span></span><span></span><span></span></div>`,
+        steps: [
+          { dir: "in",  text: "Do you work with medical practices?" },
+          { dir: "out", text: "We do! We help practices cut no-shows and answer patients 24/7." },
+          { dir: "in",  text: "Sounds good 👍" },
+          { dir: "out", text: "Want a quick demo? I can set it up in 2 minutes 🚀" }
+        ],
+        render: (s) => `<div class="web-msg web-${s.dir}">${escapeHtml(s.text)}</div>`
+      }
     ];
-    const web = [
-      ["in", "Do you work with medical practices?"],
-      ["out", "We do! We help practices cut no-shows and answer patients 24/7."],
-      ["in", "Sounds good 👍"],
-      ["out", "Want a quick demo? I can set it up in 2 minutes 🚀"]
-    ];
 
-    const screenWA = () => `
-      <div class="phone-header">
-        <img src="assets/logo.png" alt="GrowMatic">
-        <div><div class="phone-title">GrowMatic Assistant</div><div class="phone-status">online</div></div>
-      </div>
-      <div class="phone-messages">
-        ${wa.map((m, i) => `<div class="msg msg-${m[0] === "out" ? "out" : "in"}" style="animation-delay:${0.3 + i * 0.5}s">${escapeHtml(m[1])}<div class="msg-time">${escapeHtml(m[2])}${m[3] ? ' <span class="msg-tick">✓✓</span>' : ""}</div></div>`).join("")}
-      </div>`;
+    const setTabs = (idx) =>
+      tabs.innerHTML = `<div class="phone-dots">${channels.map((_, k) => `<span class="phone-dot${k === idx ? " active" : ""}"></span>`).join("")}</div><span class="phone-tab-label">${labels[idx]}</span>`;
 
-    const screenEmail = () => `
-      <div class="mail-header">
-        <div class="mail-icon">✉</div>
-        <div><div class="phone-title" style="color:var(--ink)">Inbox</div><div class="phone-status" style="color:rgba(0,0,0,0.45);opacity:1">Answered automatically · in seconds</div></div>
-      </div>
-      <div class="mail-body">
-        <div class="mail-card" style="animation-delay:.3s">
-          <div class="mail-from"><span>Sarah — Woodlands Dental</span><span style="font-size:10px;color:rgba(0,0,0,0.4);font-weight:400">now</span></div>
-          <div class="mail-sub">Subject: Appointment availability</div>
-          <div class="mail-text">Hi, do you have anything open this week for a check-up?</div>
-        </div>
-        <div class="mail-card reply" style="animation-delay:1.1s">
-          <div class="mail-badge">✓ Replied automatically</div>
-          <div class="mail-text">Hi Sarah! Thanks for reaching out 😊 We've got Thursday 10:30 or Friday 14:00 open — want me to book one in for you?</div>
-        </div>
-      </div>`;
+    // Reduced motion / no-JS-timers safety: paint the first channel fully,
+    // no sequencing, no loop.
+    if (reduceMotion) {
+      const ch = channels[0];
+      inner.innerHTML = ch.header + `<div class="${ch.bodyClass}">${ch.steps.map(ch.render).join("")}</div>`;
+      setTabs(0);
+      return;
+    }
 
-    const screenWeb = () => `
-      <div class="web-header">
-        <div class="web-avatar"><img src="assets/logo.png" alt="Matt"><span class="dot"></span></div>
-        <div><div class="phone-title">Matt</div><div class="phone-status">usually replies in seconds</div></div>
-      </div>
-      <div class="web-body">
-        ${web.map((m, i) => `<div class="web-msg web-${m[0]}" style="animation-delay:${0.3 + i * 0.5}s">${escapeHtml(m[1])}</div>`).join("")}
-      </div>`;
+    let token = 0; // cancels an in-flight sequence when the channel changes
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-    const screens = [screenWA, screenEmail, screenWeb];
-    let idx = 0;
-    const paint = () => {
-      inner.innerHTML = screens[idx]();
-      tabs.innerHTML = `<div class="phone-dots">${[0, 1, 2].map((k) => `<span class="phone-dot${k === idx ? " active" : ""}"></span>`).join("")}</div><span class="phone-tab-label">${labels[idx]}</span>`;
-    };
-    paint();
-    setInterval(() => {
+    async function playChannel(idx) {
+      const mine = ++token;
+      const ch = channels[idx];
+      setTabs(idx);
+      inner.innerHTML = ch.header + `<div class="${ch.bodyClass}"></div>`;
+      const body = inner.querySelector("." + ch.bodyClass);
+      inner.style.opacity = "1";
+
+      await sleep(500);
+      for (const step of ch.steps) {
+        if (mine !== token) return;
+        if (step.dir === "out") {
+          body.insertAdjacentHTML("beforeend", ch.typing);
+          const typingEl = body.lastElementChild;
+          await sleep(1050);
+          if (mine !== token) return;
+          typingEl.remove();
+        }
+        body.insertAdjacentHTML("beforeend", ch.render(step));
+        body.scrollTop = body.scrollHeight;
+        await sleep(step.dir === "out" ? 1400 : 800);
+      }
+      if (mine !== token) return;
+      await sleep(2400);
+      if (mine !== token) return;
+
+      // Fade out, advance, replay.
       inner.style.opacity = "0";
-      setTimeout(() => { idx = (idx + 1) % 3; paint(); inner.style.opacity = "1"; }, 350);
-    }, 5200);
+      await sleep(360);
+      if (mine !== token) return;
+      playChannel((idx + 1) % channels.length);
+    }
+
+    playChannel(0);
   })();
 
   // ---------- Missed-call cost calculator ----------
@@ -251,21 +295,26 @@
   }, 6000);
 
   // ---------- Hero canvas ----------
-  // "Flow": a field of fine threads streaming in silky curves across the
-  // hero — work, enquiries and follow-ups flowing through the system. The
-  // threads ride a smooth trig-noise flow field and leave fading trails
-  // (destination-out, so the canvas stays transparent and the CSS glows show
-  // through). Density and opacity are weighted toward the phone's side so
-  // the headline column stays calm. Retina-scaled; prefers-reduced-motion
-  // gets a static stream-lines texture instead of a loop.
+  // A calm, premium "aurora": a handful of large, very soft green light
+  // blooms that drift and breathe slowly behind the phone — the restrained,
+  // expensive backdrop you see on top SaaS sites. Deliberately quiet: low
+  // alpha, wide radii, slow timing, and weighted to the right so it never
+  // competes with the headline. Retina-scaled; reduced motion draws one
+  // static frame instead of a loop.
   (function initHeroCanvas() {
     const canvas = document.getElementById("hero-canvas");
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const GREEN = "31,157,92";
-    const INK = "10,10,10";
-    const COUNT = 420;
+
+    // x,y as fractions of the hero; r as a fraction of the larger side.
+    // ax,ay = drift amplitude (fraction); s = drift speed; peak = max alpha.
+    const blooms = [
+      { x: 0.74, y: 0.40, r: 0.52, col: "31,157,92",  peak: 0.13, ax: 0.05, ay: 0.04, s: 0.045, p: 0.0 },
+      { x: 0.92, y: 0.14, r: 0.34, col: "58,190,120", peak: 0.09, ax: 0.04, ay: 0.05, s: 0.060, p: 1.7 },
+      { x: 0.58, y: 0.74, r: 0.40, col: "31,157,92",  peak: 0.06, ax: 0.06, ay: 0.03, s: 0.038, p: 3.1 },
+      { x: 0.06, y: 0.94, r: 0.42, col: "31,157,92",  peak: 0.045, ax: 0.05, ay: 0.04, s: 0.033, p: 4.6 }
+    ];
 
     let w = 0, h = 0;
     const resize = () => {
@@ -273,72 +322,29 @@
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.lineCap = "round";
     };
 
-    const particles = Array.from({ length: COUNT }, () => ({}));
-    const spawn = (p) => {
-      p.x = Math.random() * w;
-      p.y = Math.random() * h;
-      p.life = 2 + Math.random() * 5; // seconds
-      p.green = Math.random() < 0.85;
-      p.width = 0.7 + Math.random() * 1.1;
-      p.speed = 26 + Math.random() * 34; // px/s
-    };
-
-    // Smooth pseudo-noise direction field; drifts slowly with time.
-    const angleAt = (x, y, t) =>
-      (Math.sin(x * 0.0021 + t * 0.10) +
-       Math.cos(y * 0.0024 - t * 0.085) +
-       Math.sin((x + y) * 0.0012 + t * 0.05)) * 1.05;
-
-    const step = (t, dt, fade) => {
-      if (fade) {
-        ctx.globalCompositeOperation = "destination-out";
-        ctx.fillStyle = "rgba(0,0,0,0.055)";
+    const draw = (t) => {
+      ctx.clearRect(0, 0, w, h);
+      const side = Math.max(w, h);
+      for (const b of blooms) {
+        const cx = (b.x + Math.sin(t * b.s + b.p) * b.ax) * w;
+        const cy = (b.y + Math.cos(t * b.s * 0.9 + b.p) * b.ay) * h;
+        const rad = b.r * side;
+        const breathe = 0.78 + 0.22 * Math.sin(t * b.s * 1.6 + b.p);
+        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rad);
+        g.addColorStop(0, "rgba(" + b.col + "," + (b.peak * breathe).toFixed(3) + ")");
+        g.addColorStop(1, "rgba(" + b.col + ",0)");
+        ctx.fillStyle = g;
         ctx.fillRect(0, 0, w, h);
-        ctx.globalCompositeOperation = "source-over";
-      }
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        if (!(p.life > 0) || p.x < -24 || p.x > w + 24 || p.y < -24 || p.y > h + 24) spawn(p);
-        const a = angleAt(p.x, p.y, t);
-        const nx = p.x + Math.cos(a) * p.speed * dt;
-        const ny = p.y + Math.sin(a) * p.speed * dt;
-        // Quieter over the text column, fuller around the phone.
-        const sideWeight = 0.25 + 0.75 * Math.min(1, Math.max(0, (p.x / w - 0.02) / 0.72));
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(nx, ny);
-        ctx.strokeStyle = p.green
-          ? "rgba(" + GREEN + "," + (0.03 + 0.14 * sideWeight) + ")"
-          : "rgba(" + INK + "," + (0.015 + 0.06 * sideWeight) + ")";
-        ctx.lineWidth = p.width;
-        ctx.stroke();
-        p.x = nx; p.y = ny;
-        p.life -= dt;
       }
     };
 
     resize();
-    window.addEventListener("resize", () => { resize(); if (reduceMotion) drawStatic(); });
-    particles.forEach(spawn);
+    window.addEventListener("resize", () => { resize(); if (reduceMotion) draw(0); });
+    if (reduceMotion) { draw(0); return; }
 
-    const drawStatic = () => {
-      ctx.clearRect(0, 0, w, h);
-      particles.forEach(spawn);
-      for (let i = 0; i < 200; i++) step(i / 30, 1 / 30, false);
-    };
-    if (reduceMotion) { drawStatic(); return; }
-
-    let last = null;
-    const loop = (now) => {
-      if (last === null) last = now;
-      const dt = Math.min((now - last) / 1000, 0.05);
-      last = now;
-      step(now / 1000, dt, true);
-      requestAnimationFrame(loop);
-    };
+    const loop = (now) => { draw(now / 1000); requestAnimationFrame(loop); };
     requestAnimationFrame(loop);
   })();
 
