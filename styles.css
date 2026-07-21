@@ -129,7 +129,7 @@ img { max-width: 100%; }
 #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .hero-inner {
   max-width: 1280px; margin: 0 auto;
-  padding: 170px 24px 130px;
+  padding: 150px 24px 120px;
   /* Fill the viewport so the hero uses the whole page: with align-items:
      center below, the content spreads evenly instead of bunching at the top
      (which is what happened once the headline was scaled down). Reset in the
@@ -146,7 +146,18 @@ img { max-width: 100%; }
   gap: 64px;
   align-items: center;
 }
-.hero-inner > div:first-child { min-width: 0; }
+.hero-inner > div:first-child {
+  min-width: 0;
+  /* Stretch the text column to the full section height and distribute the
+     leftover space between eyebrow -> h1 -> sub -> CTAs (their margins act as
+     minimum gaps), so the content genuinely uses the page instead of sitting
+     as a centered block. A no-op in the stacked <=1280px layout, where the
+     column is only as tall as its content. */
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .hero-inner h1 {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
@@ -155,7 +166,7 @@ img { max-width: 100%; }
      the old 4-word headline but sprawled this one over five lines and pushed
      the CTAs below the fold. Matches the /trades hero scale so both pages
      read the same. */
-  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  font-size: clamp(2rem, 3.9vw, 3.4rem);
   letter-spacing: -0.02em;
   line-height: 1.08;
   margin: 0;
