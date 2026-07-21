@@ -529,3 +529,78 @@
     loop();
   })();
 })();
+
+// ---------- Contact form ----------
+// Posts name/phone/email/message to the backend, which notifies the owner by
+// WhatsApp + email (POST /api/contact-lead). The WhatsApp buttons and Matt
+// chat still work as before — this catches the visitor who'd rather just
+// leave their details and get a call back.
+(function initContactForm() {
+  const form = document.getElementById("contact-form");
+  if (!form) return;
+  const ENDPOINT = "https://growmatic-backend-production.up.railway.app/api/contact-lead";
+  const nameEl = document.getElementById("cf-name");
+  const phoneEl = document.getElementById("cf-phone");
+  const emailEl = document.getElementById("cf-email");
+  const messageEl = document.getElementById("cf-message");
+  const honeypotEl = document.getElementById("cf-company");
+  const submitBtn = document.getElementById("cf-submit");
+  const statusEl = document.getElementById("cf-status");
+
+  const setStatus = (msg, kind) => {
+    statusEl.textContent = msg;
+    statusEl.className = "cf-status" + (kind ? " is-" + kind : "");
+  };
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Honeypot: real users never see this field. If it's filled, it's a bot —
+    // pretend all is well and quietly drop it.
+    if (honeypotEl && honeypotEl.value) {
+      form.reset();
+      setStatus("Thanks! We'll be in touch.", "ok");
+      return;
+    }
+
+    const name = nameEl.value.trim();
+    const phone = phoneEl.value.trim();
+    const email = emailEl.value.trim();
+    const message = messageEl.value.trim();
+
+    if (!name) {
+      setStatus("Please add your name so we know who we're talking to.", "err");
+      nameEl.focus();
+      return;
+    }
+    if (!phone && !email) {
+      setStatus("Please add a phone number or email so we can reach you.", "err");
+      phoneEl.focus();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    setStatus("Sending…", "");
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, email, message }),
+      });
+      if (!res.ok) throw new Error("Request failed with status " + res.status);
+      form.reset();
+      setStatus(
+        "Thanks " + name.split(" ")[0] + "! We've got your details and will be in touch within one business day. 🌱",
+        "ok"
+      );
+    } catch (err) {
+      setStatus(
+        "Sorry, that didn't go through. Please WhatsApp us on 082 790 0255 or email ewan@growmaticsa.com and we'll sort you out.",
+        "err"
+      );
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+})();

@@ -26,7 +26,7 @@
      asset for a while after a deploy; changing the query string makes the
      browser and CDN treat it as a brand new URL, guaranteeing the latest
      file is fetched immediately instead of racing cache propagation. -->
-<link rel="stylesheet" href="styles.css?v=20260721k">
+<link rel="stylesheet" href="styles.css?v=20260721l">
 </head>
 <body>
 
@@ -277,6 +277,37 @@
         <span>Free 30-min consultation</span>
         <span>100% South African team</span>
       </div>
+
+      <div class="cta-form-wrap reveal" data-delay="120">
+        <form class="cta-form" id="contact-form" novalidate>
+          <div class="cta-form-head">
+            <h3>Prefer we call you? Leave your details.</h3>
+            <p>Drop your number below and we'll be in touch within one business day — no pressure.</p>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf-name">Your name</label>
+              <input id="cf-name" type="text" autocomplete="name" required maxlength="200" placeholder="e.g. John Meyer">
+            </div>
+            <div class="cf-field">
+              <label for="cf-phone">Phone / WhatsApp</label>
+              <input id="cf-phone" type="tel" autocomplete="tel" maxlength="50" placeholder="e.g. 082 123 4567">
+            </div>
+          </div>
+          <div class="cf-field">
+            <label for="cf-email">Email <span class="cf-opt">(optional)</span></label>
+            <input id="cf-email" type="email" autocomplete="email" maxlength="255" placeholder="you@business.co.za">
+          </div>
+          <div class="cf-field">
+            <label for="cf-message">What can we help with? <span class="cf-opt">(optional)</span></label>
+            <textarea id="cf-message" rows="3" maxlength="2000" placeholder="Tell us a bit about your business…"></textarea>
+          </div>
+          <!-- Honeypot: hidden from people, tempting to bots. If filled, we drop it. -->
+          <input type="text" id="cf-company" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit" class="btn-primary cf-submit" id="cf-submit">Send &amp; get a call back <span>→</span></button>
+          <p class="cf-status" id="cf-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
     </div>
   </div>
 </section>
@@ -370,7 +401,7 @@
   </div>
 </div>
 
-<script src="script.js?v=20260721k"></script>
+<script src="script.js?v=20260721l"></script>
 <script src="chat-widget.js?v=20260721k"></script>
 </body>
 </html>
