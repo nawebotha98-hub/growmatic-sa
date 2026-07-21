@@ -166,9 +166,17 @@ img { max-width: 100%; }
      the old 4-word headline but sprawled this one over five lines and pushed
      the CTAs below the fold. Matches the /trades hero scale so both pages
      read the same. */
-  font-size: clamp(2rem, 3.9vw, 3.4rem);
+  /* Sized against REAL Syne metrics (avg ~0.63em/char at weight 800): the
+     longest line, "Run your business smarter." (26 chars), must fit the
+     ~778px text column of the two-column layout, which caps the font at
+     ~47px. The previous 3.4rem cap fit only in fallback fonts (the headless
+     verifier can't load Google Fonts) and wrapped to 4 ragged lines in
+     production. text-wrap: balance is the safety net: if an odd zoom level
+     still forces a wrap, the lines break evenly instead of orphaning a word. */
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
   letter-spacing: -0.02em;
   line-height: 1.08;
+  text-wrap: balance;
   margin: 0;
   color: var(--ink);
   overflow-wrap: break-word;
