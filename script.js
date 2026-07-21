@@ -251,119 +251,92 @@
   }, 6000);
 
   // ---------- Hero canvas ----------
-  // "The quiet signal": a faint dot grid (the system, quietly there) with a
-  // soft green pulse rippling out from behind the phone every few seconds —
-  // enquiries being answered, radiating outward 24/7. Deliberately calm: low
-  // alphas, slow timing, and the effect weighted toward the phone's side so
-  // it never fights the headline for attention. Renders at devicePixelRatio
-  // for crispness, and honours prefers-reduced-motion with a static frame.
+  // "Flow": a field of fine threads streaming in silky curves across the
+  // hero — work, enquiries and follow-ups flowing through the system. The
+  // threads ride a smooth trig-noise flow field and leave fading trails
+  // (destination-out, so the canvas stays transparent and the CSS glows show
+  // through). Density and opacity are weighted toward the phone's side so
+  // the headline column stays calm. Retina-scaled; prefers-reduced-motion
+  // gets a static stream-lines texture instead of a loop.
   (function initHeroCanvas() {
     const canvas = document.getElementById("hero-canvas");
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const GREEN = "31,157,92";
     const INK = "10,10,10";
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const COUNT = 420;
 
-    const GRID = 56;            // px between dots
-    const RIPPLE_PERIOD = 4.2;  // s between pulses
-    const RIPPLE_LIFE = 4.6;    // s a pulse takes to cross and fade
-    const BAND = 90;            // px thickness of the lit band
-
-    const mouse = { x: 0, y: 0 };
-    if (!reduceMotion) {
-      window.addEventListener("mousemove", (e) => {
-        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
-      });
-    }
-
-    const draw = (t) => {
-      const w = canvas.clientWidth, h = canvas.clientHeight;
+    let w = 0, h = 0;
+    const resize = () => {
+      w = canvas.clientWidth; h = canvas.clientHeight;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      if (canvas.width !== w * dpr || canvas.height !== h * dpr) {
-        canvas.width = w * dpr;
-        canvas.height = h * dpr;
-      }
+      canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, w, h);
+      ctx.lineCap = "round";
+    };
 
-      // Signal origin sits behind the phone, with a whisper of parallax.
-      const cx = w * 0.74 + mouse.x * 10;
-      const cy = h * 0.45 + mouse.y * 8;
-      const maxR = Math.hypot(w, h) * 0.9;
+    const particles = Array.from({ length: COUNT }, () => ({}));
+    const spawn = (p) => {
+      p.x = Math.random() * w;
+      p.y = Math.random() * h;
+      p.life = 2 + Math.random() * 5; // seconds
+      p.green = Math.random() < 0.85;
+      p.width = 0.7 + Math.random() * 1.1;
+      p.speed = 26 + Math.random() * 34; // px/s
+    };
 
-      // Soft depth glows — static, just warmth behind the phone and a
-      // counterweight bottom-left.
-      let g = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.min(w * 0.4, 520));
-      g.addColorStop(0, "rgba(" + GREEN + ",0.07)");
-      g.addColorStop(1, "rgba(" + GREEN + ",0)");
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, w, h);
-      g = ctx.createRadialGradient(w * 0.08, h * 0.9, 0, w * 0.08, h * 0.9, Math.min(w * 0.3, 380));
-      g.addColorStop(0, "rgba(" + GREEN + ",0.04)");
-      g.addColorStop(1, "rgba(" + GREEN + ",0)");
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, w, h);
+    // Smooth pseudo-noise direction field; drifts slowly with time.
+    const angleAt = (x, y, t) =>
+      (Math.sin(x * 0.0021 + t * 0.10) +
+       Math.cos(y * 0.0024 - t * 0.085) +
+       Math.sin((x + y) * 0.0012 + t * 0.05)) * 1.05;
 
-      // Active pulses as progress fractions 0..1 (up to two overlap).
-      const ripples = [];
-      if (!reduceMotion) {
-        for (let k = 0; k < 2; k++) {
-          const born = Math.floor(t / RIPPLE_PERIOD) - k;
-          if (born < 0) continue;
-          const age = t - born * RIPPLE_PERIOD;
-          if (age >= 0 && age < RIPPLE_LIFE) ripples.push(age / RIPPLE_LIFE);
-        }
+    const step = (t, dt, fade) => {
+      if (fade) {
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.fillStyle = "rgba(0,0,0,0.055)";
+        ctx.fillRect(0, 0, w, h);
+        ctx.globalCompositeOperation = "source-over";
       }
-
-      // Dot grid, lit as a pulse band passes through. The lighting is
-      // weighted toward the right so the text column stays quiet.
-      for (let x = ((w % GRID) / 2); x <= w; x += GRID) {
-        const sideWeight = 0.35 + 0.65 * Math.min(1, Math.max(0, (x / w - 0.05) / 0.7));
-        for (let y = ((h % GRID) / 2); y <= h; y += GRID) {
-          const dist = Math.hypot(x - cx, y - cy);
-          let lit = 0;
-          for (let i = 0; i < ripples.length; i++) {
-            const p = ripples[i];
-            const dd = Math.abs(dist - p * maxR);
-            if (dd < BAND) lit = Math.max(lit, (1 - dd / BAND) * (1 - p));
-          }
-          lit *= sideWeight;
-          if (lit > 0.02) {
-            ctx.fillStyle = "rgba(" + GREEN + "," + (0.12 + lit * 0.4) + ")";
-            ctx.beginPath();
-            ctx.arc(x, y, 1.4 + lit * 1.2, 0, Math.PI * 2);
-            ctx.fill();
-          } else {
-            ctx.fillStyle = "rgba(" + INK + ",0.09)";
-            ctx.beginPath();
-            ctx.arc(x, y, 1.4, 0, Math.PI * 2);
-            ctx.fill();
-          }
-        }
-      }
-
-      // The pulse rings themselves — hairline, fading as they travel.
-      for (let i = 0; i < ripples.length; i++) {
-        const p = ripples[i];
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        if (!(p.life > 0) || p.x < -24 || p.x > w + 24 || p.y < -24 || p.y > h + 24) spawn(p);
+        const a = angleAt(p.x, p.y, t);
+        const nx = p.x + Math.cos(a) * p.speed * dt;
+        const ny = p.y + Math.sin(a) * p.speed * dt;
+        // Quieter over the text column, fuller around the phone.
+        const sideWeight = 0.25 + 0.75 * Math.min(1, Math.max(0, (p.x / w - 0.02) / 0.72));
         ctx.beginPath();
-        ctx.arc(cx, cy, p * maxR, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(" + GREEN + "," + (0.18 * (1 - p)) + ")";
-        ctx.lineWidth = 1;
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(nx, ny);
+        ctx.strokeStyle = p.green
+          ? "rgba(" + GREEN + "," + (0.03 + 0.14 * sideWeight) + ")"
+          : "rgba(" + INK + "," + (0.015 + 0.06 * sideWeight) + ")";
+        ctx.lineWidth = p.width;
         ctx.stroke();
+        p.x = nx; p.y = ny;
+        p.life -= dt;
       }
     };
 
-    if (reduceMotion) {
-      draw(0);
-      window.addEventListener("resize", () => draw(0));
-      return;
-    }
-    let start = null;
+    resize();
+    window.addEventListener("resize", () => { resize(); if (reduceMotion) drawStatic(); });
+    particles.forEach(spawn);
+
+    const drawStatic = () => {
+      ctx.clearRect(0, 0, w, h);
+      particles.forEach(spawn);
+      for (let i = 0; i < 200; i++) step(i / 30, 1 / 30, false);
+    };
+    if (reduceMotion) { drawStatic(); return; }
+
+    let last = null;
     const loop = (now) => {
-      if (start === null) start = now;
-      draw((now - start) / 1000);
+      if (last === null) last = now;
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+      step(now / 1000, dt, true);
       requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
