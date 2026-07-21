@@ -509,7 +509,13 @@
       }
       const bubble = document.createElement("div");
       bubble.className = "chat-bubble";
-      bubble.textContent = m.content;
+      // The bubble renders raw text, so markdown the model occasionally emits
+      // (e.g. **bold**) would show as literal asterisks. Strip bold/header
+      // markers from assistant replies; user text stays verbatim.
+      bubble.textContent =
+        m.role === "assistant"
+          ? m.content.replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*\*/g, "").replace(/^#{1,4}\s+/gm, "")
+          : m.content;
       row.appendChild(bubble);
       messagesEl.appendChild(row);
     });
