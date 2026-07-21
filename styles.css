@@ -144,16 +144,14 @@ img { max-width: 100%; }
 .hero-inner h1 {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
-  /* The 7vw term reaches its 5.5rem ceiling at a 1257px viewport --
-     at or before the 1280px width where .hero-inner's own max-width
-     takes over and the container stops growing. Font and container
-     both finish scaling together instead of the font continuing to
-     grow (via raw vw) after the container has already capped out,
-     which is what let a word outgrow its column at some viewport
-     widths despite fitting fine at both smaller and larger ones. */
-  font-size: clamp(2.25rem, 7vw, 5.5rem);
-  letter-spacing: -0.04em;
-  line-height: 1.02;
+  /* Sized for the longer "Run your business smarter. Grow without the
+     admin." headline: the original clamp(2.25rem, 7vw, 5.5rem) scale suited
+     the old 4-word headline but sprawled this one over five lines and pushed
+     the CTAs below the fold. Matches the /trades hero scale so both pages
+     read the same. */
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  letter-spacing: -0.02em;
+  line-height: 1.08;
   margin: 0;
   color: var(--ink);
   overflow-wrap: break-word;
@@ -601,7 +599,7 @@ img { max-width: 100%; }
      ~305px wide, wider than the ~280px mobile hero column, so it had
      no space to wrap at and got hyphenated mid-word by the
      overflow-wrap fallback instead. */
-  .hero-inner h1 { font-size: clamp(1.75rem, 8.5vw, 3.5rem); }
+  .hero-inner h1 { font-size: clamp(1.75rem, 8.5vw, 3rem); }
   /* At the 40px desktop floor, "24/7" filled its 128px grid column
      edge-to-edge with zero internal breathing room, so even a real
      26px column gap read as the two stat numbers touching. */
