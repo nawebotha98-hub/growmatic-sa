@@ -322,6 +322,68 @@ img { max-width: 100%; }
 .phone-dot.active { width: 20px; background: var(--green); }
 .phone-tab-label { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.7); width: 92px; }
 
+/* ---------- Hero automation hub ---------- */
+.hub {
+  position: relative; width: 100%; max-width: 460px; aspect-ratio: 1 / 1;
+  margin: 0 auto; justify-self: center; container-type: inline-size;
+}
+.hub-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.hub-ring {
+  fill: none; stroke: rgba(31,157,92,0.16); stroke-width: 0.35; stroke-dasharray: 1.3 2.4;
+  transform-box: fill-box; transform-origin: center;
+}
+.hub-ring.spin2 { stroke: rgba(37,99,235,0.14); }
+.hub-line { fill: none; stroke-width: 0.5; stroke-dasharray: 1.6 2.2; stroke-linecap: round; }
+.hub-line.g { stroke: rgba(31,157,92,0.50); }
+.hub-line.b { stroke: rgba(37,99,235,0.45); }
+.hub-dot.g { fill: var(--green); }
+.hub-dot.b { fill: #2563eb; }
+.hub-core {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 33%; aspect-ratio: 1; border-radius: 50%; background: #fff; z-index: 3;
+  display: grid; place-items: center;
+  box-shadow: 0 12px 44px rgba(31,157,92,0.20), 0 0 0 8px rgba(31,157,92,0.05);
+}
+.hub-core img { width: 64%; height: 64%; object-fit: contain; }
+.hub-node {
+  position: absolute; transform: translate(-50%,-50%); z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+}
+.hub-chip {
+  width: 13cqw; height: 13cqw; min-width: 40px; min-height: 40px; max-width: 56px; max-height: 56px;
+  border-radius: 50%; background: #fff; box-shadow: 0 6px 20px rgba(10,20,15,0.10);
+  display: grid; place-items: center;
+}
+.hub-chip svg { width: 46%; height: 46%; }
+.hub-node.g .hub-chip svg { color: var(--green); stroke: var(--green); }
+.hub-node.b .hub-chip svg { color: #2563eb; stroke: #2563eb; }
+.hub-lbl { font-size: clamp(10px, 3cqw, 12.5px); font-weight: 600; color: var(--ink); line-height: 1.1; text-align: center; white-space: nowrap; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hub-ring.spin1 { animation: hub-spin 46s linear infinite; }
+  .hub-ring.spin2 { animation: hub-spin 62s linear infinite reverse; }
+  .hub-line { animation: hub-flow 2.6s linear infinite; }
+  .hub-dot  { animation: hub-blink 3s ease-in-out infinite; }
+  .hub-core { animation: hub-pulse 4.5s ease-in-out infinite; }
+  .hub-node { animation: hub-bob 6s ease-in-out infinite; }
+  .hub-node:nth-child(4) { animation-delay: -1.5s; }
+  .hub-node:nth-child(5) { animation-delay: -3s; }
+  .hub-node:nth-child(6) { animation-delay: -1s; }
+  .hub-node:nth-child(7) { animation-delay: -4s; }
+  .hub-node:nth-child(8) { animation-delay: -2.5s; }
+}
+@keyframes hub-spin { to { transform: rotate(360deg); } }
+@keyframes hub-flow { to { stroke-dashoffset: -3.8; } }
+@keyframes hub-blink { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+@keyframes hub-pulse {
+  0%,100% { box-shadow: 0 12px 44px rgba(31,157,92,0.20), 0 0 0 8px rgba(31,157,92,0.05); }
+  50%     { box-shadow: 0 14px 52px rgba(31,157,92,0.28), 0 0 0 14px rgba(31,157,92,0.07); }
+}
+@keyframes hub-bob {
+  0%,100% { transform: translate(-50%,-50%); }
+  50%     { transform: translate(-50%, calc(-50% - 4px)); }
+}
+
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes msgIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
