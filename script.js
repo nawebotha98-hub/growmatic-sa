@@ -3,29 +3,31 @@
 
   const WHATSAPP_NUMBER = "27827900255";
   const wa = (text) => "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
-  const waCall = wa("Hi! I'd like to book a free business consultation.");
+  const waCall = wa("Hi! I'd like to book a free automation review.");
   const waGeneral = wa("Hi! I'd like to learn more about GrowMatic SA.");
+  const waDemo = wa("Hi! I'd like to see your automation in action on WhatsApp.");
   const planLink = (plan) => wa("Hi! I'm interested in the " + plan + " plan");
 
   document.querySelectorAll(".wa-call").forEach((el) => (el.href = waCall));
   document.querySelectorAll(".wa-general").forEach((el) => (el.href = waGeneral));
+  document.querySelectorAll(".wa-demo").forEach((el) => (el.href = waDemo));
 
   const services = [
-    { eyebrow: "Your Website", title: "A Website That Wins You Work.", desc: "The problem: no website (or a dated one) makes you look smaller than you are, and customers quietly trust the competitor who looks the part. We build a clean, fast, mobile-first website — your services, your work, your reviews and a one-tap way to get in touch. The result: you look professional the moment someone lands on your page, and enquiries come straight to your phone." },
-    { eyebrow: "Get Found", title: "Show Up First on Google.", desc: "The problem: when someone searches “[your trade] near me,” your competitor with a proper Google listing gets the call — and you never even knew the customer existed. We claim and fully optimise your Google Business Profile so you appear on Google Maps and local search. The result: more people find you, call you and get directions to you, from the single highest-return channel there is — and it's free to run." },
-    { eyebrow: "Never Miss a Lead", title: "Every Missed Call, Recovered.", desc: "The problem: when you can't get to the phone, most callers don't leave a message — they simply call the next business. The moment a call is missed, we send the caller a friendly WhatsApp within seconds. The result: a missed call becomes a live conversation instead of a lost customer — ideal for trades, medical, security and anyone who can't stop mid-job to answer." },
-    { eyebrow: "Lead Management", title: "Turn More Enquiries Into Customers.", desc: "The problem: most leads never get a second follow-up, so they quietly go cold. We capture every enquiry from your site, WhatsApp and Google, then follow up automatically until the customer books, buys, or clearly says no. The result: more of the leads you already work hard to get actually turn into paying jobs." },
-    { eyebrow: "Reputation & Reviews", title: "Build a 5-Star Reputation.", desc: "The problem: your happiest customers rarely leave a review, and the reviews you do get sit unanswered. We ask satisfied customers for a Google review at exactly the right moment and draft an on-brand reply to every review for you to approve in one tap. The result: more 5-star reviews, higher on Google, and more new customers choosing you." },
-    { eyebrow: "Bookings & Scheduling", title: "Effortless Booking & Appointments.", desc: "The problem: endless back-and-forth to set a time, plus costly no-shows. Customers self-book in seconds, and friendly reminders go out automatically before every appointment. The result: a fuller diary, far fewer no-shows, and zero admin on your side." },
+    { eyebrow: "Never Miss a Lead", title: "Every Missed Call, Recovered.", desc: "The problem: when you can't get to the phone, most callers don't leave a message — they simply call the next business. The moment a call is missed, we send the caller a friendly WhatsApp within seconds. The result: a missed call becomes a live conversation instead of a lost customer — the easiest place to start, and usually the one that pays for itself first." },
     { eyebrow: "Customer Communication", title: "24/7 Customer Response.", desc: "The problem: enquiries come in after hours and across WhatsApp, email and your website — and a slow reply loses the sale. Our always-on response system answers every customer in seconds, day or night, and only brings you in when a real person is genuinely needed. The result: no enquiry ever goes cold, and you look bigger and more professional than the competition." },
-    { eyebrow: "Process Optimisation", title: "Streamline the Work Behind the Scenes.", desc: "The problem: quotes, invoices, onboarding and reporting eat hours of manual admin every week. We map the repetitive processes in your business and take them off your plate. The result: less manual work, fewer mistakes, and more time to focus on growth. If your team is repeating it, we can streamline it." }
+    { eyebrow: "Lead Management", title: "Turn More Enquiries Into Customers.", desc: "The problem: most leads never get a second follow-up, so they quietly go cold. We capture every enquiry from every source and follow up automatically until the customer books, buys, or clearly says no. The result: more of the leads you already work hard to get actually turn into paying customers." },
+    { eyebrow: "Email & Admin", title: "Email & Everyday Admin, Off Your Plate.", desc: "The problem: your inbox, quotes, invoices and repetitive admin eat hours every week and pull you away from real work. We automate the back-and-forth — drafting and sending replies, chasing quotes and invoices, sorting and routing email, and handling the recurring paperwork. The result: a calmer inbox, less manual admin, and hours back in your week." },
+    { eyebrow: "Bookings & Scheduling", title: "Effortless Booking & Appointments.", desc: "The problem: endless back-and-forth to set a time, plus costly no-shows. Customers self-book in seconds, and friendly reminders go out automatically before every appointment. The result: a fuller diary, far fewer no-shows, and zero admin on your side." },
+    { eyebrow: "Reputation & Reviews", title: "Build a 5-Star Reputation.", desc: "The problem: your happiest customers rarely leave a review, and the reviews you do get sit unanswered. We ask satisfied customers for a Google review at exactly the right moment and draft an on-brand reply to every review for you to approve in one tap. The result: more 5-star reviews, more trust, and more new customers finding you online." },
+    { eyebrow: "Business Intelligence", title: "See Your Business at a Glance.", desc: "The problem: your bookings and leads are scattered across your phone, inbox and memory. A private, always-current dashboard shows every upcoming booking and new lead in one place — no extra app, no separate login. The result: you always know exactly where the business stands, without digging for it." },
+    { eyebrow: "Process Optimisation", title: "Streamline the Work Behind the Scenes.", desc: "The problem: onboarding, reporting and repeated hand-offs eat hours of manual work every week. As your automation consultant, we map the repetitive processes in your business and take them off your plate — one workflow at a time. The result: less manual work, fewer mistakes, and more time to focus on growth. If your team is repeating it, we can automate it." }
   ];
 
   const steps = [
-    { num: "01", title: "Free preview", desc: "We build a real preview of your new website — before you pay anything." },
-    { num: "02", title: "You approve", desc: "See the finished design, ask for any changes, and only pay once you're happy." },
-    { num: "03", title: "We launch", desc: "We put it live, set up your Google listing and connect WhatsApp — usually within 7 days." },
-    { num: "04", title: "Grow", desc: "Add missed-call recovery, reviews and follow-ups whenever you're ready. We manage it all." }
+    { num: "01", title: "Free automation review", desc: "We look at your business and find where you're losing time and leads." },
+    { num: "02", title: "Start with one", desc: "We pick the single automation that'll pay off fastest — no big commitment." },
+    { num: "03", title: "We set it up", desc: "We build, connect and test everything for you. You just approve and go live." },
+    { num: "04", title: "Prove it, then grow", desc: "Once it's working, we automate the next thing — leads, email, admin, bookings." }
   ];
 
   const industries = [
@@ -40,28 +42,28 @@
   ];
 
   const plans = [
-    { name: "Get-Found Kit", tag: "Start Here", tagColor: "#1f9d5c", bg: "rgba(255,255,255,0.04)", setup: "R5,900", monthly: "One-off · no monthly", btnBg: "#1f9d5c", btnBorder: "none", link: planLink("Get-Found Kit"),
-      features: ["Professional, mobile-first website (services, gallery, reviews, quote form)", "Google Business Profile claimed & optimised to rank locally", "Click-to-WhatsApp so every enquiry lands on your phone", "Basic on-page SEO for your trade + your town", "See the finished design before you pay — live in 7 days or you don't pay"] },
-    { name: "Never Miss a Lead", tag: "Most Popular", tagColor: "#1f9d5c", bg: "#0a0a0a", setup: "R1,500 setup", monthly: "+ R650/mo", btnBg: "transparent", btnBorder: "1px solid rgba(255,255,255,0.2)", link: planLink("Never Miss a Lead"),
-      features: ["Everything in the Get-Found Kit, kept running for you", "Missed calls recovered instantly by WhatsApp", "Automatic quote & enquiry follow-ups", "Google review requests sent after every job", "Hosting, unlimited small edits & a monthly “who found you” report"] },
-    { name: "Business Autopilot", tag: "Scale Up", tagColor: "rgba(255,255,255,0.4)", bg: "#0a0a0a", setup: "From R7,500", monthly: "+ R3,500/mo", btnBg: "transparent", btnBorder: "1px solid rgba(255,255,255,0.2)", link: planLink("Business Autopilot"),
-      features: ["Everything in Never Miss a Lead", "24/7 customer response across WhatsApp, email & website chat", "Self-service bookings + reminders that cut no-shows", "Live business dashboard — leads & bookings in one place", "Priority support + monthly growth review"] }
+    { name: "Never Miss a Lead", tag: "Start Here", tagColor: "#1f9d5c", bg: "rgba(255,255,255,0.04)", setup: "R1,500", monthly: "+ R650/mo", btnBg: "#1f9d5c", btnBorder: "none", link: planLink("Never Miss a Lead"),
+      features: ["Instant WhatsApp reply to every missed call, 24/7", "Common questions answered & the lead's details captured", "Automatic follow-up so no enquiry goes cold", "Every lead in one place — nothing slips through", "30-day pilot · month-to-month · cancel anytime"] },
+    { name: "Growth Starter", tag: "Most Popular", tagColor: "#1f9d5c", bg: "#0a0a0a", setup: "R5,000", monthly: "+ R3,500/mo", btnBg: "transparent", btnBorder: "1px solid rgba(255,255,255,0.2)", link: planLink("Growth Starter"),
+      features: ["Everything in Never Miss a Lead", "24/7 customer response on WhatsApp, email & website chat", "Every enquiry captured and followed up automatically", "Bookings & appointments straight into your diary", "Monthly results report"] },
+    { name: "Business Autopilot", tag: "Scale Up", tagColor: "rgba(255,255,255,0.4)", bg: "#0a0a0a", setup: "From R7,500", monthly: "+ R4,500/mo", btnBg: "transparent", btnBorder: "1px solid rgba(255,255,255,0.2)", link: planLink("Business Autopilot"),
+      features: ["Everything in Growth Starter", "Email & everyday admin automated — quotes, invoices, inbox", "Reminders that cut no-shows", "Live business dashboard included", "Priority support + monthly growth review"] }
   ];
 
   const faqs = [
-    { q: "Do I really see the website before I pay?", a: "Yes. We design your website first and show you the finished thing. You only pay once you're happy with it — and it's live within 7 days, or you don't pay. No deposit, no risk." },
-    { q: "How long until my website is live?", a: "About 7 days from the moment you approve the design. We set up your Google listing and connect WhatsApp at the same time, and keep you updated the whole way." },
-    { q: "What does it cost?", a: "The Get-Found Kit is R5,900 once-off — website plus Google Business Profile set up and live. There's no monthly fee to get started. If you'd like it managed and growing for you afterwards, our Care Plans start from R650/mo — always optional." },
-    { q: "Do I need any technical knowledge?", a: "Not at all. We build, set up and manage everything for you — you just approve and go live. If you can use WhatsApp, you'll have no trouble at all." },
-    { q: "Can you also handle missed calls and follow-ups?", a: "Yes — once your website and Google listing are live, we can add missed-call-to-WhatsApp recovery, automatic quote follow-ups and Google review requests. Most clients start with the website and add these once the enquiries start coming in." },
-    { q: "Will it look good on a phone?", a: "Every site we build is mobile-first — most of your customers will find you on their phone, so that's exactly where we make it look its best." }
+    { q: "Can I try it before I pay?", a: "Yes. WhatsApp us and you'll watch the automation reply to you in seconds — the exact experience your own customers would get. Then you can start with a 30-day pilot, month-to-month, cancel anytime. No lock-in." },
+    { q: "Do I have to automate everything at once?", a: "Not at all — that's the point. Most businesses start with the single automation that pays for itself fastest (usually recovering missed calls), prove it works, and only then add more. You grow at your pace." },
+    { q: "What does it cost to start?", a: "Our starter automation is R1,500 once-off setup + R650/mo, month-to-month. One recovered job usually covers months of it. Bigger packages that add lead follow-ups, bookings, email and admin are R5,000 setup + R3,500/mo and up." },
+    { q: "Do I need any technical knowledge?", a: "None. We build, connect, test and manage everything for you — you just approve and go live. If you can use WhatsApp, you'll be completely fine." },
+    { q: "Can you help with email and admin too?", a: "Yes — that's core to what we do as an automation consultancy. Beyond leads and missed calls, we automate the repetitive back-office work: drafting and sorting email, chasing quotes and invoices, and the everyday admin that eats your week." },
+    { q: "What if I want to stop?", a: "Every plan is month-to-month — cancel anytime, no penalties. We'd rather earn your business every month by keeping the results coming than lock you into a contract." }
   ];
 
   // Recent work / social proof. Add a client here the moment you deliver one —
   // the section stays hidden until this array has at least one entry, so the
   // live site never shows an empty "Recent Work" block. Shape:
   //   { business: "Joe's Electrical", trade: "Electrician", town: "Gqeberha",
-  //     quote: "GrowMatic had our new site live in a week — the calls started coming." }
+  //     quote: "Every missed call now gets an instant WhatsApp back — we booked 3 jobs in the first week we'd otherwise have lost." }
   const work = [
     // { business: "", trade: "", town: "", quote: "" },
   ];
