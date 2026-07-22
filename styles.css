@@ -651,12 +651,12 @@ img { max-width: 100%; }
   .section-head h2 { font-size: clamp(1.75rem, 8vw, 2.5rem); }
   .heading-lg { font-size: clamp(2rem, 9vw, 3.5rem); }
   .heading-xl { font-size: clamp(2rem, 9vw, 3.75rem); }
-  /* Same floor problem as the headings above, on the word "customers."
-     -- the desktop clamp's 2.25rem/36px floor made that single word
-     ~305px wide, wider than the ~280px mobile hero column, so it had
-     no space to wrap at and got hyphenated mid-word by the
-     overflow-wrap fallback instead. */
-  .hero-inner h1 { font-size: clamp(1.75rem, 8.5vw, 3rem); }
+  /* The headline's longest single word is now "Automatically" (13 chars).
+     At the old clamp(1.75rem, 8.5vw, 3rem) it rendered wider than the mobile
+     hero column and got hyphenated mid-word ("Automaticall-y"). Sized down so
+     the longest word always fits on one line: at the 2.3rem cap it's ~300px,
+     and 7.2vw scales it further down on the narrowest phones. */
+  .hero-inner h1 { font-size: clamp(1.6rem, 7.2vw, 2.3rem); }
   /* At the 40px desktop floor, "24/7" filled its 128px grid column
      edge-to-edge with zero internal breathing room, so even a real
      26px column gap read as the two stat numbers touching. */
