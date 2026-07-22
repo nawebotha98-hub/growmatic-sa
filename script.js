@@ -57,6 +57,15 @@
     { q: "Will it look good on a phone?", a: "Every site we build is mobile-first — most of your customers will find you on their phone, so that's exactly where we make it look its best." }
   ];
 
+  // Recent work / social proof. Add a client here the moment you deliver one —
+  // the section stays hidden until this array has at least one entry, so the
+  // live site never shows an empty "Recent Work" block. Shape:
+  //   { business: "Joe's Electrical", trade: "Electrician", town: "Gqeberha",
+  //     quote: "GrowMatic had our new site live in a week — the calls started coming." }
+  const work = [
+    // { business: "", trade: "", town: "", quote: "" },
+  ];
+
   const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   document.getElementById("service-list").innerHTML = services.map((s) => `
@@ -105,6 +114,21 @@
       <summary><span class="faq-q">${escapeHtml(f.q)}</span><span class="faq-plus">+</span></summary>
       <p>${escapeHtml(f.a)}</p>
     </details>`).join("");
+
+  // Render Recent Work if we have any — otherwise remove the whole section so
+  // it never appears empty on the live site.
+  (function renderWork() {
+    const list = document.getElementById("work-list");
+    const section = document.getElementById("work");
+    if (!list) return;
+    if (!work.length) { if (section) section.remove(); return; }
+    list.innerHTML = work.map((w) => `
+      <div class="work-card reveal">
+        <div class="work-stars">★★★★★</div>
+        <p class="work-quote">${escapeHtml(w.quote)}</p>
+        <div class="work-who"><strong>${escapeHtml(w.business)}</strong><span>${escapeHtml([w.trade, w.town].filter(Boolean).join(" · "))}</span></div>
+      </div>`).join("");
+  })();
 
   // ---------- Hero phone: a LIVE demo of GrowMatic answering ----------
   // Instead of dropping a whole conversation in at once, each channel now
