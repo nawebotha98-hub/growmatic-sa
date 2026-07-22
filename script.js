@@ -318,166 +318,143 @@
     document.querySelectorAll(".reveal:not(.is-visible)").forEach((el) => revealShow(el));
   }, 6000);
 
-  // ---------- Hero canvas ----------
-  // The brand logo, brought to life: a rising green bar chart, a growth line
-  // climbing up through it, and a little plant sprouting two leaves at the
-  // top — "business growth" as the logo tells it. It grows in over ~9s, holds,
-  // softly fades and regrows, so it loops seamlessly. Kept quiet (low alpha,
-  // soft green) and positioned to the right so it sits behind/beside the phone
-  // and never competes with the headline. Retina-scaled; reduced motion draws
-  // one fully-grown static frame.
+  // ---------- Hero canvas: 3D emerald flow field ----------
+  // A premium, GPU-rendered particle field drifting through perspective depth
+  // along a flow field — soft green points, depth-fogged, biased to the open
+  // right side so the headline (left) stays clear. Parallax responds to pointer
+  // and device tilt; it fades in once and loops seamlessly. Reduced motion draws
+  // a single static frame; if WebGL is unavailable it falls back to the CSS
+  // depth-glows alone (a clean light hero, never broken).
   (function initHeroCanvas() {
     const canvas = document.getElementById("hero-canvas");
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let gl;
+    try {
+      gl = canvas.getContext("webgl", { alpha: true, premultipliedAlpha: false, antialias: true })
+        || canvas.getContext("experimental-webgl", { alpha: true, premultipliedAlpha: false });
+    } catch (e) { gl = null; }
+    if (!gl) return;
 
-    const GREEN = "31,157,92";
-    const LEAF = "46,178,96";
-    const CYCLE = 9; // seconds per grow→hold→fade loop
-    // Ascending bar heights (fraction of hero height), left→right, like the logo.
-    const BARS = [0.12, 0.16, 0.205, 0.255, 0.305, 0.355];
+    const VS = `
+      attribute vec3 aBase; attribute vec2 aSeed;
+      uniform float uTime,uAspect,uDpr,uFade,uField; uniform vec2 uPointer;
+      varying float vA,vC;
+      vec3 flow(vec3 p,float t){
+        float x=sin(p.y*1.3+t*0.5+aSeed.x*6.2831)+cos(p.z*0.9-t*0.4);
+        float y=sin(p.z*1.1+t*0.45)+cos(p.x*1.2+t*0.5+aSeed.y*6.2831);
+        float z=sin(p.x*1.0-t*0.35)+cos(p.y*1.4+t*0.4);
+        return vec3(x,y,z);
+      }
+      void main(){
+        float t=uTime; vec3 p=aBase;
+        p+=flow(aBase,t)*0.11*uField;
+        p.x+=sin(t*0.10+aSeed.x)*0.05*p.z;
+        p.y+=cos(t*0.08+aSeed.y)*0.04*p.z;
+        p.x+=uPointer.x*0.26*p.z;
+        p.y+=uPointer.y*0.26*p.z;
+        float persp=1.85/(p.z+1.25);
+        vec2 pos=vec2(p.x,p.y)*persp; pos.x/=uAspect;
+        gl_Position=vec4(pos,0.0,1.0);
+        float fog=smoothstep(3.4,0.35,p.z);
+        float clear=smoothstep(-0.85,0.30,pos.x);
+        vA=fog*uFade*(0.14+aSeed.x*0.5)*(0.32+0.68*clear);
+        vC=clamp(aSeed.y*0.55+(1.0-fog)*0.5,0.0,1.0);
+        float size=(9.0+aSeed.y*26.0)*persp*uDpr;
+        gl_PointSize=clamp(size,1.0,80.0*uDpr);
+      }`;
+    const FS = `
+      precision mediump float; varying float vA,vC;
+      uniform vec3 uColA,uColB; uniform float uAlpha;
+      void main(){
+        vec2 d=gl_PointCoord-0.5; float r=length(d);
+        if(r>0.5) discard;
+        float glow=pow(smoothstep(0.5,0.0,r),1.7);
+        gl_FragColor=vec4(mix(uColA,uColB,vC), glow*vA*uAlpha);
+      }`;
 
-    let w = 0, h = 0;
+    const compile = (type, src) => {
+      const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+      return s;
+    };
+    let prog;
+    try {
+      prog = gl.createProgram();
+      gl.attachShader(prog, compile(gl.VERTEX_SHADER, VS));
+      gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FS));
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+    } catch (e) { return; }
+    gl.useProgram(prog);
+
+    const N = Math.min(1500, Math.max(500, Math.round(window.innerWidth * window.innerHeight / 1700)));
+    const base = new Float32Array(N * 3);
+    const seed = new Float32Array(N * 2);
+    const rand = (a, b) => a + Math.random() * (b - a);
+    for (let i = 0; i < N; i++) {
+      base[i * 3] = rand(-1.7, 2.0);
+      base[i * 3 + 1] = rand(-1.25, 1.25);
+      base[i * 3 + 2] = rand(0.25, 3.3);
+      seed[i * 2] = Math.random();
+      seed[i * 2 + 1] = Math.random();
+    }
+    const buf = (data, loc, size) => {
+      const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
+      gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+      const a = gl.getAttribLocation(prog, loc);
+      gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, size, gl.FLOAT, false, 0, 0);
+    };
+    buf(base, "aBase", 3); buf(seed, "aSeed", 2);
+
+    const U = (n) => gl.getUniformLocation(prog, n);
+    const uTime = U("uTime"), uAspect = U("uAspect"), uDpr = U("uDpr"), uFade = U("uFade"),
+      uField = U("uField"), uPointer = U("uPointer"), uColA = U("uColA"), uColB = U("uColB"), uAlpha = U("uAlpha");
+
+    let W = 0, H = 0;
     const resize = () => {
-      w = canvas.clientWidth; h = canvas.clientHeight;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
+      W = canvas.clientWidth; H = canvas.clientHeight;
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.uniform1f(uAspect, W / H); gl.uniform1f(uDpr, dpr);
     };
+    window.addEventListener("resize", resize);
 
-    const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
-    const seg = (p, a, b) => clamp((p - a) / (b - a));
-    const easeOut = (x) => 1 - Math.pow(1 - x, 3);
-    const easeInOut = (x) => x * x * (3 - 2 * x);
-
-    const roundRectPath = (x, y, rw, rh, r) => {
-      const rr = Math.min(r, rw / 2, Math.abs(rh) / 2);
-      if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(x, y, rw, rh, rr); return; }
-      ctx.beginPath();
-      ctx.moveTo(x + rr, y);
-      ctx.arcTo(x + rw, y, x + rw, y + rh, rr);
-      ctx.arcTo(x + rw, y + rh, x, y + rh, rr);
-      ctx.arcTo(x, y + rh, x, y, rr);
-      ctx.arcTo(x, y, x + rw, y, rr);
-      ctx.closePath();
-    };
-
-    const drawLeaf = (x, y, angle, len, alpha) => {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(angle);
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(len * 0.5, -len * 0.44, len, 0);
-      ctx.quadraticCurveTo(len * 0.5, len * 0.44, 0, 0);
-      ctx.closePath();
-      ctx.fillStyle = "rgba(" + LEAF + "," + alpha.toFixed(3) + ")";
-      ctx.fill();
-      ctx.restore();
-    };
-
-    // Draws one frame at loop-progress p (0..1). env scales the whole thing's
-    // opacity for the fade-in / fade-out at the loop seams.
-    const drawFrame = (p, env) => {
-      ctx.clearRect(0, 0, w, h);
-      if (env <= 0.001) return;
-
-      // Chart geometry — sits in the open gap beside the phone so the whole
-      // motif (bars, line and the sprout) stays visible, not hidden behind it.
-      const baseY = 0.72 * h;
-      const x0 = 0.47 * w, x1 = 0.66 * w;
-      const span = x1 - x0;
-      const slot = span / BARS.length;
-      const barW = slot * 0.52;
-
-      // 1) Bars rise one after another.
-      for (let i = 0; i < BARS.length; i++) {
-        const g = easeOut(seg(p, 0.05 + i * 0.035, 0.05 + i * 0.035 + 0.3));
-        const fullH = BARS[i] * h;
-        const bh = fullH * g;
-        if (bh < 0.5) continue;
-        const bx = x0 + i * slot + (slot - barW) / 2;
-        roundRectPath(bx, baseY - bh, barW, bh, Math.min(6, barW / 2));
-        ctx.fillStyle = "rgba(" + GREEN + "," + (0.11 * env).toFixed(3) + ")";
-        ctx.fill();
-      }
-
-      // 2) Growth line climbs up-right, with a faint area fill and a glowing tip.
-      const lp = easeOut(seg(p, 0.12, 0.62));
-      const ly0 = 0.66 * h, ly1 = 0.35 * h;
-      const lineX0 = 0.43 * w, lineX1 = 0.625 * w;
-      const pointAt = (u) => {
-        const x = lineX0 + (lineX1 - lineX0) * u;
-        const y = ly0 + (ly1 - ly0) * easeInOut(u) - Math.sin(u * Math.PI) * 0.02 * h;
-        return [x, y];
-      };
-      if (lp > 0.01) {
-        const steps = 48;
-        const last = Math.max(1, Math.round(steps * lp));
-        // area fill
-        ctx.beginPath();
-        ctx.moveTo(pointAt(0)[0], baseY);
-        for (let s = 0; s <= last; s++) { const [px, py] = pointAt((s / steps)); ctx.lineTo(px, py); }
-        const [ex] = pointAt(last / steps);
-        ctx.lineTo(ex, baseY);
-        ctx.closePath();
-        ctx.fillStyle = "rgba(" + GREEN + "," + (0.05 * env).toFixed(3) + ")";
-        ctx.fill();
-        // line
-        ctx.beginPath();
-        for (let s = 0; s <= last; s++) { const [px, py] = pointAt((s / steps)); if (s === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py); }
-        ctx.strokeStyle = "rgba(" + GREEN + "," + (0.5 * env).toFixed(3) + ")";
-        ctx.lineWidth = 2.4;
-        ctx.stroke();
-        // glowing tip
-        const [tx, ty] = pointAt(last / steps);
-        const glow = ctx.createRadialGradient(tx, ty, 0, tx, ty, 22);
-        glow.addColorStop(0, "rgba(" + LEAF + "," + (0.55 * env).toFixed(3) + ")");
-        glow.addColorStop(1, "rgba(" + LEAF + ",0)");
-        ctx.fillStyle = glow;
-        ctx.fillRect(tx - 24, ty - 24, 48, 48);
-        ctx.beginPath();
-        ctx.arc(tx, ty, 3, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(" + LEAF + "," + (0.85 * env).toFixed(3) + ")";
-        ctx.fill();
-      }
-
-      // 3) Sprout: a stem rises from the line's tip, then two leaves unfurl.
-      const [tipX, tipY] = pointAt(1);
-      const stemP = easeOut(seg(p, 0.5, 0.8));
-      if (stemP > 0.01) {
-        const stemH = 0.095 * h * stemP;
-        ctx.beginPath();
-        ctx.moveTo(tipX, tipY);
-        ctx.quadraticCurveTo(tipX + 6, tipY - stemH * 0.6, tipX + 2, tipY - stemH);
-        ctx.strokeStyle = "rgba(" + LEAF + "," + (0.8 * env).toFixed(3) + ")";
-        ctx.lineWidth = 2.6;
-        ctx.stroke();
-        const topX = tipX + 2, topY = tipY - stemH;
-        const leafP = easeOut(seg(p, 0.66, 0.92));
-        if (leafP > 0.01) {
-          const ll = 0.088 * h * leafP;
-          drawLeaf(topX, topY + 3, -Math.PI * 0.74, ll, 0.85 * env);   // left leaf, up-left
-          drawLeaf(topX, topY + 5, -Math.PI * 0.2, ll * 1.05, 0.85 * env); // right leaf, up-right
-        }
-      }
-    };
-
+    gl.disable(gl.DEPTH_TEST);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.uniform3f(uColA, 0.10, 0.52, 0.31);
+    gl.uniform3f(uColB, 0.18, 0.72, 0.42);
+    gl.uniform1f(uAlpha, 0.62);
     resize();
-    const renderStatic = () => drawFrame(0.86, 1); // fully grown, pre-fade
-    window.addEventListener("resize", () => { resize(); if (reduceMotion) renderStatic(); });
-    if (reduceMotion) { renderStatic(); return; }
 
-    const loop = (now) => {
-      const p = ((now / 1000) % CYCLE) / CYCLE;
-      const env = Math.min(seg(p, 0, 0.08), 1 - seg(p, 0.9, 1));
-      drawFrame(p, easeInOut(clamp(env)));
-      requestAnimationFrame(loop);
+    let pxT = 0, pyT = 0, px = 0, py = 0;
+    window.addEventListener("mousemove", (e) => { pxT = e.clientX / W * 2 - 1; pyT = -(e.clientY / H * 2 - 1); });
+    window.addEventListener("deviceorientation", (e) => {
+      if (e.gamma == null) return;
+      pxT = Math.max(-1, Math.min(1, e.gamma / 35));
+      pyT = Math.max(-1, Math.min(1, (e.beta - 45) / 35));
+    });
+
+    const start = performance.now();
+    let fade = 0;
+    const draw = (now) => {
+      const t = (now - start) / 1000;
+      fade = Math.min(1, fade + 0.012);
+      const auto = 0.35 * Math.sin(t * 0.15);
+      px += ((pxT || auto) - px) * 0.04;
+      py += ((pyT || 0.2 * Math.cos(t * 0.12)) - py) * 0.04;
+      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.uniform1f(uTime, reduceMotion ? 6.0 : t);
+      gl.uniform1f(uFade, fade);
+      gl.uniform1f(uField, reduceMotion ? 0.0 : 1.0);
+      gl.uniform2f(uPointer, px, py);
+      gl.drawArrays(gl.POINTS, 0, N);
+      if (!reduceMotion) requestAnimationFrame(draw);
     };
-    requestAnimationFrame(loop);
+    if (reduceMotion) { fade = 1; draw(start + 6000); }
+    else requestAnimationFrame(draw);
   })();
 
   // ---------- Footer growth canvas ----------
