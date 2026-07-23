@@ -1,5 +1,5 @@
 // GrowMatic SA — homepage behaviour (redesign)
-// Nav scroll state, scroll-reveals, hero particle canvas, footer growth canvas.
+// Nav scroll state, scroll-reveals, hero flow streams, footer growth canvas.
 (function () {
   "use strict";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -43,121 +43,75 @@
       });
     }, { threshold: 0.12 });
     els.forEach(function (el) { io.observe(el); });
-    // Fail-safe: never leave content hidden
     setTimeout(function () {
       els.forEach(function (el) { if (el.style.opacity === "0") show(el); });
     }, 6000);
   })();
 
-  // ---------- Hero particle canvas ----------
+  // ---------- Hero: flowing signal streams ----------
+  // Faint green->blue lines spanning the full width, each carrying travelling
+  // light pulses that flow left-to-right — "data moving through" the page,
+  // spread across the hero rather than clustered in one corner.
   (function () {
     var el = document.getElementById("hero-fx");
     if (!el) return;
     var ctx = el.getContext("2d");
     if (!ctx) return;
-    var SIGNAL = "31,157,92";
     var t = 0;
-    var mouse = { x: 0, y: 0 };
-    window.addEventListener("mousemove", function (e) {
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
-    });
-    var dots = Array.from({ length: 22 }, function (_, i) {
-      return {
-        a: (i / 22) * Math.PI * 2 + (i % 5) * 0.3,
-        r: 0.5 + (i % 5) * 0.13,
-        s: (0.04 + (i % 3) * 0.03) * (i % 2 === 0 ? 1 : -1),
-        size: 1.5 + (i % 3),
-        wob: (i % 4) * 0.6
-      };
-    });
-    var loop = function () {
+    var STREAMS = 7;
+
+    var draw = function () {
       var w = el.clientWidth, h = el.clientHeight;
       if (el.width !== w || el.height !== h) { el.width = w; el.height = h; }
       ctx.clearRect(0, 0, w, h);
-      var cx = w * 0.72 + mouse.x * 18;
-      var cy = h * 0.42 + mouse.y * 14;
-      var R = Math.min(w * 0.17, 250);
-      var pulse = 0.5 + 0.5 * Math.sin(t * 1.4);
 
-      var glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 2.4);
-      glow.addColorStop(0, "rgba(" + SIGNAL + "," + (0.10 + pulse * 0.05) + ")");
-      glow.addColorStop(1, "rgba(" + SIGNAL + ",0)");
-      ctx.fillStyle = glow;
-      ctx.fillRect(0, 0, w, h);
-      var glow2 = ctx.createRadialGradient(w * 0.12, h * 0.85, 0, w * 0.12, h * 0.85, R * 2);
-      glow2.addColorStop(0, "rgba(" + SIGNAL + ",0.05)");
-      glow2.addColorStop(1, "rgba(" + SIGNAL + ",0)");
-      ctx.fillStyle = glow2;
-      ctx.fillRect(0, 0, w, h);
+      for (var i = 0; i < STREAMS; i++) {
+        var p = i / (STREAMS - 1);
+        var y = h * (0.14 + p * 0.72);
+        var amp = h * 0.028 * (0.5 + Math.sin(p * Math.PI));
+        var freq = 1.0 + p * 0.7;
+        var phase = t * 0.5 + i * 0.8;
 
-      var ring = function (rx, ry, rot, alpha, cometSpeed) {
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.rotate(rot);
+        // faint base line
         ctx.beginPath();
-        ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(" + SIGNAL + "," + alpha + ")";
+        for (var s = 0; s <= 80; s++) {
+          var u = s / 80;
+          var x = u * w;
+          var yy = y + Math.sin(u * Math.PI * 2 * freq + phase) * amp;
+          if (s === 0) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
+        }
+        var a = 0.05 + 0.06 * Math.sin(p * Math.PI);
+        var g = ctx.createLinearGradient(0, 0, w, 0);
+        g.addColorStop(0, "rgba(31,157,92,0)");
+        g.addColorStop(0.5, "rgba(31,157,92," + a.toFixed(3) + ")");
+        g.addColorStop(1, "rgba(31,78,140,0)");
+        ctx.strokeStyle = g;
         ctx.lineWidth = 1;
         ctx.stroke();
-        var ca = t * cometSpeed;
-        for (var k = 0; k < 7; k++) {
-          var a = ca - k * 0.055;
+
+        // travelling pulses
+        for (var k = 0; k < 2; k++) {
+          var pos = ((t * 0.05 * (0.7 + p) + i * 0.17 + k * 0.5) % 1 + 1) % 1;
+          var px = pos * w;
+          var py = y + Math.sin(pos * Math.PI * 2 * freq + phase) * amp;
+          var col = k === 0 ? "31,157,92" : "31,78,140";
+          var edge = Math.sin(pos * Math.PI); // fade in/out at the edges
+          var glow = ctx.createRadialGradient(px, py, 0, px, py, 12);
+          glow.addColorStop(0, "rgba(" + col + "," + (0.5 * edge).toFixed(3) + ")");
+          glow.addColorStop(1, "rgba(" + col + ",0)");
+          ctx.fillStyle = glow;
+          ctx.fillRect(px - 12, py - 12, 24, 24);
           ctx.beginPath();
-          ctx.arc(Math.cos(a) * rx, Math.sin(a) * ry, 2.4 - k * 0.28, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(" + SIGNAL + "," + (0.7 - k * 0.095) + ")";
+          ctx.arc(px, py, 1.7, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(" + col + "," + (0.85 * edge).toFixed(3) + ")";
           ctx.fill();
         }
-        ctx.restore();
-      };
-      ring(R * 1.45, R * 0.5, t * 0.25, 0.28, 1.1);
-      ring(R * 1.7, R * 0.42, -t * 0.18 + 0.9, 0.16, -0.8);
-
-      for (var k = 0; k < 3; k++) {
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.rotate(t * (0.2 + k * 0.07) + k);
-        ctx.beginPath();
-        for (var i = 0; i <= 6; i++) {
-          var a2 = (i / 6) * Math.PI * 2;
-          var r = R * (0.55 - k * 0.09) * (1 + pulse * 0.03);
-          if (i === 0) ctx.moveTo(Math.cos(a2) * r, Math.sin(a2) * r * 0.92);
-          else ctx.lineTo(Math.cos(a2) * r, Math.sin(a2) * r * 0.92);
-        }
-        ctx.closePath();
-        ctx.strokeStyle = "rgba(" + SIGNAL + "," + (0.42 - k * 0.1) + ")";
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        if (k === 0) { ctx.fillStyle = "rgba(" + SIGNAL + "," + (0.04 + pulse * 0.03) + ")"; ctx.fill(); }
-        ctx.restore();
       }
 
-      dots.forEach(function (d) {
-        var a = d.a + t * d.s;
-        var wobble = Math.sin(t * 0.8 + d.wob) * R * 0.05;
-        var x = cx + Math.cos(a) * (R * 1.9 * d.r + wobble);
-        var y = cy + Math.sin(a) * (R * 0.9 * d.r + wobble);
-        var dist = Math.hypot(x - cx, y - cy);
-        if (dist < R * 1.6) {
-          ctx.beginPath();
-          ctx.moveTo(x, y);
-          ctx.lineTo(cx + (x - cx) * 0.35, cy + (y - cy) * 0.35);
-          ctx.strokeStyle = "rgba(" + SIGNAL + "," + (0.14 * (1 - dist / (R * 1.6))) + ")";
-          ctx.lineWidth = 0.75;
-          ctx.stroke();
-        }
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(a + t * 0.5);
-        ctx.fillStyle = d.size > 2.5 ? "rgba(" + SIGNAL + ",0.45)" : "rgba(10,10,10,0.35)";
-        ctx.fillRect(-d.size / 2, -d.size / 2, d.size, d.size);
-        ctx.restore();
-      });
-
-      t += 0.01;
-      if (!reduce) requestAnimationFrame(loop);
+      t += 0.02;
+      if (!reduce) requestAnimationFrame(draw);
     };
-    loop();
+    draw();
   })();
 
   // ---------- Footer growth canvas ----------
