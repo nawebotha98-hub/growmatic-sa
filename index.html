@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="styles.css?v=20260723a">
 <style>
   html { scroll-behavior: smooth; }
-  body { margin: 0; background: #fafaf8; color: #0a0a0a; font-family: 'DM Sans', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  body { margin: 0; background: fafaf8; color: #0a0a0a; font-family: 'DM Sans', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: clip; }
   a { color: #0a0a0a; text-decoration: none; }
   a:hover { color: inherit; }
   ::selection { background: #1f9d5c; color: #fff; }
@@ -59,8 +59,9 @@
 </style>
 </head>
 <body>
+<canvas id="bg-fx" aria-hidden="true" style="position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;"></canvas>
 
-<div style="min-width: 320px; overflow-x: clip;">
+<div style="min-width: 320px; overflow-x: clip; position: relative; z-index: 1;">
 
   <!-- ================= NAV ================= -->
   <nav id="nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: transparent; border-bottom: 1px solid transparent; transition: background .3s ease, border-color .3s ease, backdrop-filter .3s ease;">
@@ -78,8 +79,7 @@
   </nav>
 
   <!-- ================= HERO ================= -->
-  <section id="top" style="position: relative; overflow: hidden; background: #fafaf8;">
-    <canvas id="hero-fx" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+  <section id="top" style="position: relative; overflow: hidden; background: transparent;">
 
     <div class="hero-grid pad" style="max-width: 960px; margin: 0 auto; padding: 190px 24px 130px; position: relative; text-align: center; display: flex; flex-direction: column; align-items: center;">
       <div data-reveal style="display: inline-flex; align-items: center; gap: 9px; margin-bottom: 28px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #1f7a4c;">
@@ -140,7 +140,7 @@
   </section>
 
   <!-- ================= STATS ================= -->
-  <section style="background: #fafaf8;">
+  <section style="background: transparent;">
     <div class="pad" style="max-width: 1160px; margin: 0 auto; padding: 96px 24px;">
       <div class="stat-grid" data-reveal style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #e7e7e2; border: 1px solid #e7e7e2; border-radius: 24px; overflow: hidden; box-shadow: 0 26px 55px -34px rgba(31,78,140,0.25);">
         <div style="background: #ffffff; padding: 48px 24px; text-align: center;">
@@ -164,7 +164,7 @@
   </section>
 
   <!-- ================= SERVICES ================= -->
-  <section id="services" style="background: #fafaf8;">
+  <section id="services" style="background: transparent;">
     <div class="pad" style="max-width: 1024px; margin: 0 auto; padding: 130px 24px;">
       <div data-reveal style="margin-bottom: 80px;">
         <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 24px;">What We Build</div>
@@ -225,7 +225,7 @@
   </section>
 
   <!-- ================= INDUSTRIES ================= -->
-  <section id="industries" style="background: #fafaf8;">
+  <section id="industries" style="background: transparent;">
     <div class="pad" style="max-width: 1280px; margin: 0 auto; padding: 130px 24px;">
       <div data-reveal style="max-width: 760px; margin-bottom: 80px;">
         <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 24px;">Who It's For</div>
@@ -303,7 +303,7 @@
   </section>
 
   <!-- ================= FAQ ================= -->
-  <section id="faq" style="background: #fafaf8;">
+  <section id="faq" style="background: transparent;">
     <div class="pad" style="max-width: 768px; margin: 0 auto; padding: 130px 24px;">
       <div data-reveal style="margin-bottom: 64px;">
         <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 24px;">FAQ</div>
@@ -341,7 +341,7 @@
   </section>
 
   <!-- ================= FOOTER ================= -->
-  <footer style="background: #fafaf8; border-top: 1px solid #e4e4e0;">
+  <footer style="background: transparent; border-top: 1px solid #e4e4e0;">
     <div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px 32px;">
       <div class="footer-grid" style="display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; padding-bottom: 80px;">
         <div>
@@ -428,7 +428,7 @@
 
 </div>
 
-<script src="app.js?v=20260723b"></script>
+<script src="app.js?v=20260723c"></script>
 <script src="chat-widget.js?v=20260723a"></script>
 </body>
 </html>

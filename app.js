@@ -48,17 +48,18 @@
     }, 6000);
   })();
 
-  // ---------- Hero: flowing signal streams ----------
+  // ---------- Ambient flowing signal streams (fixed, full viewport) ----------
   // Faint green->blue lines spanning the full width, each carrying travelling
-  // light pulses that flow left-to-right — "data moving through" the page,
-  // spread across the hero rather than clustered in one corner.
+  // light pulses that flow left-to-right. Drawn on a fixed background canvas
+  // that shows through every transparent (white) section; the dark sections
+  // sit opaque on top and cover it — so the motion is ambient across the site.
   (function () {
-    var el = document.getElementById("hero-fx");
+    var el = document.getElementById("bg-fx");
     if (!el) return;
     var ctx = el.getContext("2d");
     if (!ctx) return;
     var t = 0;
-    var STREAMS = 7;
+    var STREAMS = 10;
 
     var draw = function () {
       var w = el.clientWidth, h = el.clientHeight;
