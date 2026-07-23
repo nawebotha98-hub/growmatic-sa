@@ -192,6 +192,25 @@ img { max-width: 100%; }
 /* Generous vertical rhythm inside the hero — eyebrow, headline, paragraph
    and CTAs spaced out to use the full-height section rather than clustering. */
 .hero-inner .eyebrow { margin-bottom: 30px; }
+.live-badge {
+  display: inline-flex; align-items: center; gap: 9px; align-self: flex-start;
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink);
+  background: rgba(31,157,92,0.08); border: 1px solid rgba(31,157,92,0.28);
+  padding: 7px 14px; border-radius: 999px; margin-bottom: 20px;
+}
+.live-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+  box-shadow: 0 0 0 0 rgba(31,157,92,0.5);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .live-dot { animation: live-pulse 2.2s infinite; }
+}
+@keyframes live-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(31,157,92,0.5); }
+  70%  { box-shadow: 0 0 0 9px rgba(31,157,92,0); }
+  100% { box-shadow: 0 0 0 0 rgba(31,157,92,0); }
+}
 .hero-sub { margin: 52px 0 0; font-size: 20px; line-height: 1.7; color: var(--gray); font-weight: 300; max-width: 60ch; }
 .hero-ctas { margin-top: 64px; display: flex; gap: 16px; flex-wrap: wrap; }
 
