@@ -192,4 +192,38 @@
     };
     loop();
   })();
+
+  // ---------- WhatsApp widget (SA-Off-Grid style) ----------
+  // Green launcher + "Need help?" pill; tapping it opens a WhatsApp-styled
+  // card that deep-links to wa.me. Closes on outside click / Escape.
+  (function () {
+    var widget = document.getElementById("wa-widget");
+    var toggle = document.getElementById("wa-toggle");
+    var panel = document.getElementById("wa-panel");
+    var label = document.getElementById("wa-label");
+    var icoOpen = document.getElementById("wa-ico-open");
+    var icoClose = document.getElementById("wa-ico-close");
+    if (!widget || !toggle || !panel) return;
+    var open = false;
+
+    var setOpen = function (val) {
+      open = val;
+      panel.style.display = val ? "block" : "none";
+      toggle.setAttribute("aria-expanded", val ? "true" : "false");
+      if (label) label.style.display = val ? "none" : "";
+      if (icoOpen) icoOpen.style.display = val ? "none" : "";
+      if (icoClose) icoClose.style.display = val ? "block" : "none";
+    };
+
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      setOpen(!open);
+    });
+    document.addEventListener("click", function (e) {
+      if (open && !widget.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (open && e.key === "Escape") setOpen(false);
+    });
+  })();
 })();
