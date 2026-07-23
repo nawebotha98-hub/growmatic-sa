@@ -605,3 +605,61 @@
     }
   });
 })();
+
+// ---------- Hero flow-wave ribbon ----------
+// Layered green->blue lines flowing along the bottom of the hero, swelling in
+// the middle like a woven ribbon (matches the redesign's wave motif). Sits
+// behind the hero content. Reduced motion paints a single static frame.
+(function initWaveCanvas() {
+  const canvas = document.getElementById("wave-canvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  let w = 0, h = 0;
+  const resize = () => {
+    w = canvas.clientWidth; h = canvas.clientHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.round(w * dpr));
+    canvas.height = Math.max(1, Math.round(h * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.lineCap = "round";
+  };
+  resize();
+  window.addEventListener("resize", resize);
+
+  const LINES = 24;
+  const draw = (now) => {
+    ctx.clearRect(0, 0, w, h);
+    const t = now * 0.001;
+    for (let i = 0; i < LINES; i++) {
+      const p = i / (LINES - 1);
+      const lineY = h * 0.52 + (p - 0.5) * h * 0.64;
+      const amp = h * 0.16 * (0.35 + 0.65 * Math.sin(p * Math.PI));
+      const freq = 1.3 + p * 1.1;
+      const phase = t * 0.6 + i * 0.4;
+      ctx.beginPath();
+      const steps = 64;
+      for (let s = 0; s <= steps; s++) {
+        const u = s / steps;
+        const x = u * w;
+        const env = Math.sin(u * Math.PI); // horizontal swell, peaks in the middle
+        const y = lineY + Math.sin(u * Math.PI * 2 * freq + phase) * amp * (0.3 + 0.7 * env);
+        if (s === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      const a = 0.08 + 0.16 * Math.sin(p * Math.PI);
+      const g = ctx.createLinearGradient(0, 0, w, 0);
+      g.addColorStop(0,    "rgba(31,157,92," + a.toFixed(3) + ")");
+      g.addColorStop(0.55, "rgba(31,157,92," + (a * 0.7).toFixed(3) + ")");
+      g.addColorStop(1,    "rgba(37,99,235," + a.toFixed(3) + ")");
+      ctx.strokeStyle = g;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+  };
+
+  if (reduce) { draw(0); return; }
+  const loop = (now) => { draw(now); requestAnimationFrame(loop); };
+  requestAnimationFrame(loop);
+})();
