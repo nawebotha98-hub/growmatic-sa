@@ -3,456 +3,422 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GrowMatic SA | AI Automation for South African Businesses</title>
-<meta name="description" content="Work less. Sell more. GrowMatic SA sets up an AI agent that answers your customers on WhatsApp, email and website chat 24/7 — books appointments, follows up leads and texts back every missed call, so a dropped ringtone never means a lost sale.">
-<meta name="keywords" content="AI automation South Africa, AI agent, WhatsApp automation, missed call text-back, lead automation, email automation, appointment booking automation, customer service automation, business automation">
-<meta property="og:title" content="GrowMatic SA | AI Automation for South African Businesses">
-<meta property="og:description" content="Work less. Sell more. An AI agent that answers customers on WhatsApp, email and website chat 24/7 — books appointments, follows up leads and texts back every missed call.">
+<title>GrowMatic SA — AI Automation for South African Businesses</title>
+<meta name="description" content="Automate the busywork. Grow on autopilot. One AI agent answers every customer on WhatsApp, email and your website chat — books appointments, follows up leads, and texts back every missed call. Built for South African businesses.">
+<meta name="keywords" content="AI automation South Africa, AI agent, WhatsApp automation, missed call text-back, lead automation, booking automation, customer service AI, business automation Gqeberha">
+<meta property="og:title" content="GrowMatic SA — AI Automation for South African Businesses">
+<meta property="og:description" content="Automate the busywork. Grow on autopilot. One AI agent that answers every customer on WhatsApp, email and website chat — books appointments, follows up leads and texts back every missed call.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://growmaticsa.com/">
 <meta property="og:image" content="https://growmaticsa.com/assets/logo-horizontal.png">
 <meta property="og:image:width" content="1536">
 <meta property="og:image:height" content="1024">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="GrowMatic SA | AI Automation for South African Businesses">
-<meta name="twitter:description" content="Work less. Sell more. An AI agent that answers customers on WhatsApp, email and website chat 24/7 — books appointments, follows up leads and texts back every missed call.">
+<meta name="twitter:title" content="GrowMatic SA — AI Automation for South African Businesses">
+<meta name="twitter:description" content="Automate the busywork. Grow on autopilot. One AI agent that answers every customer on WhatsApp, email and website chat.">
 <meta name="twitter:image" content="https://growmaticsa.com/assets/logo-horizontal.png">
 <link rel="icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<!-- Bump ?v= on styles.css/script.js below whenever either file changes.
-     GitHub Pages/its CDN can serve a cached copy of an unversioned static
-     asset for a while after a deploy; changing the query string makes the
-     browser and CDN treat it as a brand new URL, guaranteeing the latest
-     file is fetched immediately instead of racing cache propagation. -->
-<link rel="stylesheet" href="styles.css?v=20260722h">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #fafaf8; color: #0a0a0a; font-family: 'DM Sans', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  a { color: #0a0a0a; text-decoration: none; }
+  a:hover { color: #1f9d5c; }
+  ::selection { background: #1f9d5c; color: #fff; }
+  summary { list-style: none; cursor: pointer; }
+  summary::-webkit-details-marker { display: none; }
+  details[open] [data-plus] { transform: rotate(45deg); }
+  details[open] summary [data-q] { color: #1f9d5c; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes spinR { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+  @keyframes nodeFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  @keyframes pulseRing { 0% { transform: scale(0.85); opacity: 0.5; } 100% { transform: scale(1.35); opacity: 0; } }
+  @keyframes dashFlow { to { stroke-dashoffset: -1000; } }
+
+  /* Responsive — the design was desktop-first; these keep it clean on phones */
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr !important; padding-top: 128px !important; gap: 56px !important; }
+  }
+  @media (max-width: 820px) {
+    .nav-link { display: none !important; }
+    .svc-row { grid-template-columns: 1fr !important; gap: 10px !important; }
+    .footer-grid { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 640px) {
+    .pad { padding-top: 84px !important; padding-bottom: 84px !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  }
+</style>
 </head>
 <body>
 
-<nav class="nav" id="nav">
-  <div class="nav-inner">
-    <a href="#top" class="nav-logo"><img src="assets/logo-horizontal.png" alt="GrowMatic SA"></a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="nav-links" id="nav-links">
-      <a href="#offer">Start Here</a>
-      <a href="#services">Solutions</a>
-      <a href="#how-it-works">How It Works</a>
-      <a href="#industries">Industries</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
-      <a href="trades.html" class="nav-trades">For Trades</a>
-      <a href="quote-recovery.html" class="nav-trades">Quote Recovery</a>
-      <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20book%20a%20free%20automation%20review." class="btn-nav wa-call" target="_blank" rel="noopener noreferrer">Book a free review</a>
-    </div>
-  </div>
-</nav>
+<div style="min-width: 320px; overflow-x: clip;">
 
-<section id="top" class="hero">
-  <canvas id="wave-canvas" aria-hidden="true"></canvas>
-  <div class="hero-inner">
-    <div>
-      <div class="live-badge reveal"><span class="live-dot"></span>Live 24/7</div>
-      <div class="eyebrow reveal" data-delay="40">South Africa · AI Automation</div>
-      <h1 class="reveal" data-delay="80">Work less.<br>Sell <span class="accent">more</span>.</h1>
-      <p class="hero-sub reveal" data-delay="180">Your AI agent answers customers on WhatsApp, email and a live chat widget on your own website — books appointments while you sleep, and texts back every missed call, so <strong>one dropped ringtone doesn't mean one lost sale.</strong></p>
-      <div class="hero-ctas reveal" data-delay="280">
-        <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20book%20a%20free%20strategy%20call." class="btn-primary" target="_blank" rel="noopener noreferrer">Book a free strategy call <span>→</span></a>
-        <a href="#services" class="btn-secondary">See what we build</a>
+  <!-- ================= NAV ================= -->
+  <nav id="nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: transparent; border-bottom: 1px solid transparent; transition: background .3s ease, border-color .3s ease, backdrop-filter .3s ease;">
+    <div style="max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px;">
+      <a href="#top" style="display: flex; align-items: center;"><img src="assets/logo-horizontal.png" alt="GrowMatic SA" style="height: 120px; width: auto; margin: -42px 0 -42px -20px; display: block;"></a>
+      <div style="display: flex; align-items: center; gap: 36px; flex-wrap: wrap; justify-content: flex-end;">
+        <a class="nav-link" href="#top" style="font-size: 14px; font-weight: 500; color: #1f9d5c;">Home</a>
+        <a class="nav-link" href="#services" style="font-size: 14px; font-weight: 500; color: rgba(10,10,10,0.7);">Solutions</a>
+        <a class="nav-link" href="#industries" style="font-size: 14px; font-weight: 500; color: rgba(10,10,10,0.7);">About Us</a>
+        <a class="nav-link" href="#how-it-works" style="font-size: 14px; font-weight: 500; color: rgba(10,10,10,0.7);">How It Works</a>
+        <a class="nav-link" href="#cta" style="font-size: 14px; font-weight: 500; color: rgba(10,10,10,0.7);">Contact</a>
+        <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20book%20a%20free%20strategy%20call." target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, #1f4e8c, #1f9d5c); color: #ffffff; padding: 12px 24px; border-radius: 999px; font-size: 14px; font-weight: 600; transition: filter .25s ease;">Book a Demo <span style="font-size: 15px;">→</span></a>
       </div>
     </div>
+  </nav>
 
-    <div class="hub reveal" data-delay="240" aria-hidden="true">
-      <svg class="hub-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-        <circle class="hub-ring spin1" cx="50" cy="50" r="27"></circle>
-        <circle class="hub-ring spin2" cx="50" cy="50" r="40"></circle>
-        <line class="hub-line b" x1="50" y1="50" x2="50" y2="12"></line>
-        <line class="hub-line b" x1="50" y1="50" x2="82.9" y2="31"></line>
-        <line class="hub-line g" x1="50" y1="50" x2="82.9" y2="69"></line>
-        <line class="hub-line g" x1="50" y1="50" x2="50" y2="88"></line>
-        <line class="hub-line b" x1="50" y1="50" x2="17.1" y2="69"></line>
-        <line class="hub-line g" x1="50" y1="50" x2="17.1" y2="31"></line>
-        <circle class="hub-dot b" cx="50" cy="12" r="1.1"></circle>
-        <circle class="hub-dot b" cx="82.9" cy="31" r="1.1"></circle>
-        <circle class="hub-dot g" cx="82.9" cy="69" r="1.1"></circle>
-        <circle class="hub-dot g" cx="50" cy="88" r="1.1"></circle>
-        <circle class="hub-dot b" cx="17.1" cy="69" r="1.1"></circle>
-        <circle class="hub-dot g" cx="17.1" cy="31" r="1.1"></circle>
-      </svg>
+  <!-- ================= HERO ================= -->
+  <section id="top" style="position: relative; overflow: hidden; background: #fafaf8;">
+    <canvas id="hero-fx" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
 
-      <div class="hub-core"><img src="assets/logo.png" alt="GrowMatic SA"></div>
-
-      <div class="hub-node b" style="left:50%;top:12%">
-        <span class="hub-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"></path></svg></span>
-        <span class="hub-lbl">Website</span>
-      </div>
-      <div class="hub-node b" style="left:82.9%;top:31%">
-        <span class="hub-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg></span>
-        <span class="hub-lbl">Email</span>
-      </div>
-      <div class="hub-node g" style="left:82.9%;top:69%">
-        <span class="hub-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="m8.3 12 2.6 2.6 4.8-5.4"></path></svg></span>
-        <span class="hub-lbl">Tasks</span>
-      </div>
-      <div class="hub-node g" style="left:50%;top:88%">
-        <span class="hub-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11"></path><path d="M12 20V5"></path><path d="M19 20v-6"></path></svg></span>
-        <span class="hub-lbl">Analytics</span>
-      </div>
-      <div class="hub-node b" style="left:17.1%;top:69%">
-        <span class="hub-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"></circle><path d="M15.5 9a3 3 0 1 0-2-5.2"></path><path d="M3.5 20a6 6 0 0 1 11 0"></path><path d="M17 14.3A6 6 0 0 1 20.5 20"></path></svg></span>
-        <span class="hub-lbl">CRM</span>
-      </div>
-      <div class="hub-node g" style="left:17.1%;top:31%">
-        <span class="hub-chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"></path></svg></span>
-        <span class="hub-lbl">WhatsApp</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="marquee">
-  <div class="marquee-track">
-    <div class="marquee-group">
-      <span>Faster Response</span><span class="dot">·</span><span>More Leads Captured</span><span class="dot">·</span><span>Fewer Missed Calls</span><span class="dot">·</span><span>Automatic Follow-Up</span><span class="dot">·</span><span>Easier Bookings</span><span class="dot">·</span><span>Better Reviews</span><span class="dot">·</span><span>Less Admin</span><span class="dot">·</span><span>More Sales</span><span class="dot">·</span><span>Happier Customers</span><span class="dot">·</span>
-    </div>
-    <div class="marquee-group">
-      <span>Faster Response</span><span class="dot">·</span><span>More Leads Captured</span><span class="dot">·</span><span>Fewer Missed Calls</span><span class="dot">·</span><span>Automatic Follow-Up</span><span class="dot">·</span><span>Easier Bookings</span><span class="dot">·</span><span>Better Reviews</span><span class="dot">·</span><span>Less Admin</span><span class="dot">·</span><span>More Sales</span><span class="dot">·</span><span>Happier Customers</span><span class="dot">·</span>
-    </div>
-  </div>
-</div>
-
-<section class="section section-dark">
-  <div class="wrap">
-    <div class="section-head reveal" style="max-width:760px">
-      <div class="eyebrow accent">The Problem</div>
-      <h2>Your business is losing money <span class="accent">while you sleep</span>.</h2>
-    </div>
-    <div class="grid grid-3">
-      <div class="card-dark reveal">
-        <div class="hr"></div>
-        <div class="eyebrow accent">The Cost</div>
-        <h3>Hours wasted on repetitive tasks.</h3>
-        <p>Answering the same questions, confirming bookings, sending follow-ups — it's eating your day alive.</p>
-      </div>
-      <div class="card-dark reveal" data-delay="100">
-        <div class="hr"></div>
-        <div class="eyebrow accent">The Risk</div>
-        <h3>Every missed call is a lost sale.</h3>
-        <p>When you don't pick up, most people don't leave a voicemail — they just call the next business on the list. If you're not answering, someone else is.</p>
-      </div>
-      <div class="card-dark reveal" data-delay="200">
-        <div class="hr"></div>
-        <div class="eyebrow accent">The Trap</div>
-        <h3>Stuck working in the business, not on it.</h3>
-        <p>The right systems working quietly in the background give you your time back — so you can actually grow instead of just keeping up.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-light" id="cost">
-  <div class="wrap">
-    <div class="section-head reveal" style="max-width:720px">
-      <div class="eyebrow">The cost of a missed call</div>
-      <h2>What are missed calls <span class="accent">costing you?</span></h2>
-      <p class="section-sub">Rough it out with your own numbers — even a conservative estimate usually surprises people.</p>
-    </div>
-    <div class="calc reveal">
-      <div class="calc-inputs">
-        <div class="calc-field">
-          <label for="calls">Calls you miss a week</label>
-          <input id="calls" type="number" min="0" max="500" value="5" inputmode="numeric">
-        </div>
-        <div class="calc-field">
-          <label for="job">Average sale value (R)</label>
-          <input id="job" type="number" min="0" step="100" value="1500" inputmode="numeric">
-        </div>
-      </div>
-      <div class="calc-out">
-        <div class="calc-line"><span>Missed calls a month</span><b id="o-month">≈ 22</b></div>
-        <div class="calc-big">
-          <span>If just 1 in 3 became a sale, you're letting go of</span>
-          <strong id="o-year">R0</strong>
-          <em>a year</em>
-        </div>
-        <div class="calc-sub" id="o-mo">That's about R0/month walking past your door.</div>
-        <p class="calc-note">A rough estimate from your own numbers — not a promise. Recovering even a slice of these is exactly what we set up.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-light section-border">
-  <div class="wrap">
-    <div class="grid grid-4">
-      <div class="stat reveal">
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">Every enquiry answered</div>
-      </div>
-      <div class="stat reveal" data-delay="80">
-        <div class="stat-num">Days</div>
-        <div class="stat-label">To set up — not months</div>
-      </div>
-      <div class="stat reveal" data-delay="160">
-        <div class="stat-num">Month&#8209;to&#8209;month</div>
-        <div class="stat-label">Cancel anytime</div>
-      </div>
-      <div class="stat reveal" data-delay="240">
-        <div class="stat-num">0</div>
-        <div class="stat-label">Extra staff needed</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="services" class="section section-light">
-  <div class="wrap wrap-narrow">
-    <div class="section-head reveal">
-      <div class="eyebrow">What We Build</div>
-      <h2 style="max-width:760px">AI systems that <span class="accent">run the busywork</span> for you.</h2>
-    </div>
-    <div class="service-list" id="service-list"></div>
-  </div>
-</section>
-
-<section id="offer" class="section section-dark">
-  <div class="wrap wrap-narrow">
-    <div class="section-head reveal" style="max-width:820px">
-      <div class="eyebrow accent">Start Here</div>
-      <h2 class="heading-lg">Start with <span class="accent">one automation</span> that pays for itself.</h2>
-      <p class="section-sub reveal" data-delay="120">You don't have to automate everything at once. Most businesses start with the one that stings the most — <strong>every missed call turned into a live conversation.</strong> When you can't get to the phone, the caller gets a friendly WhatsApp from you within seconds — so a missed call becomes a booked job instead of a lost one. Prove it works, then we automate more.</p>
-    </div>
-
-    <div class="grid grid-3" style="margin-top:16px">
-      <div class="card-dark reveal">
-        <div class="hr"></div>
-        <div class="eyebrow accent">What it does</div>
-        <div class="plan-features" style="margin-top:8px">
-          <div class="plan-feature"><span class="check">✓</span><span>Instant WhatsApp reply to every missed call, day or night</span></div>
-          <div class="plan-feature"><span class="check">✓</span><span>Answers the common questions and captures the lead's details</span></div>
-          <div class="plan-feature"><span class="check">✓</span><span>Follows up automatically so no enquiry goes cold</span></div>
-          <div class="plan-feature"><span class="check">✓</span><span>Every lead lands in one place — nothing slips through</span></div>
-        </div>
-      </div>
-      <div class="card-dark reveal" data-delay="100">
-        <div class="hr"></div>
-        <div class="eyebrow accent">What it costs</div>
-        <div class="plan-setup">R1,500</div>
-        <div class="plan-setup-label">once-off setup · live in days</div>
-        <div class="plan-monthly">+ R650/mo · cancel anytime</div>
-        <p style="margin-top:16px">One recovered job usually covers months of it. Ready for more? Add lead follow-ups, bookings, email &amp; admin whenever it makes sense.</p>
-      </div>
-      <div class="card-dark reveal" data-delay="200" style="background:rgba(31,157,92,0.08);border:1px solid rgba(31,157,92,0.25)">
-        <div class="hr"></div>
-        <div class="eyebrow accent">Try before you commit</div>
-        <h3>See it work first.</h3>
-        <p>Message us on WhatsApp and watch the automation reply to you in seconds — experience the exact thing your customers would. Then start with a <strong>30-day pilot, month-to-month, cancel anytime.</strong></p>
-      </div>
-    </div>
-
-    <div class="coming-soon-cta reveal" style="margin-top:56px">
-      <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20see%20your%20automation%20in%20action%20on%20WhatsApp." class="btn-primary wa-demo" target="_blank" rel="noopener noreferrer">See it work on WhatsApp <span>→</span></a>
-      <span class="eyebrow" style="color:rgba(255,255,255,0.4)">30-day pilot · Month-to-month · Cancel anytime</span>
-    </div>
-  </div>
-</section>
-
-<section id="work" class="section section-light">
-  <div class="wrap">
-    <div class="section-head reveal" style="max-width:760px">
-      <div class="eyebrow">Recent Work</div>
-      <h2>Real businesses, <span class="accent">running on autopilot</span>.</h2>
-      <p class="section-sub">Automations we've set up for South African businesses — and what changed for them.</p>
-    </div>
-    <div class="grid grid-3" id="work-list"></div>
-  </div>
-</section>
-
-<section id="how-it-works" class="section section-dark section-border">
-  <div class="wrap">
-    <div class="section-head reveal" style="max-width:760px">
-      <div class="eyebrow accent">How It Works</div>
-      <h2>Simple. Fast. <span class="accent">Done.</span></h2>
-      <p class="section-sub">From first call to a live system in about two weeks.</p>
-    </div>
-    <div class="grid grid-4" id="steps-list"></div>
-  </div>
-</section>
-
-<section id="industries" class="section section-light">
-  <div class="wrap">
-    <div class="section-head reveal" style="max-width:760px">
-      <div class="eyebrow">Who It's For</div>
-      <h2>Built for SA's <span class="accent">hardest-working businesses</span>.</h2>
-    </div>
-    <div class="grid grid-4" id="industries-list"></div>
-  </div>
-</section>
-
-<section id="pricing" class="section section-dark">
-  <div class="wrap">
-    <div class="section-head reveal" style="max-width:760px">
-      <div class="eyebrow accent">Pricing</div>
-      <h2>Transparent. <span class="accent">No surprises.</span></h2>
-      <p class="section-sub">Start small with one automation, then add more as it pays off. Every plan is month-to-month — cancel anytime, no lock-in.</p>
-      <p class="section-sub" style="color:rgba(255,255,255,0.5);font-size:16px;margin-top:16px">Not sure? Start with a 30-day pilot and see the results for yourself.</p>
-    </div>
-    <div class="plans" id="plans-list"></div>
-  </div>
-</section>
-
-<section id="faq" class="section section-light">
-  <div class="wrap wrap-faq">
-    <div class="section-head reveal" style="margin-bottom:64px">
-      <div class="eyebrow">FAQ</div>
-      <h2>Questions, <span class="accent">answered</span>.</h2>
-    </div>
-    <div class="faq-list reveal" id="faq-list"></div>
-  </div>
-</section>
-
-<section id="cta" class="section section-dark cta-section">
-  <div class="wrap">
-    <div class="cta-inner reveal">
-      <div class="eyebrow accent">Let's Build</div>
-      <h2 class="heading-xl">Your first AI system,<br><span class="accent">up and running</span>.</h2>
-      <p class="cta-sub">Book a free 30-minute strategy call. We'll map exactly where AI can save you time and win you more customers — no pressure, no jargon.</p>
-      <div class="cta-ctas">
-        <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20book%20a%20free%20strategy%20call." class="btn-primary" target="_blank" rel="noopener noreferrer">Book your free strategy call <span>→</span></a>
-        <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20learn%20more%20about%20GrowMatic%20SA." class="btn-outline wa-general" target="_blank" rel="noopener noreferrer">WhatsApp us</a>
-      </div>
-      <div class="cta-tags">
-        <span>No obligation</span>
-        <span>Free 30-min strategy call</span>
-        <span>100% South African team</span>
-      </div>
-
-      <div class="cta-form-wrap reveal" data-delay="120">
-        <form class="cta-form" id="contact-form" novalidate>
-          <div class="cta-form-head">
-            <h3>Prefer we call you? Leave your details.</h3>
-            <p>Drop your number below and we'll be in touch within one business day — no pressure.</p>
-          </div>
-          <div class="cf-row">
-            <div class="cf-field">
-              <label for="cf-name">Your name</label>
-              <input id="cf-name" type="text" autocomplete="name" required maxlength="200" placeholder="e.g. John Meyer">
-            </div>
-            <div class="cf-field">
-              <label for="cf-phone">Phone / WhatsApp</label>
-              <input id="cf-phone" type="tel" autocomplete="tel" maxlength="50" placeholder="e.g. 082 123 4567">
-            </div>
-          </div>
-          <div class="cf-field">
-            <label for="cf-email">Email <span class="cf-opt">(optional)</span></label>
-            <input id="cf-email" type="email" autocomplete="email" maxlength="255" placeholder="you@business.co.za">
-          </div>
-          <div class="cf-field">
-            <label for="cf-message">What can we help with? <span class="cf-opt">(optional)</span></label>
-            <textarea id="cf-message" rows="3" maxlength="2000" placeholder="Tell us a bit about your business…"></textarea>
-          </div>
-          <!-- Honeypot: hidden from people, tempting to bots. If filled, we drop it. -->
-          <input type="text" id="cf-company" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <button type="submit" class="btn-primary cf-submit" id="cf-submit">Send &amp; get a call back <span>→</span></button>
-          <p class="cf-status" id="cf-status" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-top">
+    <div class="hero-grid pad" style="max-width: 1280px; margin: 0 auto; padding: 180px 24px 120px; position: relative; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 56px; align-items: center;">
       <div>
-        <img src="assets/logo-horizontal.png" alt="GrowMatic SA" class="footer-logo">
-        <p>We help South African businesses win more customers, respond faster and cut the admin — practical growth solutions that work quietly in the background, 24/7.</p>
-        <div class="footer-ctas">
-          <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20book%20a%20free%20business%20consultation." class="btn-primary-sm wa-call" target="_blank" rel="noopener noreferrer">Book a consultation</a>
-          <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20learn%20more%20about%20GrowMatic%20SA." class="btn-outline-sm wa-general" target="_blank" rel="noopener noreferrer">WhatsApp us</a>
+        <div data-reveal style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 12px; border-radius: 999px; background: rgba(31,157,92,0.09); border: 1px solid rgba(31,157,92,0.2); margin-bottom: 32px;">
+          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: #1f4e8c; background: #ffffff; padding: 3px 10px; border-radius: 999px;"><span style="width: 7px; height: 7px; border-radius: 50%; background: #1f9d5c; box-shadow: 0 0 0 0 rgba(31,157,92,0.5); animation: nodeFloat 2.4s ease-in-out infinite;"></span>LIVE 24/7</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #1f7a4c;">AI Automation · South Africa</span>
+        </div>
+        <h1 data-reveal data-reveal-delay="80" style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.6rem, 6.4vw, 6rem); letter-spacing: -0.04em; line-height: 1.03; margin: 0; color: #0a0a0a;">Automate the busywork. <span style="background: linear-gradient(90deg, #1f4e8c, #1f9d5c); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Grow on autopilot.</span></h1>
+        <p data-reveal data-reveal-delay="180" style="margin: 36px 0 0; font-size: 19px; line-height: 1.7; color: #565654; font-weight: 300; max-width: 56ch;">One AI agent answers every customer on WhatsApp, email, and your website chat — books appointments, follows up on leads, and texts back every missed call. So you never lose a sale to a ringing phone again.</p>
+        <div data-reveal data-reveal-delay="280" style="margin-top: 44px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+          <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20book%20a%20free%20strategy%20call." target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, #1f4e8c, #1f9d5c); color: #ffffff; padding: 16px 32px; border-radius: 999px; font-size: 15px; font-weight: 600; box-shadow: 0 12px 30px -10px rgba(31,120,110,0.6); transition: filter .2s ease, transform .1s ease;">Book a free demo <span style="font-size: 16px;">→</span></a>
+          <a href="#services" style="display: inline-flex; align-items: center; gap: 8px; color: #0a0a0a; padding: 16px 28px; border-radius: 999px; font-size: 15px; font-weight: 500; border: 1px solid #dcdcd6; transition: background .2s ease, border-color .2s ease;">See what we build</a>
         </div>
       </div>
-      <div class="footer-cols">
-        <div>
-          <div class="eyebrow">Company</div>
-          <div class="footer-links">
-            <a href="#services">Solutions</a>
-            <a href="#how-it-works">How it works</a>
-            <a href="#industries">Industries</a>
-            <a href="#pricing">Pricing</a>
+
+      <!-- Orbital node diagram -->
+      <div data-reveal data-reveal-delay="240" style="justify-self: center; width: 100%;">
+        <div style="position: relative; width: 100%; max-width: 460px; aspect-ratio: 1 / 1; margin: 0 auto;">
+          <div style="position: absolute; inset: 8%; border-radius: 50%; border: 1px dashed rgba(31,78,140,0.18); animation: spin 60s linear infinite;"></div>
+          <div style="position: absolute; inset: 22%; border-radius: 50%; border: 1px dashed rgba(31,157,92,0.22); animation: spinR 42s linear infinite;"></div>
+          <div style="position: absolute; inset: 36%; border-radius: 50%; border: 1px solid rgba(31,157,92,0.12);"></div>
+
+          <svg viewBox="0 0 400 400" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible;" aria-hidden="true">
+            <g stroke="rgba(31,157,92,0.32)" stroke-width="1.4" fill="none" stroke-dasharray="5 7" style="animation: dashFlow 14s linear infinite;">
+              <line x1="200" y1="200" x2="200" y2="36"></line>
+              <line x1="200" y1="200" x2="342" y2="118"></line>
+              <line x1="200" y1="200" x2="342" y2="282"></line>
+              <line x1="200" y1="200" x2="200" y2="364"></line>
+              <line x1="200" y1="200" x2="58" y2="282"></line>
+              <line x1="200" y1="200" x2="58" y2="118"></line>
+            </g>
+          </svg>
+
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3;">
+            <div style="position: absolute; inset: -14px; border-radius: 50%; background: rgba(31,157,92,0.35); animation: pulseRing 2.8s ease-out infinite;"></div>
+            <div style="position: relative; width: 120px; height: 120px; border-radius: 50%; background: #ffffff; box-shadow: 0 20px 50px -14px rgba(31,78,140,0.35); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(31,157,92,0.15);">
+              <img src="assets/logo.png" alt="GrowMatic SA" style="width: 78px; height: 78px; object-fit: contain; display: block;">
+            </div>
           </div>
-        </div>
-        <div>
-          <div class="eyebrow">Resources</div>
-          <div class="footer-links">
-            <a href="#faq">FAQ</a>
-            <a href="#offer">Start Here</a>
-            <a href="#cta">Contact</a>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="popia.html">POPIA Notice</a>
-            <a href="terms.html">Terms of Service</a>
-          </div>
-        </div>
-        <div>
-          <div class="eyebrow">Get in touch</div>
-          <div class="footer-links">
-            <a href="mailto:ewan@growmaticsa.com">ewan@growmaticsa.com</a>
-            <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20learn%20more%20about%20GrowMatic%20SA." class="wa-general" target="_blank" rel="noopener noreferrer">+27 82 790 0255</a>
-            <span class="muted">South Africa</span>
-          </div>
+
+          <div style="position: absolute; top: 10%; left: 50%; transform: translate(-50%, -50%); z-index: 2;"><div style="display: flex; flex-direction: column; align-items: center; gap: 8px; animation: nodeFloat 4.2s ease-in-out infinite; animation-delay: 0s;"><div style="width: 56px; height: 56px; border-radius: 18px; background: #ffffff; box-shadow: 0 12px 28px -12px rgba(31,78,140,0.4); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(31,78,140,0.08);"><span style="font-size: 24px; line-height: 1;">💬</span></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #565654; white-space: nowrap;">WhatsApp</span></div></div>
+          <div style="position: absolute; top: 27%; left: 88%; transform: translate(-50%, -50%); z-index: 2;"><div style="display: flex; flex-direction: column; align-items: center; gap: 8px; animation: nodeFloat 5s ease-in-out infinite; animation-delay: .4s;"><div style="width: 56px; height: 56px; border-radius: 18px; background: #ffffff; box-shadow: 0 12px 28px -12px rgba(31,78,140,0.4); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(31,78,140,0.08);"><span style="font-size: 24px; line-height: 1;">✉️</span></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #565654; white-space: nowrap;">Email</span></div></div>
+          <div style="position: absolute; top: 73%; left: 88%; transform: translate(-50%, -50%); z-index: 2;"><div style="display: flex; flex-direction: column; align-items: center; gap: 8px; animation: nodeFloat 4.6s ease-in-out infinite; animation-delay: .8s;"><div style="width: 56px; height: 56px; border-radius: 18px; background: #ffffff; box-shadow: 0 12px 28px -12px rgba(31,78,140,0.4); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(31,78,140,0.08);"><span style="font-size: 24px; line-height: 1;">📅</span></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #565654; white-space: nowrap;">Bookings</span></div></div>
+          <div style="position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%); z-index: 2;"><div style="display: flex; flex-direction: column; align-items: center; gap: 8px; animation: nodeFloat 5.2s ease-in-out infinite; animation-delay: 1.2s;"><div style="width: 56px; height: 56px; border-radius: 18px; background: #ffffff; box-shadow: 0 12px 28px -12px rgba(31,78,140,0.4); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(31,78,140,0.08);"><span style="font-size: 24px; line-height: 1;">⭐</span></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #565654; white-space: nowrap;">Reviews</span></div></div>
+          <div style="position: absolute; top: 73%; left: 12%; transform: translate(-50%, -50%); z-index: 2;"><div style="display: flex; flex-direction: column; align-items: center; gap: 8px; animation: nodeFloat 4.4s ease-in-out infinite; animation-delay: .6s;"><div style="width: 56px; height: 56px; border-radius: 18px; background: #ffffff; box-shadow: 0 12px 28px -12px rgba(31,78,140,0.4); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(31,78,140,0.08);"><span style="font-size: 24px; line-height: 1;">📱</span></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #565654; white-space: nowrap;">Social</span></div></div>
+          <div style="position: absolute; top: 27%; left: 12%; transform: translate(-50%, -50%); z-index: 2;"><div style="display: flex; flex-direction: column; align-items: center; gap: 8px; animation: nodeFloat 4.8s ease-in-out infinite; animation-delay: 1s;"><div style="width: 56px; height: 56px; border-radius: 18px; background: #ffffff; box-shadow: 0 12px 28px -12px rgba(31,78,140,0.4); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(31,78,140,0.08);"><span style="font-size: 24px; line-height: 1;">📞</span></div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #565654; white-space: nowrap;">Missed Call</span></div></div>
         </div>
       </div>
     </div>
-    <div class="footer-growth">
-      <canvas id="growth-canvas"></canvas>
+
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 90px; display: block;" aria-hidden="true">
+      <path d="M0,70 C240,20 480,110 720,70 C960,30 1200,100 1440,55 L1440,120 L0,120 Z" fill="rgba(31,78,140,0.05)"></path>
+      <path d="M0,85 C260,45 520,120 780,80 C1040,45 1240,110 1440,75" fill="none" stroke="rgba(31,157,92,0.4)" stroke-width="2"></path>
+      <path d="M0,98 C260,60 520,128 780,92 C1040,60 1240,120 1440,88" fill="none" stroke="rgba(31,78,140,0.25)" stroke-width="1.5"></path>
+    </svg>
+  </section>
+
+  <!-- ================= FEATURE BAR ================= -->
+  <section style="background: #0a0a0a;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08); transform: translateY(-40px); border-radius: 20px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(0,0,0,0.5);">
+        <div style="background: #101010; padding: 32px 28px; display: flex; flex-direction: column; gap: 12px;"><span style="font-size: 24px; line-height: 1;">⚡</span><div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.02em; color: #fafaf8;">Save Time</div><div style="font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.55);">Automate the repetitive admin that eats your day — replies, reminders, follow-ups.</div></div>
+        <div style="background: #101010; padding: 32px 28px; display: flex; flex-direction: column; gap: 12px;"><span style="font-size: 24px; line-height: 1;">🎯</span><div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.02em; color: #fafaf8;">Never Miss a Lead</div><div style="font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.55);">Every enquiry and missed call gets an instant response, day or night.</div></div>
+        <div style="background: #101010; padding: 32px 28px; display: flex; flex-direction: column; gap: 12px;"><span style="font-size: 24px; line-height: 1;">📈</span><div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.02em; color: #fafaf8;">Sell More</div><div style="font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.55);">Faster replies and smart follow-ups turn more conversations into customers.</div></div>
+        <div style="background: #101010; padding: 32px 28px; display: flex; flex-direction: column; gap: 12px;"><span style="font-size: 24px; line-height: 1;">🛡️</span><div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.02em; color: #fafaf8;">Built for SA</div><div style="font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.55);">Local team, WhatsApp-first, priced for South African small businesses.</div></div>
+      </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 GrowMatic SA · All rights reserved</span>
-      <span>growmaticsa.com</span>
-      <span>Proudly South African</span>
+  </section>
+
+  <!-- ================= MARQUEE ================= -->
+  <div style="background: #0a0a0a; overflow: hidden; padding: 18px 0; border-top: 1px solid rgba(255,255,255,0.08);">
+    <div style="display: flex; width: max-content; animation: marquee 36s linear infinite;">
+      <div style="display: flex; gap: 48px; padding-right: 48px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.55); white-space: nowrap;">
+        <span>AI Agents</span><span style="color: #1f9d5c;">·</span><span>WhatsApp</span><span style="color: #1f9d5c;">·</span><span>Email</span><span style="color: #1f9d5c;">·</span><span>Live Chat</span><span style="color: #1f9d5c;">·</span><span>Missed-Call Text-Back</span><span style="color: #1f9d5c;">·</span><span>Bookings</span><span style="color: #1f9d5c;">·</span><span>Reminders</span><span style="color: #1f9d5c;">·</span><span>Reviews</span><span style="color: #1f9d5c;">·</span><span>Social</span><span style="color: #1f9d5c;">·</span><span>Dashboards</span><span style="color: #1f9d5c;">·</span>
+      </div>
+      <div style="display: flex; gap: 48px; padding-right: 48px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.55); white-space: nowrap;">
+        <span>AI Agents</span><span style="color: #1f9d5c;">·</span><span>WhatsApp</span><span style="color: #1f9d5c;">·</span><span>Email</span><span style="color: #1f9d5c;">·</span><span>Live Chat</span><span style="color: #1f9d5c;">·</span><span>Missed-Call Text-Back</span><span style="color: #1f9d5c;">·</span><span>Bookings</span><span style="color: #1f9d5c;">·</span><span>Reminders</span><span style="color: #1f9d5c;">·</span><span>Reviews</span><span style="color: #1f9d5c;">·</span><span>Social</span><span style="color: #1f9d5c;">·</span><span>Dashboards</span><span style="color: #1f9d5c;">·</span>
+      </div>
     </div>
   </div>
-</footer>
 
-<a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20learn%20more%20about%20GrowMatic%20SA." class="wa-float wa-general" id="wa-float-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp us">
-  <svg width="30" height="30" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
-</a>
+  <!-- ================= PROBLEM ================= -->
+  <section style="background: #0a0a0a; color: #fafaf8;">
+    <div class="pad" style="max-width: 1280px; margin: 0 auto; padding: 130px 24px;">
+      <div data-reveal style="max-width: 760px; margin-bottom: 80px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c; margin-bottom: 24px;">The Problem</div>
+        <h2 style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.25rem, 5vw, 4rem); letter-spacing: -0.04em; line-height: 1.05; margin: 0;">Your business is losing money <span style="color: #1f9d5c;">while you sleep</span>.</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 56px;">
+        <div data-reveal><div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px;"></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c; margin-bottom: 20px;">The Cost</div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em; line-height: 1.25; margin: 0 0 16px;">Hours wasted on repetitive tasks.</h3><p style="color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.7; margin: 0;">Answering the same questions, confirming bookings, sending follow-ups — it's eating your day alive.</p></div>
+        <div data-reveal data-reveal-delay="100"><div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px;"></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c; margin-bottom: 20px;">The Risk</div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em; line-height: 1.25; margin: 0 0 16px;">Every missed call is a lost sale.</h3><p style="color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.7; margin: 0;">When you don't pick up, most people don't leave a voicemail — they just call the next business on the list. If you're not answering, someone else is.</p></div>
+        <div data-reveal data-reveal-delay="200"><div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px;"></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c; margin-bottom: 20px;">The Trap</div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em; line-height: 1.25; margin: 0 0 16px;">Stuck working in the business, not on it.</h3><p style="color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.7; margin: 0;">Automation gives you your time back so you can actually grow — instead of just survive.</p></div>
+      </div>
+    </div>
+  </section>
 
-<div class="chat-teaser" id="chat-teaser" hidden>
-  <button type="button" id="chat-teaser-open">Hi, I'm Matt 👋 — need a hand with anything?</button>
-  <button type="button" id="chat-teaser-dismiss" aria-label="Dismiss">&times;</button>
+  <!-- ================= STATS ================= -->
+  <section style="background: #fafaf8; border-top: 1px solid #e4e4e0;">
+    <div class="pad" style="max-width: 1280px; margin: 0 auto; padding: 100px 24px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 48px;">
+        <div data-reveal><div style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.04em; line-height: 1; color: #0a0a0a;">24/7</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-top: 16px;">Always-on automation</div></div>
+        <div data-reveal data-reveal-delay="80"><div style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.04em; line-height: 1; color: #0a0a0a;">2wk</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-top: 16px;">Average setup time</div></div>
+        <div data-reveal data-reveal-delay="160"><div style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.04em; line-height: 1; color: #0a0a0a;">100%</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-top: 16px;">Built for South Africa</div></div>
+        <div data-reveal data-reveal-delay="240"><div style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.04em; line-height: 1; color: #0a0a0a;">0</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-top: 16px;">Extra staff needed</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section id="services" style="background: #fafaf8;">
+    <div class="pad" style="max-width: 1024px; margin: 0 auto; padding: 130px 24px;">
+      <div data-reveal style="margin-bottom: 80px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 24px;">What We Build</div>
+        <h2 style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.25rem, 5vw, 4rem); letter-spacing: -0.04em; line-height: 1.05; margin: 0; color: #0a0a0a; max-width: 720px;">AI systems that <span style="color: #1f9d5c;">move the needle</span>.</h2>
+      </div>
+      <div>
+        <div data-reveal style="border-top: 1px solid #e4e4e0;"><div class="svc-row" style="display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 52px 16px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; padding-top: 8px;">Chat Agent</div><div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 16px; color: #0a0a0a;">AI customer service agent.</h3><p style="color: #6b6b68; font-size: 17px; line-height: 1.7; margin: 0; max-width: 60ch;">One AI agent, three channels — WhatsApp, email, and a live chat widget embedded on your own website. Answers FAQs, qualifies leads, drafts on-brand email replies and follow-ups, and only escalates to you when a human actually needs to step in.</p></div></div></div>
+        <div data-reveal style="border-top: 1px solid #e4e4e0;"><div class="svc-row" style="display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 52px 16px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; padding-top: 8px;">Lead Capture</div><div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 16px; color: #0a0a0a;">Lead capture and follow-up.</h3><p style="color: #6b6b68; font-size: 17px; line-height: 1.7; margin: 0; max-width: 60ch;">Captures leads from any source and follows up automatically over WhatsApp and email until they book or buy.</p></div></div></div>
+        <div data-reveal style="border-top: 1px solid #e4e4e0;"><div class="svc-row" style="display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 52px 16px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; padding-top: 8px;">Booking</div><div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 16px; color: #0a0a0a;">Booking and appointments.</h3><p style="color: #6b6b68; font-size: 17px; line-height: 1.7; margin: 0; max-width: 60ch;">Customers self-book on WhatsApp in seconds. Automated reminders go out before every appointment so fewer people forget to show up.</p></div></div></div>
+        <div data-reveal style="border-top: 1px solid #e4e4e0;"><div class="svc-row" style="display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 52px 16px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; padding-top: 8px;">Missed Call</div><div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 16px; color: #0a0a0a;">Missed call text-back.</h3><p style="color: #6b6b68; font-size: 17px; line-height: 1.7; margin: 0; max-width: 60ch;">When you can't get to the phone, we auto-send the caller a WhatsApp message within seconds. A missed call turns into a live conversation instead of a lost customer — built for trades, salons, and anyone who can't stop what they're doing to answer.</p></div></div></div>
+        <div data-reveal style="border-top: 1px solid #e4e4e0;"><div class="svc-row" style="display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 52px 16px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; padding-top: 8px;">Dashboard</div><div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 16px; color: #0a0a0a;">Client dashboard.</h3><p style="color: #6b6b68; font-size: 17px; line-height: 1.7; margin: 0; max-width: 60ch;">A private, always-up-to-date link showing your upcoming bookings and leads — generated automatically from the same system that runs your WhatsApp. No extra app, no separate login, just one link that's always current.</p></div></div></div>
+        <div data-reveal style="border-top: 1px solid #e4e4e0;"><div class="svc-row" style="display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 52px 16px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; padding-top: 8px;">Reputation</div><div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 16px; color: #0a0a0a;">Review and reputation manager.</h3><p style="color: #6b6b68; font-size: 17px; line-height: 1.7; margin: 0; max-width: 60ch;">Automatically asks happy customers for a Google review at the right moment. AI drafts on-brand replies to every review, ready for you to approve with one tap.</p></div></div></div>
+        <div data-reveal style="border-top: 1px solid #e4e4e0;"><div class="svc-row" style="display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 52px 16px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; padding-top: 8px;">Social</div><div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 16px; color: #0a0a0a;">Social media automation.</h3><p style="color: #6b6b68; font-size: 17px; line-height: 1.7; margin: 0; max-width: 60ch;">Generates, schedules, and posts to Facebook and Instagram consistently — without you ever opening the app.</p></div></div></div>
+        <div data-reveal style="border-top: 1px solid #e4e4e0;"><div class="svc-row" style="display: grid; grid-template-columns: 200px 1fr; gap: 32px; padding: 52px 16px;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; padding-top: 8px;">Custom</div><div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 16px; color: #0a0a0a;">Custom AI workflows.</h3><p style="color: #6b6b68; font-size: 17px; line-height: 1.7; margin: 0; max-width: 60ch;">Any repetitive process mapped and automated: invoices, onboarding, reporting. If a human is repeating it, we replace it.</p></div></div></div>
+        <div style="border-top: 1px solid #e4e4e0;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMING SOON ================= -->
+  <section id="coming-soon" style="background: #0a0a0a; color: #fafaf8;">
+    <div class="pad" style="max-width: 1024px; margin: 0 auto; padding: 130px 24px;">
+      <div data-reveal style="display: flex; align-items: center; gap: 12px; margin-bottom: 32px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c;">Coming Soon</span>
+        <span style="height: 1px; flex: 1; background: rgba(255,255,255,0.1);"></span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Q3 · 2026</span>
+      </div>
+      <h2 data-reveal data-reveal-delay="80" style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 6vw, 5.5rem); letter-spacing: -0.04em; line-height: 1.02; margin: 0; max-width: 900px;">AI <span style="color: #1f9d5c;">Receptionist</span>.<br>Never miss a call again.</h2>
+      <p data-reveal data-reveal-delay="160" style="margin: 40px 0 0; color: rgba(255,255,255,0.6); font-size: 20px; line-height: 1.7; max-width: 60ch;">A voice AI that picks up on the first ring, sounds human, and does the work of a full-time receptionist — without lunch breaks, sick days, or missed opportunities.</p>
+      <div style="margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px;">
+        <div data-reveal><div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 20px;"></div><div style="color: #1f9d5c; font-size: 20px; margin-bottom: 14px;">☎</div><div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: -0.02em;">Answers calls 24/7</div></div>
+        <div data-reveal data-reveal-delay="80"><div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 20px;"></div><div style="color: #1f9d5c; font-size: 20px; margin-bottom: 14px;">▦</div><div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: -0.02em;">Books appointments</div></div>
+        <div data-reveal data-reveal-delay="160"><div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 20px;"></div><div style="color: #1f9d5c; font-size: 20px; margin-bottom: 14px;">◈</div><div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: -0.02em;">Handles leads</div></div>
+        <div data-reveal data-reveal-delay="240"><div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 20px;"></div><div style="color: #1f9d5c; font-size: 20px; margin-bottom: 14px;">↻</div><div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: -0.02em;">Automated follow-ups</div></div>
+      </div>
+      <div data-reveal style="margin-top: 64px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+        <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20early%20access%20to%20the%20AI%20Receptionist." target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #1f9d5c; color: #ffffff; padding: 16px 32px; border-radius: 999px; font-size: 15px; font-weight: 500; transition: filter .2s ease;">Join the early access list</a>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4);">Priority pricing for first 20 businesses</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section id="how-it-works" style="background: #0a0a0a; color: #fafaf8; border-top: 1px solid rgba(255,255,255,0.08);">
+    <div class="pad" style="max-width: 1280px; margin: 0 auto; padding: 130px 24px;">
+      <div data-reveal style="max-width: 760px; margin-bottom: 80px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c; margin-bottom: 24px;">The Process</div>
+        <h2 style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.25rem, 5vw, 4rem); letter-spacing: -0.04em; line-height: 1.05; margin: 0;">Simple. Fast. <span style="color: #1f9d5c;">Done.</span></h2>
+        <p style="color: rgba(255,255,255,0.6); margin: 24px 0 0; font-size: 18px; line-height: 1.7; max-width: 60ch;">From first call to live system in about two weeks.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
+        <div data-reveal><div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px;"></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c; margin-bottom: 20px;">01</div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.02em; margin: 0 0 12px;">Free strategy call</h3><p style="color: rgba(255,255,255,0.55); font-size: 15px; line-height: 1.7; margin: 0;">We find your biggest time-wasters.</p></div>
+        <div data-reveal data-reveal-delay="80"><div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px;"></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c; margin-bottom: 20px;">02</div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.02em; margin: 0 0 12px;">Custom build plan</h3><p style="color: rgba(255,255,255,0.55); font-size: 15px; line-height: 1.7; margin: 0;">Designed around your business.</p></div>
+        <div data-reveal data-reveal-delay="160"><div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px;"></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c; margin-bottom: 20px;">03</div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.02em; margin: 0 0 12px;">We build it for you</h3><p style="color: rgba(255,255,255,0.55); font-size: 15px; line-height: 1.7; margin: 0;">No code, no tech stress — just approve.</p></div>
+        <div data-reveal data-reveal-delay="240"><div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px;"></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c; margin-bottom: 20px;">04</div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.02em; margin: 0 0 12px;">Go live and grow</h3><p style="color: rgba(255,255,255,0.55); font-size: 15px; line-height: 1.7; margin: 0;">System runs, we optimise monthly.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INDUSTRIES ================= -->
+  <section id="industries" style="background: #fafaf8;">
+    <div class="pad" style="max-width: 1280px; margin: 0 auto; padding: 130px 24px;">
+      <div data-reveal style="max-width: 760px; margin-bottom: 80px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 24px;">Who It's For</div>
+        <h2 style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.25rem, 5vw, 4rem); letter-spacing: -0.04em; line-height: 1.05; margin: 0; color: #0a0a0a;">Built for SA's <span style="color: #1f9d5c;">local business owners</span>.</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
+        <div data-reveal><div style="height: 1px; background: #e4e4e0; margin-bottom: 24px;"></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 20px;">Hospitality</div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.02em; margin: 0 0 12px; color: #0a0a0a;">Restaurants &amp; cafés</h3><p style="color: #6b6b68; font-size: 15px; line-height: 1.7; margin: 0;">Reservations, WhatsApp orders, reviews, loyalty.</p></div>
+        <div data-reveal data-reveal-delay="80"><div style="height: 1px; background: #e4e4e0; margin-bottom: 24px;"></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 20px;">Retail</div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.02em; margin: 0 0 12px; color: #0a0a0a;">Retail &amp; local shops</h3><p style="color: #6b6b68; font-size: 15px; line-height: 1.7; margin: 0;">Restock alerts, promos, enquiry management.</p></div>
+        <div data-reveal data-reveal-delay="160"><div style="height: 1px; background: #e4e4e0; margin-bottom: 24px;"></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 20px;">Wellness</div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.02em; margin: 0 0 12px; color: #0a0a0a;">Beauty &amp; wellness</h3><p style="color: #6b6b68; font-size: 15px; line-height: 1.7; margin: 0;">Self-booking, reminders, rebooking nudges.</p></div>
+        <div data-reveal data-reveal-delay="240"><div style="height: 1px; background: #e4e4e0; margin-bottom: 24px;"></div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 20px;">Trades</div><h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.02em; margin: 0 0 12px; color: #0a0a0a;">Trades &amp; services</h3><p style="color: #6b6b68; font-size: 15px; line-height: 1.7; margin: 0;">Lead qualification, quote follow-up, scheduling.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRICING ================= -->
+  <section id="pricing" style="background: #0a0a0a; color: #fafaf8;">
+    <div class="pad" style="max-width: 1280px; margin: 0 auto; padding: 130px 24px;">
+      <div data-reveal style="max-width: 760px; margin-bottom: 80px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c; margin-bottom: 24px;">Pricing</div>
+        <h2 style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.25rem, 5vw, 4rem); letter-spacing: -0.04em; line-height: 1.05; margin: 0;">Transparent. <span style="color: #1f9d5c;">No surprises.</span></h2>
+        <p style="color: rgba(255,255,255,0.6); margin: 24px 0 0; font-size: 18px; line-height: 1.7; max-width: 60ch;">Clear pricing. Real value. Cancel anytime. Every package includes the AI customer service agent across all three channels — WhatsApp, email, and a live chat widget on your website — as standard, not a paid add-on.</p>
+        <p style="color: rgba(255,255,255,0.5); margin: 16px 0 0; font-size: 16px; line-height: 1.7; max-width: 60ch;">Start with a 30-day pilot — month-to-month, cancel anytime.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: rgba(255,255,255,0.08); border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div data-reveal style="background: rgba(255,255,255,0.04); padding: 40px; display: flex; flex-direction: column;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c; margin-bottom: 20px;">Most Popular</div>
+          <h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em; margin: 0 0 24px;">Lead Response Bot</h3>
+          <div style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: -0.04em; line-height: 1;">R5,000</div>
+          <div style="color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 6px;">once-off setup</div>
+          <div style="color: #1f9d5c; font-size: 14px; font-weight: 500; margin: 4px 0 32px;">+ R3,500/mo</div>
+          <div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px;"></div>
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; flex: 1;">
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>AI agent answering on WhatsApp, email &amp; website chat — 24/7, replies in seconds</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Lead capture &amp; instant follow-up on every enquiry</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Booking &amp; appointment automation straight into your diary</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Missed Call Text-Back included</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Monthly performance report</span></div>
+          </div>
+          <a href="https://wa.me/27827900255?text=Hi!%20I'm%20interested%20in%20the%20Lead%20Response%20Bot%20plan" target="_blank" rel="noopener noreferrer" style="display: block; text-align: center; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 500; background: #1f9d5c; color: #ffffff; border: none; transition: filter .2s ease;">Get started</a>
+        </div>
+        <div data-reveal style="background: #0a0a0a; padding: 40px; display: flex; flex-direction: column;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 20px;">Plan</div>
+          <h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em; margin: 0 0 24px;">Admin Autopilot</h3>
+          <div style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: -0.04em; line-height: 1;">R7,500</div>
+          <div style="color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 6px;">once-off setup</div>
+          <div style="color: #1f9d5c; font-size: 14px; font-weight: 500; margin: 4px 0 32px;">+ R4,500/mo</div>
+          <div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px;"></div>
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; flex: 1;">
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Everything in Lead Response Bot</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Automated quoting &amp; invoice follow-ups</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Customer reminders (reduce no-shows)</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Client Dashboard included</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Priority support + monthly strategy review</span></div>
+          </div>
+          <a href="https://wa.me/27827900255?text=Hi!%20I'm%20interested%20in%20the%20Admin%20Autopilot%20plan" target="_blank" rel="noopener noreferrer" style="display: block; text-align: center; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 500; background: transparent; color: #ffffff; border: 1px solid rgba(255,255,255,0.2); transition: filter .2s ease, background .2s ease;">Get started</a>
+        </div>
+        <div data-reveal style="background: #0a0a0a; padding: 40px; display: flex; flex-direction: column;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 20px;">Plan</div>
+          <h3 style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em; margin: 0 0 24px;">Custom Automation Build</h3>
+          <div style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: -0.04em; line-height: 1;">From R15,000</div>
+          <div style="color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 6px;">once-off setup</div>
+          <div style="color: #1f9d5c; font-size: 14px; font-weight: 500; margin: 4px 0 32px;">+ Custom</div>
+          <div style="height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px;"></div>
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; flex: 1;">
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Bespoke workflow automation (CRM, email, WhatsApp, sheets)</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Full business audit + dedicated account manager</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Unlimited custom automations</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>Staff training included</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5;"><span style="color: #1f9d5c; flex-shrink: 0;">✓</span><span>SLA and uptime guarantees</span></div>
+          </div>
+          <a href="https://wa.me/27827900255?text=Hi!%20I'm%20interested%20in%20the%20Custom%20Automation%20Build%20plan" target="_blank" rel="noopener noreferrer" style="display: block; text-align: center; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 500; background: transparent; color: #ffffff; border: 1px solid rgba(255,255,255,0.2); transition: filter .2s ease, background .2s ease;">Get started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section id="faq" style="background: #fafaf8;">
+    <div class="pad" style="max-width: 768px; margin: 0 auto; padding: 130px 24px;">
+      <div data-reveal style="margin-bottom: 64px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 24px;">FAQ</div>
+        <h2 style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.25rem, 5vw, 4rem); letter-spacing: -0.04em; line-height: 1.05; margin: 0; color: #0a0a0a;">Questions, <span style="color: #1f9d5c;">answered</span>.</h2>
+      </div>
+      <div data-reveal style="border-top: 1px solid #e4e4e0;">
+        <details style="border-bottom: 1px solid #e4e4e0;"><summary style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 4px;"><span data-q style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.02em; color: #0a0a0a; transition: color .2s ease;">Do I need technical knowledge to use this?</span><span data-plus style="color: #1f9d5c; font-size: 22px; font-weight: 300; transition: transform .25s ease; flex-shrink: 0; line-height: 1;">+</span></summary><p style="color: #6b6b68; font-size: 15px; line-height: 1.7; margin: 0; padding: 0 4px 24px; max-width: 60ch;">Not at all. We build, set up, and manage everything for you. You just approve and go live. If you can use WhatsApp, you can use our systems.</p></details>
+        <details style="border-bottom: 1px solid #e4e4e0;"><summary style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 4px;"><span data-q style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.02em; color: #0a0a0a; transition: color .2s ease;">How long does setup take?</span><span data-plus style="color: #1f9d5c; font-size: 22px; font-weight: 300; transition: transform .25s ease; flex-shrink: 0; line-height: 1;">+</span></summary><p style="color: #6b6b68; font-size: 15px; line-height: 1.7; margin: 0; padding: 0 4px 24px; max-width: 60ch;">Most systems go live within about 2 weeks. We keep you updated every step of the way.</p></details>
+        <details style="border-bottom: 1px solid #e4e4e0;"><summary style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 4px;"><span data-q style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.02em; color: #0a0a0a; transition: color .2s ease;">Will this work with WhatsApp?</span><span data-plus style="color: #1f9d5c; font-size: 22px; font-weight: 300; transition: transform .25s ease; flex-shrink: 0; line-height: 1;">+</span></summary><p style="color: #6b6b68; font-size: 15px; line-height: 1.7; margin: 0; padding: 0 4px 24px; max-width: 60ch;">Absolutely. WhatsApp integration is at the core of what we do. Our AI agents can chat with your customers on WhatsApp 24/7, just like a real person.</p></details>
+        <details style="border-bottom: 1px solid #e4e4e0;"><summary style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 4px;"><span data-q style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.02em; color: #0a0a0a; transition: color .2s ease;">What happens if something breaks?</span><span data-plus style="color: #1f9d5c; font-size: 22px; font-weight: 300; transition: transform .25s ease; flex-shrink: 0; line-height: 1;">+</span></summary><p style="color: #6b6b68; font-size: 15px; line-height: 1.7; margin: 0; padding: 0 4px 24px; max-width: 60ch;">We monitor your systems and fix issues fast. Admin Autopilot and Custom Automation Build include priority support. You're never left hanging.</p></details>
+        <details style="border-bottom: 1px solid #e4e4e0;"><summary style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 4px;"><span data-q style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.02em; color: #0a0a0a; transition: color .2s ease;">Is this affordable for a small business?</span><span data-plus style="color: #1f9d5c; font-size: 22px; font-weight: 300; transition: transform .25s ease; flex-shrink: 0; line-height: 1;">+</span></summary><p style="color: #6b6b68; font-size: 15px; line-height: 1.7; margin: 0; padding: 0 4px 24px; max-width: 60ch;">Yes — our Lead Response Bot package is designed to be accessible for small businesses. The ROI typically pays for itself within the first month through saved time and captured leads.</p></details>
+        <details style="border-bottom: 1px solid #e4e4e0;"><summary style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 4px;"><span data-q style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.02em; color: #0a0a0a; transition: color .2s ease;">Can I see it before I pay?</span><span data-plus style="color: #1f9d5c; font-size: 22px; font-weight: 300; transition: transform .25s ease; flex-shrink: 0; line-height: 1;">+</span></summary><p style="color: #6b6b68; font-size: 15px; line-height: 1.7; margin: 0; padding: 0 4px 24px; max-width: 60ch;">Of course. Book a free strategy call and we'll show you a live demo tailored to your business. No pressure, no obligation.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section id="cta" style="background: #0a0a0a; color: #fafaf8;">
+    <div class="pad" style="max-width: 1280px; margin: 0 auto; padding: 150px 24px; text-align: center;">
+      <div data-reveal style="max-width: 900px; margin: 0 auto;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1f9d5c; margin-bottom: 32px;">Let's Build</div>
+        <h2 style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.75rem, 7vw, 6rem); letter-spacing: -0.04em; line-height: 1.02; margin: 0;">Your first AI system,<br><span style="color: #1f9d5c;">together</span>.</h2>
+        <p style="color: rgba(255,255,255,0.6); font-size: 20px; line-height: 1.7; margin: 40px auto 0; max-width: 55ch;">Book a free 30-minute strategy call. We'll show you exactly where automation saves you time and makes you money.</p>
+        <div style="margin-top: 56px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20book%20a%20free%20strategy%20call." target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #1f9d5c; color: #ffffff; padding: 16px 32px; border-radius: 999px; font-size: 15px; font-weight: 500; transition: filter .2s ease, transform .1s ease;">Book a free strategy call <span style="font-size: 16px;">→</span></a>
+          <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20learn%20more%20about%20GrowMatic%20SA." target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.2); color: #ffffff; padding: 16px 32px; border-radius: 999px; font-size: 15px; font-weight: 500; transition: background .2s ease;">WhatsApp us</a>
+        </div>
+        <div style="margin-top: 56px; display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4);">
+          <span>No obligation</span>
+          <span>Free 30-min audit</span>
+          <span>100% South African team</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer style="background: #fafaf8; border-top: 1px solid #e4e4e0;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 96px 24px 32px;">
+      <div class="footer-grid" style="display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; padding-bottom: 80px;">
+        <div>
+          <img src="assets/logo-horizontal.png" alt="GrowMatic SA" style="width: 240px; height: auto; display: block; margin: -32px 0 8px -16px;">
+          <p style="color: #6b6b68; font-size: 15px; line-height: 1.7; margin: 0; max-width: 380px;">We build AI agents and automation systems that keep South African businesses running 24/7 — so you never miss a customer again.</p>
+          <div style="margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20book%20a%20free%20strategy%20call." target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #1f9d5c; color: #ffffff; padding: 12px 24px; border-radius: 999px; font-size: 14px; font-weight: 500; transition: filter .2s ease;">Book a strategy call</a>
+            <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20learn%20more%20about%20GrowMatic%20SA." target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; border: 1px solid #e4e4e0; color: #0a0a0a; padding: 12px 24px; border-radius: 999px; font-size: 14px; font-weight: 500; transition: background .2s ease;">WhatsApp us</a>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 40px; align-content: start; padding-top: 12px;">
+          <div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 20px;">Company</div>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <a href="#services" style="font-size: 14px; color: #0a0a0a;">Services</a>
+              <a href="#how-it-works" style="font-size: 14px; color: #0a0a0a;">How it works</a>
+              <a href="#industries" style="font-size: 14px; color: #0a0a0a;">Industries</a>
+              <a href="#pricing" style="font-size: 14px; color: #0a0a0a;">Pricing</a>
+            </div>
+          </div>
+          <div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 20px;">Resources</div>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <a href="#faq" style="font-size: 14px; color: #0a0a0a;">FAQ</a>
+              <a href="#coming-soon" style="font-size: 14px; color: #0a0a0a;">AI Receptionist</a>
+              <a href="#cta" style="font-size: 14px; color: #0a0a0a;">Contact</a>
+            </div>
+          </div>
+          <div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68; margin-bottom: 20px;">Get in touch</div>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <a href="mailto:ewan@growmaticsa.com" style="font-size: 14px; color: #0a0a0a;">ewan@growmaticsa.com</a>
+              <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20learn%20more%20about%20GrowMatic%20SA." target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #0a0a0a;">+27 82 790 0255</a>
+              <span style="font-size: 14px; color: #6b6b68;">South Africa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-hidden="true" style="border-top: 1px solid #e4e4e0; overflow: hidden; user-select: none; pointer-events: none;">
+        <canvas id="growth-fx" style="display: block; width: 100%; height: 180px;"></canvas>
+      </div>
+      <div style="padding-top: 24px; border-top: 1px solid #e4e4e0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6b68;">
+        <span>© 2026 GrowMatic SA · All rights reserved</span>
+        <span>growmaticsa.com</span>
+        <span>Proudly South African</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= FLOATING WHATSAPP ================= -->
+  <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20learn%20more%20about%20GrowMatic%20SA." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp us" style="position: fixed; bottom: 24px; right: 24px; z-index: 60; display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; background: #25D366; border-radius: 50%; box-shadow: 0 12px 32px -8px rgba(31,157,92,0.55); transition: filter .2s ease, transform .15s ease;"><svg width="30" height="30" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg></a>
+
 </div>
 
-<button type="button" class="chat-launcher" id="chat-launcher" aria-label="Chat with Matt" aria-expanded="false">
-  <svg class="icon-bubble" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-  <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-</button>
-
-<div class="chat-panel" id="chat-panel" role="dialog" aria-label="Chat with Matt" hidden>
-  <div class="chat-panel-header">
-    <div class="chat-avatar"><img src="assets/logo.png" alt=""><span class="chat-status-dot"></span></div>
-    <div>
-      <div class="chat-panel-name">Matt</div>
-      <div class="chat-panel-sub">GrowMatic SA &middot; usually replies in seconds</div>
-    </div>
-  </div>
-  <div class="chat-messages" id="chat-messages"></div>
-  <div class="chat-escalation" id="chat-escalation" hidden>
-    <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20book%20a%20free%20business%20consultation." class="wa-call" target="_blank" rel="noopener noreferrer"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> WhatsApp</a>
-    <a href="mailto:ewan@growmaticsa.com"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> Email</a>
-    <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20book%20a%20free%20business%20consultation." class="wa-call" target="_blank" rel="noopener noreferrer"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Book a call</a>
-  </div>
-  <div class="chat-input-row">
-    <textarea id="chat-input" placeholder="Tell Matt about your business&hellip;" rows="1" maxlength="4000"></textarea>
-    <button type="button" id="chat-send" aria-label="Send message" disabled>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-    </button>
-  </div>
-</div>
-
-<script src="script.js?v=20260722g"></script>
-<script src="chat-widget.js?v=20260721k"></script>
+<script src="app.js?v=20260723a"></script>
 </body>
 </html>
