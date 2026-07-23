@@ -24,7 +24,7 @@
   ];
 
   const steps = [
-    { num: "01", title: "Free automation review", desc: "We look at your business and find where you're losing time and leads." },
+    { num: "01", title: "Free strategy call", desc: "We look at your business and find where you're losing time and leads." },
     { num: "02", title: "Start with one", desc: "We pick the single automation that'll pay off fastest — no big commitment." },
     { num: "03", title: "We set it up", desc: "We build, connect and test everything for you. You just approve and go live." },
     { num: "04", title: "Prove it, then grow", desc: "Once it's working, we automate the next thing — leads, email, admin, bookings." }
