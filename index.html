@@ -44,9 +44,18 @@
   }
   .hero .hero-inner { grid-template-columns: none; display: block; }
   .hero .hero-inner > div:first-child { max-width: 640px; display: block; }
-  .hero .eyebrow { color: var(--green); }
+  /* Lighter than the brand --green: the brand shade reads fine on the white
+     dashboard card but is too close to the dark hero background for the
+     eyebrow/accent text sitting directly on it. */
+  .hero .eyebrow { color: #4fe0a0; }
   .hero .hero-inner h1 { font-size: clamp(1.9rem, 3.6vw, 3rem); letter-spacing: -0.02em; line-height: 1.07; color: var(--bg); }
+  .hero .hero-inner h1 .accent { color: #4fe0a0; }
   .hero .hero-sub { font-size: 18px; margin-top: 26px; color: rgba(255,255,255,.66); }
+  /* .hero-sub strong is var(--ink) (near-black) in styles.css, tuned for a
+     light background elsewhere on the site — invisible against this hero's
+     dark background (reported directly: "the black script... I can't see
+     it"). */
+  .hero .hero-sub strong { color: #fff; font-weight: 600; }
   .hero .hero-ctas { margin-top: 30px; }
 
   /* Nav reads dark-on-transparent by default (styles.css); before the user
@@ -101,6 +110,13 @@
       0 60px 100px -32px rgba(0,0,0,.55),
       0 20px 40px -18px rgba(0,0,0,.4),
       0 0 0 1px rgba(10,10,10,.05);
+  }
+  /* Same gentle floatY treatment the site already uses on the trades-page
+     phone mockup (styles.css .phone-body) -- reusing an established motion
+     rather than introducing a new one so it reads as part of the same
+     design system. Respects reduced-motion like every other animation here. */
+  @media (prefers-reduced-motion: no-preference) {
+    .laptop { animation: floatY 7s ease-in-out infinite; }
   }
   .laptop::before {
     /* Faint edge-lit rim so the card reads as raised glass, not a flat cutout. */
