@@ -166,9 +166,23 @@
   teaserDismissBtn.addEventListener("click", dismissTeaser);
 
   if (!localStorage.getItem(TEASER_DISMISSED_KEY)) {
-    setTimeout(() => {
-      if (!open) teaserEl.hidden = false;
-    }, 1600);
+    // Fires on whichever comes first: the visitor scrolls a bit, or a
+    // longer fallback timer, for anyone who reads the hero without
+    // scrolling. A flat 1.6s timer used to fire while most visitors were
+    // still reading the hero, landing this fixed bottom-right bubble
+    // directly on top of the hero CTAs on tall hero layouts.
+    let shown = false;
+    const showTeaser = () => {
+      if (shown || open) return;
+      shown = true;
+      teaserEl.hidden = false;
+      window.removeEventListener("scroll", onScroll);
+    };
+    const onScroll = () => {
+      if (window.scrollY > 300) showTeaser();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    setTimeout(showTeaser, 6000);
   }
 
   const history = loadHistory();

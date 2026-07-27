@@ -1,3 +1,31 @@
+/* Self-hosted (not the Google Fonts CDN link this site used to load): a
+   third-party font request is a real single point of failure for the
+   entire brand look — slow mobile networks, corporate/ad-block filter
+   lists (many block fonts.googleapis.com/fonts.gstatic.com by default),
+   or any connectivity hiccup all fall back to a generic system font with
+   no way to recover, since nothing here ever re-checks. Each file below
+   is the exact "latin" subset woff2 Google's own CSS served, just fetched
+   once and committed instead of requested on every visit. font-weight is
+   declared as the real range each file covers (Syne and DM Sans are
+   variable fonts; Google's API repeats the identical file per static
+   weight, so one @font-face with a range is equivalent and simpler). */
+@font-face {
+  font-family: 'Syne'; font-style: normal; font-weight: 700 800; font-display: swap;
+  src: url('assets/fonts/syne-700-800.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans'; font-style: normal; font-weight: 300 500; font-display: swap;
+  src: url('assets/fonts/dm-sans-300-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; font-display: swap;
+  src: url('assets/fonts/ibm-plex-mono-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 500; font-display: swap;
+  src: url('assets/fonts/ibm-plex-mono-500.woff2') format('woff2');
+}
+
 :root {
   --bg: #fafaf8;
   --ink: #0a0a0a;
