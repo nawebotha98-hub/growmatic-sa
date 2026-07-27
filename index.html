@@ -26,9 +26,43 @@
 <style>
   /* Homepage-only additions (was quote-recovery-page-only). Everything else
      uses styles.css so it matches the rest of the site exactly. */
-  .hero .hero-inner h1 { font-size: clamp(1.9rem, 3.6vw, 3rem); letter-spacing: -0.02em; line-height: 1.07; }
-  .hero .hero-sub { font-size: 18px; margin-top: 26px; }
+
+  /* Homepage hero: dark, moody base (was a flat pale-mint background) so the
+     existing WebGL flow-field (#hero-canvas, soft emerald points) and the
+     woven wave ribbon (#wave-canvas) actually read — both are near-invisible
+     against a light background at the low alpha they're drawn with, which is
+     why all that engineering was going unnoticed. A grain layer adds the
+     textured, photographic depth a flat gradient can't. Scoped to .hero
+     inside THIS page's own <style> tag only — trades.html has its own copy
+     of the shared .hero/.hero-inner rules and is untouched by this. */
+  .hero {
+    background:
+      radial-gradient(ellipse 55% 60% at 78% 18%, rgba(47,190,110,0.16), transparent 68%),
+      radial-gradient(ellipse 65% 55% at 12% 96%, rgba(31,157,92,0.14), transparent 70%),
+      linear-gradient(178deg, #060a07 0%, #0b120c 45%, #0a0f0a 100%);
+  }
+  .hero::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .05; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  .hero .hero-inner { grid-template-columns: none; display: block; }
+  .hero .hero-inner > div:first-child { max-width: 640px; display: block; }
+  .hero .eyebrow { color: var(--green); }
+  .hero .hero-inner h1 { font-size: clamp(1.9rem, 3.6vw, 3rem); letter-spacing: -0.02em; line-height: 1.07; color: var(--bg); }
+  .hero .hero-sub { font-size: 18px; margin-top: 26px; color: rgba(255,255,255,.66); }
   .hero .hero-ctas { margin-top: 30px; }
+
+  /* Nav reads dark-on-transparent by default (styles.css); before the user
+     scrolls past this dark hero it needs to flip light. script.js already
+     toggles a "scrolled" class at scrollY>20 for the existing blur/bg
+     treatment, so this just piggybacks on that same class. Desktop only:
+     below 860px the nav already forces an opaque --bg background regardless
+     of scroll state (see styles.css's own mobile-nav comment), so the
+     dark-ink logo/links there are already correct and must stay untouched. */
+  @media (min-width: 861px) {
+    .nav:not(.scrolled) .nav-logo img { filter: brightness(0) invert(1); }
+    .nav:not(.scrolled) .nav-links > a:not(.btn-nav) { color: rgba(255,255,255,.82); }
+  }
 
   .qsteps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .qstep { background: #fff; border: 1px solid #e4e4e0; border-radius: 16px; padding: 26px 22px; box-shadow: 0 14px 34px -24px rgba(10,10,10,.25); transition: transform .15s ease, box-shadow .15s ease; }
@@ -59,18 +93,16 @@
      phone frames around a screenshot are the single most overused SaaS-
      template trope, and a plain bezel was reading as generic/cheap no
      matter how the content inside was polished). Presented as the real app
-     UI itself, elevated with shadow + a slight rotation for depth, sized to
-     fit the same ~389px hero column the old phone mockup used to occupy
-     (the hero grid caps at 1280px wide; see .hero-inner's own comment for
-     why 4fr resolves to ~389px there). */
-  .laptop-wrap { justify-self: center; }
+     UI itself, now the hero's full-width visual anchor below the headline
+     (previously squeezed into a side column) so it reads as the main event
+     rather than a decoration. */
+  .laptop-wrap { margin-top: 56px; }
   .laptop {
-    position: relative; width: 400px; max-width: 100%;
-    background: #fff; border-radius: 14px; overflow: hidden;
-    transform: rotate(-1.4deg);
+    position: relative; width: 100%; max-width: 900px;
+    background: #fff; border-radius: 16px; overflow: hidden;
     box-shadow:
-      0 50px 90px -30px rgba(10,10,10,.28),
-      0 18px 36px -18px rgba(10,10,10,.22),
+      0 60px 100px -32px rgba(0,0,0,.55),
+      0 20px 40px -18px rgba(0,0,0,.4),
       0 0 0 1px rgba(10,10,10,.05);
   }
   .laptop::before {
@@ -80,52 +112,52 @@
   }
   .laptop-screen { display: flex; flex-direction: column; }
 
-  .dash-topbar { display: flex; align-items: center; gap: 16px; padding: 13px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
-  .dash-brand { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-  .dash-brand img { width: 18px; height: 18px; }
-  .dash-brand span { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 11px; color: var(--ink); }
-  .dash-topnav { display: flex; gap: 15px; flex: 1; }
-  .dash-topnav span { font-size: 9.5px; color: var(--gray); }
+  .dash-topbar { display: flex; align-items: center; gap: 26px; padding: 18px 26px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .dash-brand { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .dash-brand img { width: 24px; height: 24px; }
+  .dash-brand span { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); }
+  .dash-topnav { display: flex; gap: 22px; flex: 1; }
+  .dash-topnav span { font-size: 12.5px; color: var(--gray); }
   .dash-topnav span.active { color: var(--ink); font-weight: 600; }
   .dash-avatar {
-    width: 24px; height: 24px; border-radius: 50%; color: #fff; flex-shrink: 0;
-    font-family: 'IBM Plex Mono', monospace; font-size: 8px; font-weight: 600;
+    width: 32px; height: 32px; border-radius: 50%; color: #fff; flex-shrink: 0;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
     display: flex; align-items: center; justify-content: center;
   }
-  .dash-avatar.you { width: 19px; height: 19px; background: var(--green); font-size: 7.5px; font-weight: 700; font-family: inherit; }
+  .dash-avatar.you { width: 25px; height: 25px; background: var(--green); font-size: 9.5px; font-weight: 700; font-family: inherit; }
   .dash-avatar.high { background: linear-gradient(155deg,#d15353,#b83a3a); }
   .dash-avatar.med { background: linear-gradient(155deg,#c99a3a,#a97f24); }
   .dash-avatar.low { background: linear-gradient(155deg,#3fae7c,#1f9d5c); }
 
-  .dash-main { flex: 1; min-height: 0; padding: 17px 18px 0; }
+  .dash-main { flex: 1; min-height: 0; padding: 26px 26px 0; }
   .dash-eyebrow {
-    display: flex; align-items: center; gap: 6px;
-    font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; text-transform: uppercase;
-    letter-spacing: .06em; color: var(--gray); margin: 0 0 6px;
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--gray); margin: 0 0 8px;
   }
   .dash-live-dot {
-    width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
     box-shadow: 0 0 0 0 rgba(31,157,92,.5);
   }
   @media (prefers-reduced-motion: no-preference) {
     .dash-live-dot { animation: live-pulse 2.2s infinite; }
   }
-  .dash-figrow { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; }
-  .dash-figure { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 27px; letter-spacing: -0.01em; color: var(--ink); margin: 0; }
-  .dash-spark { flex-shrink: 0; margin-bottom: 3px; }
-  .dash-figuresub { display: flex; align-items: center; gap: 8px; font-size: 9.5px; color: var(--gray); margin: 6px 0 14px; line-height: 1.4; }
+  .dash-figrow { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+  .dash-figure { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 42px; letter-spacing: -0.01em; color: var(--ink); margin: 0; }
+  .dash-spark { flex-shrink: 0; margin-bottom: 6px; width: 100px; height: 40px; }
+  .dash-figuresub { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--gray); margin: 10px 0 22px; line-height: 1.4; }
   .dash-delta {
-    display: inline-flex; align-items: center; gap: 3px; font-weight: 600; color: var(--green);
-    background: rgba(31,157,92,.1); padding: 2px 7px; border-radius: 99px; font-size: 8.5px; flex-shrink: 0;
+    display: inline-flex; align-items: center; gap: 4px; font-weight: 600; color: var(--green);
+    background: rgba(31,157,92,.1); padding: 3px 9px; border-radius: 99px; font-size: 11.5px; flex-shrink: 0;
   }
 
-  .dash-listhead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-  .dash-listhead .t { font-size: 10.5px; font-weight: 600; color: var(--ink); }
-  .dash-listhead .l { font-size: 8.5px; color: var(--green); font-weight: 500; }
+  .dash-listhead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .dash-listhead .t { font-size: 14.5px; font-weight: 600; color: var(--ink); }
+  .dash-listhead .l { font-size: 12px; color: var(--green); font-weight: 500; }
 
-  .dash-rows { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 6px 16px -12px rgba(10,10,10,.18); }
+  .dash-rows { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 6px 16px -12px rgba(10,10,10,.18); }
   .dash-row {
-    display: flex; align-items: center; gap: 9px; padding: 8px 11px;
+    display: flex; align-items: center; gap: 14px; padding: 14px 18px;
     border-bottom: 1px solid var(--border); border-left: 3px solid transparent; background: #fff;
   }
   .dash-row:first-child { background: rgba(31,157,92,.04); border-left-color: #b83a3a; }
@@ -133,9 +165,37 @@
   .dash-row:nth-child(3) { border-left-color: var(--green); }
   .dash-row:last-child { border-bottom: none; }
   .dash-row .info { flex: 1; min-width: 0; }
-  .dash-row .name { font-size: 10.5px; font-weight: 600; color: var(--ink); }
-  .dash-row .meta { font-size: 8px; color: var(--gray); margin-top: 2px; }
-  .dash-row .val { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 600; color: var(--ink); flex-shrink: 0; }
+  .dash-row .name { font-size: 14.5px; font-weight: 600; color: var(--ink); }
+  .dash-row .meta { font-size: 11.5px; color: var(--gray); margin-top: 3px; }
+  .dash-row .val { font-family: 'IBM Plex Mono', monospace; font-size: 14.5px; font-weight: 600; color: var(--ink); flex-shrink: 0; }
+
+  /* Below ~640px the card's rendered width drops back to roughly what it
+     was before this pass widened it for desktop (~900px cap) -- without
+     this, the topbar's brand + 3 nav items + avatar overflow the narrow
+     card and get clipped by .laptop's overflow:hidden (verified visually:
+     "Import quotes" and the last row's rand value were cut off flush
+     against the card edge on a 390px viewport). */
+  @media (max-width: 640px) {
+    .dash-topbar { gap: 10px; padding: 12px 14px; }
+    .dash-brand span { font-size: 11px; }
+    .dash-brand img { width: 16px; height: 16px; }
+    .dash-topnav { gap: 9px; }
+    .dash-topnav span { font-size: 8.5px; }
+    .dash-avatar { width: 22px; height: 22px; font-size: 8px; }
+    .dash-avatar.you { width: 18px; height: 18px; font-size: 7px; }
+    .dash-main { padding: 16px 14px 0; }
+    .dash-eyebrow { font-size: 9px; }
+    .dash-figure { font-size: 24px; }
+    .dash-spark { width: 52px; height: 22px; }
+    .dash-figuresub { font-size: 10px; margin: 8px 0 14px; }
+    .dash-delta { font-size: 9px; }
+    .dash-listhead .t { font-size: 11px; }
+    .dash-listhead .l { font-size: 9px; }
+    .dash-row { padding: 9px 10px; gap: 8px; }
+    .dash-row .name { font-size: 10.5px; }
+    .dash-row .meta { font-size: 8px; }
+    .dash-row .val { font-size: 10.5px; }
+  }
 </style>
 </head>
 <body>
@@ -165,7 +225,7 @@
       <p class="hero-sub">How many quotes did you send last month that you never heard back from? Not "no" — just silence. GrowMatic <strong>automatically follows up your outstanding quotes</strong>, so the jobs don't get forgotten while you're busy on-site — and tells you exactly which customers are still interested.</p>
       <div class="hero-ctas">
         <a href="#how" class="btn-primary">See how it works <span>→</span></a>
-        <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20recover%20the%20quotes%20that%20go%20quiet%20on%20me." class="btn-secondary" target="_blank" rel="noopener noreferrer">Recover my quotes</a>
+        <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20recover%20the%20quotes%20that%20go%20quiet%20on%20me." class="btn-outline" target="_blank" rel="noopener noreferrer">Recover my quotes</a>
       </div>
     </div>
 
