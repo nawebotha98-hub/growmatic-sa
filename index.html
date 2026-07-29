@@ -70,16 +70,30 @@
     .nav:not(.scrolled) .nav-links > a:not(.btn-nav) { color: rgba(255,255,255,.82); }
   }
 
+  /* Oversized background numeral (reused on the PROBLEM section's cards
+     below too) — a repeated, deliberate editorial device instead of plain
+     icon+text cards, so the two sections read as one system rather than
+     two generic feature grids. */
   .qsteps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-  .qstep { background: #fff; border: 1px solid #e4e4e0; border-radius: 16px; padding: 26px 22px; box-shadow: 0 14px 34px -24px rgba(10,10,10,.25); transition: transform .15s ease, box-shadow .15s ease; }
+  .qstep { position: relative; overflow: hidden; background: #fff; border: 1px solid #e4e4e0; border-radius: 16px; padding: 26px 22px; box-shadow: 0 14px 34px -24px rgba(10,10,10,.25); transition: transform .15s ease, box-shadow .15s ease; }
   .qstep:hover { transform: translateY(-3px); box-shadow: 0 24px 46px -26px rgba(10,10,10,.3); }
-  .qstep .qico { width: 46px; height: 46px; border-radius: 12px; background: rgba(31,157,92,.1); display: flex; align-items: center; justify-content: center; color: #1f9d5c; margin-bottom: 16px; }
+  .qstep .qnum {
+    position: absolute; top: -8px; right: 4px; font-family: 'IBM Plex Mono', monospace;
+    font-size: 64px; font-weight: 600; color: rgba(31,157,92,.09); letter-spacing: -0.02em; line-height: 1;
+  }
+  .qstep .qico { position: relative; width: 46px; height: 46px; border-radius: 12px; background: rgba(31,157,92,.1); display: flex; align-items: center; justify-content: center; color: #1f9d5c; margin-bottom: 16px; }
   .qstep .qico svg { width: 23px; height: 23px; }
-  .qstep .qnum { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #1f9d5c; font-weight: 600; letter-spacing: .08em; }
-  .qstep h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; margin: 6px 0 8px; color: #0a0a0a; letter-spacing: -.01em; line-height: 1.2; }
-  .qstep p { margin: 0; color: #5c5c58; font-size: 14.5px; line-height: 1.6; }
+  .qstep h3 { position: relative; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; margin: 6px 0 8px; color: #0a0a0a; letter-spacing: -.01em; line-height: 1.2; }
+  .qstep p { position: relative; margin: 0; color: #5c5c58; font-size: 14.5px; line-height: 1.6; }
   @media (max-width: 900px){ .qsteps { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px){ .qsteps { grid-template-columns: 1fr; } }
+
+  .card-dark { position: relative; overflow: hidden; }
+  .problem-num {
+    position: absolute; top: -14px; right: 0; font-family: 'IBM Plex Mono', monospace;
+    font-size: 72px; font-weight: 600; color: rgba(255,255,255,.06); letter-spacing: -0.02em; line-height: 1;
+  }
+  .card-dark .hr, .card-dark .eyebrow, .card-dark h3, .card-dark p { position: relative; }
 
   /* "Recovered" flag under the hero phone conversation */
   .recovered-flag { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #1f9d5c; background: rgba(31,157,92,.12); border: 1px solid rgba(31,157,92,.28); border-radius: 999px; padding: 7px 14px; }
@@ -223,7 +237,6 @@
       <a href="/">Home</a>
       <a href="#how">How it works</a>
       <a href="#stages">The system</a>
-      <a href="trades.html">For Trades</a>
       <a href="https://wa.me/27827900255?text=Hi!%20I%20send%20quotes%20and%20want%20to%20stop%20losing%20the%20ones%20that%20go%20quiet." class="btn-nav wa-call" target="_blank" rel="noopener noreferrer">Book a call</a>
     </div>
   </div>
@@ -319,18 +332,21 @@
     </div>
     <div class="grid grid-3">
       <div class="card-dark">
+        <div class="problem-num">01</div>
         <div class="hr"></div>
         <div class="eyebrow accent">Silence isn't rejection</div>
         <h3>Most "no replies" would still say yes</h3>
         <p>They meant to get back to you. Life happened. Without a nudge, that quote just sits there — and eventually someone else does the job.</p>
       </div>
       <div class="card-dark">
+        <div class="problem-num">02</div>
         <div class="hr"></div>
         <div class="eyebrow accent">You're on the tools</div>
         <h3>You can't work and chase quotes</h3>
         <p>Following up every quote by hand is exactly the admin you never get to. So the good ones slip through with the bad.</p>
       </div>
       <div class="card-dark">
+        <div class="problem-num">03</div>
         <div class="hr"></div>
         <div class="eyebrow accent">Money already in reach</div>
         <h3>This is work you've already quoted</h3>
@@ -477,7 +493,6 @@
             <a href="/">Home</a>
             <a href="#how">How it works</a>
             <a href="#stages">The system</a>
-            <a href="trades.html">For Trades</a>
           </div>
         </div>
         <div>
