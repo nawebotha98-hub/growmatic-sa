@@ -42,33 +42,26 @@
     content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .05; mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   }
-  .hero .hero-inner { grid-template-columns: none; display: block; }
-  .hero .hero-inner > div:first-child { max-width: 640px; display: block; }
+  /* Centered, single-column hero — text stacks and centers above the
+     device instead of sitting in a left-aligned column, so the whole hero
+     reads as one continuous composition flowing straight down into the
+     laptop, matching the reference the user sent. */
+  .hero .hero-inner { grid-template-columns: none; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .hero .hero-inner > div:first-child { max-width: 720px; display: block; }
   /* Lighter than the brand --green: the brand shade reads fine on the white
      dashboard card but is too close to the dark hero background for the
      eyebrow/accent text sitting directly on it. */
   .hero .eyebrow { color: #4fe0a0; }
-  .hero .hero-inner h1 { font-size: clamp(1.9rem, 3.6vw, 3rem); letter-spacing: -0.02em; line-height: 1.07; color: var(--bg); }
+  .hero .hero-inner h1 { font-size: clamp(2.1rem, 4.4vw, 3.4rem); letter-spacing: -0.02em; line-height: 1.07; color: var(--bg); }
   .hero .hero-inner h1 .accent { color: #4fe0a0; }
-  .hero .hero-sub { font-size: 18px; margin-top: 26px; color: rgba(255,255,255,.66); }
+  .hero .hero-sub { font-size: 18px; margin: 26px auto 0; max-width: 58ch; color: rgba(255,255,255,.66); }
   /* .hero-sub strong is var(--ink) (near-black) in styles.css, tuned for a
      light background elsewhere on the site — invisible against this hero's
      dark background (reported directly: "the black script... I can't see
      it"). */
   .hero .hero-sub strong { color: #fff; font-weight: 600; }
-  .hero .hero-ctas { margin-top: 30px; }
+  .hero .hero-ctas { margin-top: 30px; justify-content: center; }
 
-  /* Nav reads dark-on-transparent by default (styles.css); before the user
-     scrolls past this dark hero it needs to flip light. script.js already
-     toggles a "scrolled" class at scrollY>20 for the existing blur/bg
-     treatment, so this just piggybacks on that same class. Desktop only:
-     below 860px the nav already forces an opaque --bg background regardless
-     of scroll state (see styles.css's own mobile-nav comment), so the
-     dark-ink logo/links there are already correct and must stay untouched. */
-  @media (min-width: 861px) {
-    .nav:not(.scrolled) .nav-logo img { filter: brightness(0) invert(1); }
-    .nav:not(.scrolled) .nav-links > a:not(.btn-nav) { color: rgba(255,255,255,.82); }
-  }
 
   /* Oversized background numeral (reused on the PROBLEM section's cards
      below too) — a repeated, deliberate editorial device instead of plain
@@ -109,35 +102,75 @@
   .stage p { margin: 0; color: rgba(255,255,255,.72); font-size: 14.5px; line-height: 1.6; }
   @media (max-width: 820px){ .stages { grid-template-columns: 1fr; } }
 
-  /* Hero dashboard preview — a floating UI card (no device bezel: laptop/
-     phone frames around a screenshot are the single most overused SaaS-
-     template trope, and a plain bezel was reading as generic/cheap no
-     matter how the content inside was polished). Presented as the real app
-     UI itself, now the hero's full-width visual anchor below the headline
-     (previously squeezed into a side column) so it reads as the main event
-     rather than a decoration. */
-  .laptop-wrap { margin-top: 56px; }
-  .laptop {
-    position: relative; width: 100%; max-width: 900px;
-    background: #fff; border-radius: 16px; overflow: hidden;
-    box-shadow:
-      0 60px 100px -32px rgba(0,0,0,.55),
-      0 20px 40px -18px rgba(0,0,0,.4),
-      0 0 0 1px rgba(10,10,10,.05);
+  /* Floating pill nav — replaces the old full-width bar for this page. A
+     detached glass pill works over both the dark hero and the lighter
+     sections below without needing the old scroll-triggered light/dark
+     text-color flip, so that whole fragile mechanism is removed here. */
+  .nav { padding: 16px 20px 0; background: transparent !important; border-bottom: none !important; backdrop-filter: none !important; }
+  .nav.scrolled { background: transparent !important; }
+  .nav-inner {
+    max-width: 1120px; background: rgba(10,14,11,.75); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,.09); border-radius: 999px;
+    padding: 8px 10px 8px 22px; box-shadow: 0 24px 50px -26px rgba(0,0,0,.65);
   }
-  /* Same gentle floatY treatment the site already uses on the trades-page
-     phone mockup (styles.css .phone-body) -- reusing an established motion
-     rather than introducing a new one so it reads as part of the same
-     design system. Respects reduced-motion like every other animation here. */
+  .nav-logo img { filter: brightness(0) invert(1); }
+  .nav-links > a:not(.btn-nav) { color: rgba(255,255,255,.82) !important; }
+  .nav-toggle span { background: #fff !important; }
+
+  /* Hero device — a real laptop shape (lid + hinge + base), not a flat
+     card: the flat version read as "generic dashboard screenshot"; a
+     proper device silhouette, angled in 3D and glowing on a "pedestal",
+     is what actually matches the reference the user sent (a Framer "AI
+     product" template's laptop-on-a-plinth hero shot). That reference
+     image is a photorealistic 3D render — out of reach without an image
+     generation tool — so this is the closest honest equivalent buildable
+     in CSS: GrowMatic's own real dashboard, no fake logos/awards/
+     testimonials the way that reference template had. */
+  .laptop-wrap { margin-top: 56px; position: relative; perspective: 2200px; display: flex; justify-content: center; }
+  .laptop-device {
+    position: relative; width: 100%; max-width: 820px; z-index: 1;
+    transform: rotateX(10deg) rotateY(-12deg);
+    transform-style: preserve-3d;
+  }
   @media (prefers-reduced-motion: no-preference) {
-    .laptop { animation: floatY 7s ease-in-out infinite; }
+    .laptop-device { animation: laptopFloat 7s ease-in-out infinite; }
   }
-  .laptop::before {
-    /* Faint edge-lit rim so the card reads as raised glass, not a flat cutout. */
-    content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+  @keyframes laptopFloat {
+    0%, 100% { transform: rotateX(10deg) rotateY(-12deg) translateY(0); }
+    50% { transform: rotateX(10deg) rotateY(-12deg) translateY(-14px); }
   }
-  .laptop-screen { display: flex; flex-direction: column; }
+  @media (max-width: 700px) {
+    .laptop-device { transform: none !important; animation: none !important; }
+  }
+  .laptop-lid {
+    position: relative; background: linear-gradient(155deg,#2c2c2c,#0a0a0a 55%);
+    border-radius: 15px 15px 3px 3px; padding: 11px 11px 0;
+    box-shadow: 0 50px 90px -28px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.04);
+  }
+  .laptop-notch {
+    position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
+    width: 6px; height: 6px; border-radius: 50%; background: #1a1a1a;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.1);
+  }
+  .laptop-screen {
+    display: flex; flex-direction: column; background: #fff;
+    border-radius: 3px 3px 0 0; overflow: hidden;
+  }
+  .laptop-base {
+    height: 20px; background: linear-gradient(180deg,#2a2a2a,#050505);
+    border-radius: 0 0 13px 13px; position: relative;
+    box-shadow: 0 40px 70px -25px rgba(0,0,0,.55);
+  }
+  .laptop-base::after {
+    content: ''; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+    width: 92px; height: 6px; background: #050505; border-radius: 0 0 7px 7px;
+  }
+  .laptop-glow {
+    position: absolute; left: 50%; bottom: -30px; transform: translateX(-50%);
+    width: 78%; height: 160px; background: radial-gradient(ellipse at center, rgba(79,224,160,.4), transparent 72%);
+    filter: blur(34px); pointer-events: none; z-index: 0;
+  }
+  @media (max-width: 700px) { .laptop-glow { display: none; } }
 
   .dash-topbar { display: flex; align-items: center; gap: 26px; padding: 18px 26px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
   .dash-brand { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
@@ -223,6 +256,65 @@
     .dash-row .meta { font-size: 8px; }
     .dash-row .val { font-size: 10.5px; }
   }
+
+  /* "Works with your tools" — the converging-lines-to-a-central-logo motif
+     from the reference, applied to a real, honest claim (no new software
+     to learn) instead of a generic "integrations" list. */
+  .tools-hub { display: flex; flex-direction: column; align-items: center; padding: 32px 0 8px; }
+  .tool-icons { display: flex; gap: 28px; margin-bottom: 4px; }
+  .tool-icon {
+    width: 56px; height: 56px; border-radius: 16px; background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.75);
+  }
+  .tool-icon svg { width: 26px; height: 26px; }
+  .tools-lines { display: block; margin: -6px 0 -10px; }
+  .tools-logo {
+    width: 56px; height: 56px; border-radius: 16px; background: var(--green);
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 0 40px rgba(79,224,160,.5);
+  }
+  .tools-logo img { width: 30px; height: 30px; }
+  .tools-checklist { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 36px; }
+  .tools-checklist span {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; color: rgba(255,255,255,.8);
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 999px; padding: 9px 16px;
+  }
+  .tools-checklist svg { width: 15px; height: 15px; color: var(--green); flex-shrink: 0; }
+  @media (max-width: 560px) {
+    .tool-icons { gap: 14px; }
+    .tool-icon { width: 44px; height: 44px; border-radius: 12px; }
+    .tool-icon svg { width: 20px; height: 20px; }
+  }
+
+  /* Pricing — a single honest card (there's one real offer right now, not
+     a 3-tier comparison table) styled with the same glow language as the
+     hero card, so it reads as part of the same system. */
+  .price-wrap { display: flex; justify-content: center; }
+  .price-card {
+    position: relative; width: 100%; max-width: 460px; background: #0d130e;
+    border: 1px solid rgba(79,224,160,.25); border-radius: 24px; padding: 40px 36px;
+    box-shadow: 0 40px 90px -30px rgba(0,0,0,.6), 0 0 60px -20px rgba(79,224,160,.25);
+    overflow: hidden;
+  }
+  .price-card::before {
+    content: ''; position: absolute; top: -60%; left: -20%; width: 140%; height: 140%;
+    background: radial-gradient(ellipse at top, rgba(79,224,160,.14), transparent 60%); pointer-events: none;
+  }
+  .price-badge {
+    position: relative; display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--green);
+    background: rgba(79,224,160,.1); border: 1px solid rgba(79,224,160,.3); border-radius: 999px; padding: 6px 14px; margin-bottom: 22px;
+  }
+  .price-figure { position: relative; display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+  .price-figure .setup { font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 600; color: #fff; }
+  .price-figure .sep { font-size: 15px; color: rgba(255,255,255,.5); }
+  .price-figure .monthly { font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 600; color: var(--green); }
+  .price-figure .monthly small { font-size: 15px; font-weight: 400; color: rgba(255,255,255,.5); }
+  .price-note { position: relative; font-size: 14px; color: rgba(255,255,255,.55); margin: 0 0 28px; }
+  .price-features { position: relative; list-style: none; margin: 0 0 32px; padding: 0; display: flex; flex-direction: column; gap: 13px; }
+  .price-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; color: rgba(255,255,255,.85); line-height: 1.5; }
+  .price-features svg { width: 17px; height: 17px; color: var(--green); flex-shrink: 0; margin-top: 2px; }
+  .price-card .btn-primary { position: relative; width: 100%; justify-content: center; }
 </style>
 </head>
 <body>
@@ -256,7 +348,10 @@
     </div>
 
     <div class="laptop-wrap">
-      <div class="laptop">
+      <div class="laptop-glow"></div>
+      <div class="laptop-device">
+        <div class="laptop-lid">
+          <div class="laptop-notch"></div>
           <div class="laptop-screen">
             <div class="dash-topbar">
               <div class="dash-brand"><img src="assets/logo.png" alt=""><span>GrowMatic</span></div>
@@ -306,6 +401,8 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="laptop-base"></div>
       </div>
     </div>
   </div>
