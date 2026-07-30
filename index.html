@@ -315,6 +315,31 @@
   .price-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; color: rgba(255,255,255,.85); line-height: 1.5; }
   .price-features svg { width: 17px; height: 17px; color: var(--green); flex-shrink: 0; margin-top: 2px; }
   .price-card .btn-primary { position: relative; width: 100%; justify-content: center; }
+
+  /* Footer — dark to match the rest of this page (the shared .footer in
+     styles.css is light, correct for the plain legal pages that reuse it,
+     but reads flat/dated after everything above went dark+glowing).
+     Scoped to this page only via being inline here, not touching
+     styles.css, so privacy/terms/popia are untouched. */
+  .footer { background: #060907; border-top: 1px solid rgba(255,255,255,.07); position: relative; overflow: hidden; }
+  .footer::before {
+    content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 300px; background: radial-gradient(ellipse at center, rgba(79,224,160,.1), transparent 70%);
+    pointer-events: none;
+  }
+  .footer .wrap { position: relative; }
+  .footer-logo { filter: brightness(0) invert(1); }
+  .footer-top p { color: rgba(255,255,255,.55); }
+  .footer-cols .eyebrow { color: #4fe0a0; }
+  .footer-links a { color: rgba(255,255,255,.72); transition: color .15s ease; }
+  .footer-links a:hover { color: #fff; }
+  .footer-links .muted { color: rgba(255,255,255,.4); }
+  .footer-top { border-bottom: 1px solid rgba(255,255,255,.07); }
+  .footer-bottom { border-top-color: rgba(255,255,255,.07); color: rgba(255,255,255,.4); }
+  /* .btn-outline-sm is dark-ink-on-light in styles.css, tuned for the light
+     footer this page no longer has -- would be invisible here otherwise. */
+  .footer .btn-outline-sm { color: #fff !important; border-color: rgba(255,255,255,.25); }
+  .footer .btn-outline-sm:hover { background: rgba(255,255,255,.06); }
 </style>
 </head>
 <body>
@@ -339,7 +364,7 @@
 <section class="hero">
   <div class="hero-inner">
     <div>
-      <div class="eyebrow">Quote Recovery · for solar, security &amp; trade installers</div>
+      <div class="eyebrow">Quote Recovery · for South African businesses that send quotes</div>
       <h1>Turn more quotes into <span class="accent">paying jobs</span>.</h1>
       <p class="hero-sub">How many quotes did you send last month that you never heard back from? Not "no" — just silence. GrowMatic <strong>automatically follows up your outstanding quotes</strong>, so the jobs don't get forgotten while you're busy on-site — and tells you exactly which customers are still interested.</p>
       <div class="hero-ctas">

@@ -548,6 +548,7 @@ img { max-width: 100%; }
 /* ---------- CTA ---------- */
 .cta-section .wrap { text-align: center; }
 .cta-inner { max-width: 900px; margin: 0 auto; }
+.cta-inner .eyebrow { margin-bottom: 28px; }
 .cta-inner h2 { font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: -0.04em; line-height: 1.02; margin: 0; }
 .cta-sub { color: rgba(255,255,255,0.6); font-size: 20px; line-height: 1.7; margin: 40px auto 0; max-width: 55ch; }
 .cta-ctas { margin-top: 56px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
