@@ -172,6 +172,17 @@
   }
   @media (max-width: 700px) { .laptop-glow { display: none; } }
 
+  /* Extra top clearance for every section on this page: the floating pill
+     nav (introduced above) is taller than the plain bar the shared .wrap
+     padding in styles.css was tuned for, so section headings/eyebrows were
+     rendering partly behind the nav when scrolled to their own top edge
+     (measured directly: nav bottom at 74px, eyebrow top at 59px on
+     mobile — genuinely overlapping, not a visual illusion). Excludes the
+     footer, which keeps its own tighter padding via .footer .wrap's
+     higher specificity in styles.css. */
+  .wrap { padding-top: 170px; }
+  @media (max-width: 860px) { .wrap { padding-top: 108px; } }
+
   .dash-topbar { display: flex; align-items: center; gap: 26px; padding: 18px 26px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
   .dash-brand { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
   .dash-brand img { width: 24px; height: 24px; }
