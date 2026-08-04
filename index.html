@@ -3,829 +3,477 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GrowMatic SA — Turn More Quotes Into Paying Jobs</title>
-<meta name="description" content="You send quotes and never hear back. GrowMatic automatically follows up your outstanding quotes so the jobs don't get forgotten while you're on-site — and shows you exactly which customers are still interested.">
+<title>GrowMatic SA — The Money Is Already In Your Quotes</title>
+<meta name="description" content="Most quotes that go quiet were never a no. GrowMatic finds the jobs you've already priced and never heard back on, and shows you exactly what they're worth. Free 15-minute audit.">
 <meta name="keywords" content="quote follow up, quote recovery, solar installer quotes, security CCTV quotes, gate automation quotes, air conditioning quotes, trades quotes South Africa, follow up unaccepted quotes, GrowMatic">
 <link rel="canonical" href="https://growmaticsa.com/">
-<meta property="og:title" content="Turn more quotes into paying jobs.">
-<meta property="og:description" content="GrowMatic automatically follows up the quotes you've already sent — so potential jobs don't slip away while you're busy on-site.">
+<meta property="og:title" content="The money is already in your quotes.">
+<meta property="og:description" content="GrowMatic finds the jobs you've already priced and never heard back on, and shows you exactly what they're worth. Free 15-minute audit.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://growmaticsa.com/">
 <meta property="og:image" content="https://growmaticsa.com/assets/logo-horizontal.png">
 <meta property="og:image:width" content="1536">
 <meta property="og:image:height" content="1024">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Turn more quotes into paying jobs.">
-<meta name="twitter:description" content="GrowMatic automatically follows up the quotes you've already sent — so potential jobs don't slip away while you're busy on-site.">
+<meta name="twitter:title" content="The money is already in your quotes.">
+<meta name="twitter:description" content="GrowMatic finds the jobs you've already priced and never heard back on, and shows you exactly what they're worth. Free 15-minute audit.">
 <meta name="twitter:image" content="https://growmaticsa.com/assets/logo-horizontal.png">
 <link rel="icon" href="assets/logo.png">
-<link rel="stylesheet" href="styles.css?v=20260727a">
 <style>
-  /* Homepage-only additions (was quote-recovery-page-only). Everything else
-     uses styles.css so it matches the rest of the site exactly. */
-
-  /* Homepage hero: dark, moody base (was a flat pale-mint background) so the
-     existing WebGL flow-field (#hero-canvas, soft emerald points) and the
-     woven wave ribbon (#wave-canvas) actually read — both are near-invisible
-     against a light background at the low alpha they're drawn with, which is
-     why all that engineering was going unnoticed. A grain layer adds the
-     textured, photographic depth a flat gradient can't. Scoped to .hero
-     inside THIS page's own <style> tag only — trades.html has its own copy
-     of the shared .hero/.hero-inner rules and is untouched by this. */
-  .hero {
-    background:
-      radial-gradient(ellipse 55% 60% at 78% 18%, rgba(47,190,110,0.16), transparent 68%),
-      radial-gradient(ellipse 65% 55% at 12% 96%, rgba(31,157,92,0.14), transparent 70%),
-      linear-gradient(178deg, #060a07 0%, #0b120c 45%, #0a0f0a 100%);
+  @font-face {
+    font-family: 'Sora'; font-style: normal; font-weight: 400 700; font-display: swap;
+    src: url('assets/fonts/sora-variable.woff2') format('woff2');
   }
-  .hero::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .05; mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  @font-face {
+    font-family: 'Manrope'; font-style: normal; font-weight: 400 700; font-display: swap;
+    src: url('assets/fonts/manrope-variable.woff2') format('woff2');
   }
-  /* Centered, single-column hero — text stacks and centers above the
-     device instead of sitting in a left-aligned column, so the whole hero
-     reads as one continuous composition flowing straight down into the
-     laptop, matching the reference the user sent. */
-  .hero .hero-inner { grid-template-columns: none; display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .hero .hero-inner > div:first-child { max-width: 720px; display: block; }
-  /* Lighter than the brand --green: the brand shade reads fine on the white
-     dashboard card but is too close to the dark hero background for the
-     eyebrow/accent text sitting directly on it. */
-  .hero .eyebrow { color: #4fe0a0; }
-  .hero .hero-inner h1 { font-size: clamp(2.1rem, 4.4vw, 3.4rem); letter-spacing: -0.02em; line-height: 1.07; color: var(--bg); }
-  .hero .hero-inner h1 .accent { color: #4fe0a0; }
-  .hero .hero-sub { font-size: 18px; margin: 26px auto 0; max-width: 58ch; color: rgba(255,255,255,.66); }
-  /* .hero-sub strong is var(--ink) (near-black) in styles.css, tuned for a
-     light background elsewhere on the site — invisible against this hero's
-     dark background (reported directly: "the black script... I can't see
-     it"). */
-  .hero .hero-sub strong { color: #fff; font-weight: 600; }
-  .hero .hero-ctas { margin-top: 30px; justify-content: center; }
-
-
-  /* Oversized background numeral (reused on the PROBLEM section's cards
-     below too) — a repeated, deliberate editorial device instead of plain
-     icon+text cards, so the two sections read as one system rather than
-     two generic feature grids. */
-  .qsteps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-  .qstep { position: relative; overflow: hidden; background: #fff; border: 1px solid #e4e4e0; border-radius: 16px; padding: 26px 22px; box-shadow: 0 14px 34px -24px rgba(10,10,10,.25); transition: transform .15s ease, box-shadow .15s ease; }
-  .qstep:hover { transform: translateY(-3px); box-shadow: 0 24px 46px -26px rgba(10,10,10,.3); }
-  .qstep .qnum {
-    position: absolute; top: -8px; right: 4px; font-family: 'IBM Plex Mono', monospace;
-    font-size: 64px; font-weight: 600; color: rgba(31,157,92,.09); letter-spacing: -0.02em; line-height: 1;
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+  body { margin: 0; background: #08090c; color: #eef1f5; font-family: 'Manrope', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { text-decoration: none; }
+  ::selection { background: #45e08a; color: #05130a; }
+  h1,h2,h3 { font-family: 'Sora', system-ui, sans-serif; }
+  .fig { font-variant-numeric: tabular-nums lining-nums; font-feature-settings: 'tnum' 1, 'lnum' 1; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 5px; border-radius: 999px; background: linear-gradient(90deg, #45e08a var(--p,50%), #20242c var(--p,50%)); outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 26px; height: 26px; border-radius: 50%; background: #0d0f14; border: 2px solid #45e08a; box-shadow: 0 0 0 4px rgba(69,224,138,.16), 0 6px 16px rgba(0,0,0,.5); cursor: pointer; transition: transform .12s; }
+  input[type=range]::-webkit-slider-thumb:active { transform: scale(1.12); }
+  input[type=range]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #0d0f14; border: 2px solid #45e08a; box-shadow: 0 0 0 4px rgba(69,224,138,.16); cursor: pointer; }
+  @media (max-width: 900px) {
+    #calculator-grid, #honest-grid, #popia-grid, #cta-grid { grid-template-columns: 1fr !important; }
+    #problem-grid, #audit-grid { grid-template-columns: 1fr 1fr !important; }
+    #hero-ticks { grid-template-columns: 1fr 1fr !important; }
+    nav#site-nav { display: none !important; }
   }
-  .qstep .qico { position: relative; width: 46px; height: 46px; border-radius: 12px; background: rgba(31,157,92,.1); display: flex; align-items: center; justify-content: center; color: #1f9d5c; margin-bottom: 16px; }
-  .qstep .qico svg { width: 23px; height: 23px; }
-  .qstep h3 { position: relative; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; margin: 6px 0 8px; color: #0a0a0a; letter-spacing: -.01em; line-height: 1.2; }
-  .qstep p { position: relative; margin: 0; color: #5c5c58; font-size: 14.5px; line-height: 1.6; }
-  @media (max-width: 900px){ .qsteps { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px){ .qsteps { grid-template-columns: 1fr; } }
-
-  .card-dark { position: relative; overflow: hidden; }
-  .problem-num {
-    position: absolute; top: -14px; right: 0; font-family: 'IBM Plex Mono', monospace;
-    font-size: 72px; font-weight: 600; color: rgba(255,255,255,.06); letter-spacing: -0.02em; line-height: 1;
-  }
-  .card-dark .hr, .card-dark .eyebrow, .card-dark h3, .card-dark p { position: relative; }
-
-  /* "Recovered" flag under the hero phone conversation */
-  .recovered-flag { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #1f9d5c; background: rgba(31,157,92,.12); border: 1px solid rgba(31,157,92,.28); border-radius: 999px; padding: 7px 14px; }
-
-  /* Stage ladder */
-  .stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  .stage { position: relative; border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 26px 24px; background: rgba(255,255,255,.02); }
-  .stage.live { border-color: rgba(31,157,92,.5); background: rgba(31,157,92,.06); }
-  .stage .badge { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; margin-bottom: 14px; }
-  .stage.live .badge { background: #1f9d5c; color: #04140c; }
-  .stage.soon .badge { background: rgba(255,255,255,.1); color: rgba(255,255,255,.75); }
-  .stage h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 19px; margin: 0 0 8px; color: #fff; letter-spacing: -.01em; }
-  .stage p { margin: 0; color: rgba(255,255,255,.72); font-size: 14.5px; line-height: 1.6; }
-  @media (max-width: 820px){ .stages { grid-template-columns: 1fr; } }
-
-  /* Floating pill nav — replaces the old full-width bar for this page. A
-     detached glass pill works over both the dark hero and the lighter
-     sections below without needing the old scroll-triggered light/dark
-     text-color flip, so that whole fragile mechanism is removed here. */
-  .nav { padding: 16px 20px 0; background: transparent !important; border-bottom: none !important; backdrop-filter: none !important; }
-  .nav.scrolled { background: transparent !important; }
-  .nav-inner {
-    max-width: 1120px; background: rgba(10,14,11,.75); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,.09); border-radius: 999px;
-    padding: 8px 10px 8px 22px; box-shadow: 0 24px 50px -26px rgba(0,0,0,.65);
-  }
-  .nav-logo img { filter: brightness(0) invert(1); }
-  .nav-links > a:not(.btn-nav) { color: rgba(255,255,255,.82) !important; }
-  .nav-toggle span { background: #fff !important; }
-
-  /* Hero device — a real laptop shape (lid + hinge + base), not a flat
-     card: the flat version read as "generic dashboard screenshot"; a
-     proper device silhouette, angled in 3D and glowing on a "pedestal",
-     is what actually matches the reference the user sent (a Framer "AI
-     product" template's laptop-on-a-plinth hero shot). That reference
-     image is a photorealistic 3D render — out of reach without an image
-     generation tool — so this is the closest honest equivalent buildable
-     in CSS: GrowMatic's own real dashboard, no fake logos/awards/
-     testimonials the way that reference template had. */
-  .laptop-wrap { margin-top: 56px; position: relative; perspective: 2200px; display: flex; justify-content: center; }
-  .laptop-device {
-    position: relative; width: 100%; max-width: 820px; z-index: 1;
-    transform: rotateX(10deg) rotateY(-12deg);
-    transform-style: preserve-3d;
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .laptop-device { animation: laptopFloat 7s ease-in-out infinite; }
-  }
-  @keyframes laptopFloat {
-    0%, 100% { transform: rotateX(10deg) rotateY(-12deg) translateY(0); }
-    50% { transform: rotateX(10deg) rotateY(-12deg) translateY(-14px); }
-  }
-  @media (max-width: 700px) {
-    .laptop-device { transform: none !important; animation: none !important; }
-  }
-  .laptop-lid {
-    position: relative; background: linear-gradient(155deg,#2c2c2c,#0a0a0a 55%);
-    border-radius: 15px 15px 3px 3px; padding: 11px 11px 0;
-    box-shadow: 0 50px 90px -28px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.04);
-  }
-  .laptop-notch {
-    position: absolute; top: 4px; left: 50%; transform: translateX(-50%);
-    width: 6px; height: 6px; border-radius: 50%; background: #1a1a1a;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.1);
-  }
-  .laptop-screen {
-    display: flex; flex-direction: column; background: #fff;
-    border-radius: 3px 3px 0 0; overflow: hidden;
-  }
-  .laptop-base {
-    height: 20px; background: linear-gradient(180deg,#2a2a2a,#050505);
-    border-radius: 0 0 13px 13px; position: relative;
-    box-shadow: 0 40px 70px -25px rgba(0,0,0,.55);
-  }
-  .laptop-base::after {
-    content: ''; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
-    width: 92px; height: 6px; background: #050505; border-radius: 0 0 7px 7px;
-  }
-  .laptop-glow {
-    position: absolute; left: 50%; bottom: -30px; transform: translateX(-50%);
-    width: 78%; height: 160px; background: radial-gradient(ellipse at center, rgba(79,224,160,.4), transparent 72%);
-    filter: blur(34px); pointer-events: none; z-index: 0;
-  }
-  @media (max-width: 700px) { .laptop-glow { display: none; } }
-
-  /* Extra top clearance for every section on this page: the floating pill
-     nav (introduced above) is taller than the plain bar the shared .wrap
-     padding in styles.css was tuned for, so section headings/eyebrows were
-     rendering partly behind the nav when scrolled to their own top edge
-     (measured directly: nav bottom at 74px, eyebrow top at 59px on
-     mobile — genuinely overlapping, not a visual illusion). Excludes the
-     footer, which keeps its own tighter padding via .footer .wrap's
-     higher specificity in styles.css. */
-  .wrap { padding-top: 170px; }
-  @media (max-width: 860px) { .wrap { padding-top: 108px; } }
-
-  .dash-topbar { display: flex; align-items: center; gap: 26px; padding: 18px 26px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
-  .dash-brand { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-  .dash-brand img { width: 24px; height: 24px; }
-  .dash-brand span { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); }
-  .dash-topnav { display: flex; gap: 22px; flex: 1; }
-  .dash-topnav span { font-size: 12.5px; color: var(--gray); }
-  .dash-topnav span.active { color: var(--ink); font-weight: 600; }
-  .dash-avatar {
-    width: 32px; height: 32px; border-radius: 50%; color: #fff; flex-shrink: 0;
-    font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .dash-avatar.you { width: 25px; height: 25px; background: var(--green); font-size: 9.5px; font-weight: 700; font-family: inherit; }
-  .dash-avatar.high { background: linear-gradient(155deg,#d15353,#b83a3a); }
-  .dash-avatar.med { background: linear-gradient(155deg,#c99a3a,#a97f24); }
-  .dash-avatar.low { background: linear-gradient(155deg,#3fae7c,#1f9d5c); }
-
-  .dash-main { flex: 1; min-height: 0; padding: 26px 26px 0; }
-  .dash-eyebrow {
-    display: flex; align-items: center; gap: 8px;
-    font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase;
-    letter-spacing: .06em; color: var(--gray); margin: 0 0 8px;
-  }
-  .dash-live-dot {
-    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
-    box-shadow: 0 0 0 0 rgba(31,157,92,.5);
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .dash-live-dot { animation: live-pulse 2.2s infinite; }
-  }
-  .dash-figrow { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
-  .dash-figure { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 42px; letter-spacing: -0.01em; color: var(--ink); margin: 0; }
-  .dash-spark { flex-shrink: 0; margin-bottom: 6px; width: 100px; height: 40px; }
-  .dash-figuresub { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--gray); margin: 10px 0 22px; line-height: 1.4; }
-  .dash-delta {
-    display: inline-flex; align-items: center; gap: 4px; font-weight: 600; color: var(--green);
-    background: rgba(31,157,92,.1); padding: 3px 9px; border-radius: 99px; font-size: 11.5px; flex-shrink: 0;
-  }
-
-  .dash-listhead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-  .dash-listhead .t { font-size: 14.5px; font-weight: 600; color: var(--ink); }
-  .dash-listhead .l { font-size: 12px; color: var(--green); font-weight: 500; }
-
-  .dash-rows { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 6px 16px -12px rgba(10,10,10,.18); }
-  .dash-row {
-    display: flex; align-items: center; gap: 14px; padding: 14px 18px;
-    border-bottom: 1px solid var(--border); border-left: 3px solid transparent; background: #fff;
-  }
-  .dash-row:first-child { background: rgba(31,157,92,.04); border-left-color: #b83a3a; }
-  .dash-row:nth-child(2) { border-left-color: #a97f24; }
-  .dash-row:nth-child(3) { border-left-color: var(--green); }
-  .dash-row:last-child { border-bottom: none; }
-  .dash-row .info { flex: 1; min-width: 0; }
-  .dash-row .name { font-size: 14.5px; font-weight: 600; color: var(--ink); }
-  .dash-row .meta { font-size: 11.5px; color: var(--gray); margin-top: 3px; }
-  .dash-row .val { font-family: 'IBM Plex Mono', monospace; font-size: 14.5px; font-weight: 600; color: var(--ink); flex-shrink: 0; }
-
-  /* Below ~640px the card's rendered width drops back to roughly what it
-     was before this pass widened it for desktop (~900px cap) -- without
-     this, the topbar's brand + 3 nav items + avatar overflow the narrow
-     card and get clipped by .laptop's overflow:hidden (verified visually:
-     "Import quotes" and the last row's rand value were cut off flush
-     against the card edge on a 390px viewport). */
-  @media (max-width: 640px) {
-    .dash-topbar { gap: 10px; padding: 12px 14px; }
-    .dash-brand span { font-size: 11px; }
-    .dash-brand img { width: 16px; height: 16px; }
-    .dash-topnav { gap: 9px; }
-    .dash-topnav span { font-size: 8.5px; }
-    .dash-avatar { width: 22px; height: 22px; font-size: 8px; }
-    .dash-avatar.you { width: 18px; height: 18px; font-size: 7px; }
-    .dash-main { padding: 16px 14px 0; }
-    .dash-eyebrow { font-size: 9px; }
-    .dash-figure { font-size: 24px; }
-    .dash-spark { width: 52px; height: 22px; }
-    .dash-figuresub { font-size: 10px; margin: 8px 0 14px; }
-    .dash-delta { font-size: 9px; }
-    .dash-listhead .t { font-size: 11px; }
-    .dash-listhead .l { font-size: 9px; }
-    .dash-row { padding: 9px 10px; gap: 8px; }
-    .dash-row .name { font-size: 10.5px; }
-    .dash-row .meta { font-size: 8px; }
-    .dash-row .val { font-size: 10.5px; }
-  }
-
-  /* "Works with your tools" — the converging-lines-to-a-central-logo motif
-     from the reference, applied to a real, honest claim (no new software
-     to learn) instead of a generic "integrations" list. */
-  .tools-hub { display: flex; flex-direction: column; align-items: center; padding: 32px 0 8px; }
-  .tool-icons { display: flex; gap: 28px; margin-bottom: 4px; }
-  .tool-icon {
-    width: 56px; height: 56px; border-radius: 16px; background: rgba(255,255,255,.03);
-    border: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center;
-    color: rgba(255,255,255,.75);
-  }
-  .tool-icon svg { width: 26px; height: 26px; }
-  .tools-lines { display: block; margin: -6px 0 -10px; }
-  .tools-logo {
-    width: 56px; height: 56px; border-radius: 16px; background: var(--green);
-    display: flex; align-items: center; justify-content: center; box-shadow: 0 0 40px rgba(79,224,160,.5);
-  }
-  .tools-logo img { width: 30px; height: 30px; }
-  .tools-checklist { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 36px; }
-  .tools-checklist span {
-    display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; color: rgba(255,255,255,.8);
-    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 999px; padding: 9px 16px;
-  }
-  .tools-checklist svg { width: 15px; height: 15px; color: var(--green); flex-shrink: 0; }
   @media (max-width: 560px) {
-    .tool-icons { gap: 14px; }
-    .tool-icon { width: 44px; height: 44px; border-radius: 12px; }
-    .tool-icon svg { width: 20px; height: 20px; }
+    #problem-grid, #audit-grid { grid-template-columns: 1fr !important; }
   }
-
-  /* Pricing — a single honest card (there's one real offer right now, not
-     a 3-tier comparison table) styled with the same glow language as the
-     hero card, so it reads as part of the same system. */
-  .price-wrap { display: flex; justify-content: center; }
-  .price-card {
-    position: relative; width: 100%; max-width: 460px; background: #0d130e;
-    border: 1px solid rgba(79,224,160,.25); border-radius: 24px; padding: 40px 36px;
-    box-shadow: 0 40px 90px -30px rgba(0,0,0,.6), 0 0 60px -20px rgba(79,224,160,.25);
-    overflow: hidden;
-  }
-  .price-card::before {
-    content: ''; position: absolute; top: -60%; left: -20%; width: 140%; height: 140%;
-    background: radial-gradient(ellipse at top, rgba(79,224,160,.14), transparent 60%); pointer-events: none;
-  }
-  .price-badge {
-    position: relative; display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
-    font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--green);
-    background: rgba(79,224,160,.1); border: 1px solid rgba(79,224,160,.3); border-radius: 999px; padding: 6px 14px; margin-bottom: 22px;
-  }
-  .price-figure { position: relative; display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
-  .price-figure .setup { font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 600; color: #fff; }
-  .price-figure .sep { font-size: 15px; color: rgba(255,255,255,.5); }
-  .price-figure .monthly { font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 600; color: var(--green); }
-  .price-figure .monthly small { font-size: 15px; font-weight: 400; color: rgba(255,255,255,.5); }
-  .price-note { position: relative; font-size: 14px; color: rgba(255,255,255,.55); margin: 0 0 28px; }
-  .price-features { position: relative; list-style: none; margin: 0 0 32px; padding: 0; display: flex; flex-direction: column; gap: 13px; }
-  .price-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; color: rgba(255,255,255,.85); line-height: 1.5; }
-  .price-features svg { width: 17px; height: 17px; color: var(--green); flex-shrink: 0; margin-top: 2px; }
-  .price-card .btn-primary { position: relative; width: 100%; justify-content: center; }
-
-  /* Footer — dark to match the rest of this page (the shared .footer in
-     styles.css is light, correct for the plain legal pages that reuse it,
-     but reads flat/dated after everything above went dark+glowing).
-     Scoped to this page only via being inline here, not touching
-     styles.css, so privacy/terms/popia are untouched. */
-  .footer { background: #060907; border-top: 1px solid rgba(255,255,255,.07); position: relative; overflow: hidden; }
-  .footer::before {
-    content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
-    width: 700px; height: 300px; background: radial-gradient(ellipse at center, rgba(79,224,160,.1), transparent 70%);
-    pointer-events: none;
-  }
-  .footer .wrap { position: relative; }
-  .footer-logo { filter: brightness(0) invert(1); }
-  .footer-top p { color: rgba(255,255,255,.55); }
-  .footer-cols .eyebrow { color: #4fe0a0; }
-  .footer-links a { color: rgba(255,255,255,.72); transition: color .15s ease; }
-  .footer-links a:hover { color: #fff; }
-  .footer-links .muted { color: rgba(255,255,255,.4); }
-  .footer-top { border-bottom: 1px solid rgba(255,255,255,.07); }
-  .footer-bottom { border-top-color: rgba(255,255,255,.07); color: rgba(255,255,255,.4); }
-  /* .btn-outline-sm is dark-ink-on-light in styles.css, tuned for the light
-     footer this page no longer has -- would be invisible here otherwise. */
-  .footer .btn-outline-sm { color: #fff !important; border-color: rgba(255,255,255,.25); }
-  .footer .btn-outline-sm:hover { background: rgba(255,255,255,.06); }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @keyframes drift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(3%,-4%) scale(1.08); } }
+  @keyframes fadeup { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes tape { to { transform: translateX(-50%); } }
 </style>
 </head>
 <body>
 
-<nav class="nav" id="nav">
-  <div class="nav-inner">
-    <a href="/" class="nav-logo"><img src="assets/logo-horizontal.png" alt="GrowMatic SA"></a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
-      <span></span><span></span><span></span>
-    </button>
-    <div class="nav-links" id="nav-links">
-      <a href="/">Home</a>
-      <a href="#how">How it works</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
-      <a href="https://wa.me/27827900255?text=Hi!%20I%20send%20quotes%20and%20want%20to%20stop%20losing%20the%20ones%20that%20go%20quiet." class="btn-nav wa-call" target="_blank" rel="noopener noreferrer">Book a call</a>
-    </div>
-  </div>
-</nav>
+<div style="position: relative; overflow-x: clip;">
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div>
-      <div class="eyebrow">Quote Recovery · for South African businesses that send quotes</div>
-      <h1>Turn more quotes into <span class="accent">paying jobs</span>.</h1>
-      <p class="hero-sub">How many quotes did you send last month that you never heard back from? Not "no" — just silence. GrowMatic <strong>automatically follows up your outstanding quotes</strong>, so the jobs don't get forgotten while you're busy on-site — and tells you exactly which customers are still interested.</p>
-      <div class="hero-ctas">
-        <a href="#how" class="btn-primary">See how it works <span>→</span></a>
-        <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20to%20recover%20the%20quotes%20that%20go%20quiet%20on%20me." class="btn-outline" target="_blank" rel="noopener noreferrer">Recover my quotes</a>
+  <!-- ambient glows -->
+  <div style="position: absolute; top: -180px; right: -120px; width: 720px; height: 720px; border-radius: 50%; background: radial-gradient(circle, rgba(69,224,138,.16), transparent 62%); filter: blur(20px); animation: drift 16s ease-in-out infinite; pointer-events: none; z-index: 0;"></div>
+  <div style="position: absolute; top: 420px; left: -200px; width: 620px; height: 620px; border-radius: 50%; background: radial-gradient(circle, rgba(56,132,255,.12), transparent 64%); filter: blur(20px); animation: drift 20s ease-in-out infinite reverse; pointer-events: none; z-index: 0;"></div>
+  <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px); background-size: 60px 60px; -webkit-mask-image: radial-gradient(1200px 800px at 70% 0%, #000 20%, transparent 76%); mask-image: radial-gradient(1200px 800px at 70% 0%, #000 20%, transparent 76%); pointer-events: none; z-index: 0;"></div>
+
+  <div style="position: relative; z-index: 1;">
+
+  <!-- NAV -->
+  <header id="top" style="position: sticky; top: 0; z-index: 60; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); background: rgba(8,9,12,.72); border-bottom: 1px solid rgba(255,255,255,.06);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 15px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+      <a href="#top" style="display: inline-flex; align-items: center;">
+        <img src="assets/logo-mono-white.png" alt="GrowMatic SA" style="height: 40px; width: auto; display: block;">
+      </a>
+      <nav id="site-nav" style="display: flex; align-items: center; gap: 32px; font-size: 14.5px; font-weight: 500; color: #aab2c0;">
+        <a href="#problem" style="color: #aab2c0;">The problem</a>
+        <a href="#calculator" style="color: #aab2c0;">Calculator</a>
+        <a href="#audit" style="color: #aab2c0;">The audit</a>
+        <a href="#honest" style="color: #aab2c0;">Why free</a>
+      </nav>
+      <a href="https://wa.me/27827900255?text=Hi%20Ewan%2C%20I%27d%20like%20to%20book%20the%20free%2015-minute%20audit." style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 999px; background: #45e08a; color: #05130a; font-family: 'Sora'; font-weight: 600; font-size: 14.5px; box-shadow: 0 8px 24px rgba(69,224,138,.24);">Book a free audit</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section style="max-width: 1200px; margin: 0 auto; padding: 24px 28px 40px;">
+    <div style="position: relative; border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); min-height: 640px; display: flex; box-shadow: 0 50px 120px -40px rgba(0,0,0,.9); animation: fadeup .8s ease both;">
+      <div style="position: absolute; inset: 0; z-index: 0; background: url('assets/hero.png') center right / cover no-repeat;"></div>
+      <div style="position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(6,7,10,.94) 0%, rgba(6,7,10,.82) 34%, rgba(6,7,10,.34) 66%, rgba(6,7,10,.5) 100%);"></div>
+      <div style="position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(6,7,10,.55) 0%, transparent 26%, transparent 58%, rgba(6,7,10,.92) 100%);"></div>
+      <div style="position: absolute; bottom: -40px; left: 0; right: 0; height: 220px; z-index: 1; background: radial-gradient(700px 200px at 30% 100%, rgba(69,224,138,.28), transparent 70%); pointer-events: none;"></div>
+
+      <div style="position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(28px, 5vw, 60px); width: 100%;">
+        <h1 style="font-weight: 700; font-size: clamp(38px, 5.6vw, 66px); line-height: 1.02; letter-spacing: -.035em; margin: 0 0 22px; max-width: 15ch; text-shadow: 0 2px 30px rgba(0,0,0,.5);">The money is already in your quotes.</h1>
+        <p style="font-size: clamp(17px, 2vw, 20px); line-height: 1.5; color: #cfd5df; max-width: 540px; margin: 0 0 32px;">Most quotes that go quiet were never a no. GrowMatic finds the jobs you've already priced and never heard back on, and shows you exactly what they're worth.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 13px;">
+          <a href="https://wa.me/27827900255?text=Hi%20Ewan%2C%20I%27d%20like%20to%20book%20the%20free%2015-minute%20audit." style="display: inline-flex; align-items: center; gap: 9px; padding: 15px 28px; border-radius: 12px; background: #16a34a; color: #fff; font-family: 'Sora'; font-weight: 600; font-size: 16px; box-shadow: 0 14px 34px rgba(22,163,74,.4);">Book a free 15-minute audit →</a>
+          <a href="#calculator" style="display: inline-flex; align-items: center; gap: 9px; padding: 15px 28px; border-radius: 12px; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.04); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); color: #fff; font-family: 'Sora'; font-weight: 500; font-size: 16px;">See what you're owed</a>
+        </div>
+        <div id="hero-ticks" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,.12);">
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); backdrop-filter: blur(8px);">
+            <span style="width: 34px; height: 34px; border-radius: 10px; background: rgba(69,224,138,.14); border: 1px solid rgba(69,224,138,.3); display: grid; place-items: center; color: #45e08a; font-size: 16px; font-weight: 800;">✓</span>
+            <span style="font-family: 'Sora'; font-size: 14.5px; font-weight: 600; color: #fff; letter-spacing: -.01em; line-height: 1.25;">Founder-run</span>
+            <span style="font-size: 12.5px; color: #9aa3b2; line-height: 1.4;">You deal with me, Ewan — directly</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); backdrop-filter: blur(8px);">
+            <span style="width: 34px; height: 34px; border-radius: 10px; background: rgba(69,224,138,.14); border: 1px solid rgba(69,224,138,.3); display: grid; place-items: center; color: #45e08a; font-size: 16px; font-weight: 800;">✓</span>
+            <span style="font-family: 'Sora'; font-size: 14.5px; font-weight: 600; color: #fff; letter-spacing: -.01em; line-height: 1.25;">Nothing to install</span>
+            <span style="font-size: 12.5px; color: #9aa3b2; line-height: 1.4;">Works with the tools you already use</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); backdrop-filter: blur(8px);">
+            <span style="width: 34px; height: 34px; border-radius: 10px; background: rgba(69,224,138,.14); border: 1px solid rgba(69,224,138,.3); display: grid; place-items: center; color: #45e08a; font-size: 16px; font-weight: 800;">✓</span>
+            <span style="font-family: 'Sora'; font-size: 14.5px; font-weight: 600; color: #fff; letter-spacing: -.01em; line-height: 1.25;">POPIA-safe</span>
+            <span style="font-size: 12.5px; color: #9aa3b2; line-height: 1.4;">Your data never leaves your systems</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); backdrop-filter: blur(8px);">
+            <span style="width: 34px; height: 34px; border-radius: 10px; background: rgba(69,224,138,.14); border: 1px solid rgba(69,224,138,.3); display: grid; place-items: center; color: #45e08a; font-size: 16px; font-weight: 800;">✓</span>
+            <span style="font-family: 'Sora'; font-size: 14.5px; font-weight: 600; color: #fff; letter-spacing: -.01em; line-height: 1.25;">Free 15-min audit</span>
+            <span style="font-size: 12.5px; color: #9aa3b2; line-height: 1.4;">See your number before you pay a cent</span>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="laptop-wrap">
-      <div class="laptop-glow"></div>
-      <div class="laptop-device">
-        <div class="laptop-lid">
-          <div class="laptop-notch"></div>
-          <div class="laptop-screen">
-            <div class="dash-topbar">
-              <div class="dash-brand"><img src="assets/logo.png" alt=""><span>GrowMatic</span></div>
-              <div class="dash-topnav">
-                <span class="active">Dashboard</span>
-                <span>Recovery queue</span>
-                <span>Import quotes</span>
+  <!-- TRUST BAND -->
+  <section style="max-width: 1200px; margin: 0 auto; padding: 8px 28px 84px;">
+    <div style="border: 1px solid rgba(255,255,255,.08); border-radius: 20px; overflow: hidden; background: linear-gradient(180deg, rgba(18,21,27,.7), rgba(10,12,16,.7)); -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);">
+      <div style="display: flex; width: max-content; animation: tape 24s linear infinite;" id="trust-tape">
+        <!-- repeated twice for seamless loop -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 PROBLEM -->
+  <section id="problem" style="position: relative; padding: 76px 28px 90px; overflow: hidden;">
+    <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100vw; height: 100%; z-index: 0; background: url('assets/growth-bg.png') center / cover no-repeat;"></div>
+    <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100vw; height: 100%; z-index: 0; background: linear-gradient(180deg, rgba(8,9,12,.9) 0%, rgba(8,9,12,.72) 40%, rgba(8,9,12,.86) 100%);"></div>
+    <div style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto;">
+    <div style="max-width: 680px; margin-bottom: 48px;">
+      <div style="font-family: 'Sora'; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #45e08a; margin-bottom: 18px;">Where the money goes</div>
+      <h2 style="font-weight: 700; font-size: clamp(34px, 4.8vw, 56px); line-height: 1.03; letter-spacing: -.03em; margin: 0;">A quote is not the finish line. It only feels like one.</h2>
+    </div>
+    <div id="problem-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      <div style="padding: 32px 30px; border-radius: 18px; background: linear-gradient(180deg, rgba(20,23,30,.7), rgba(12,14,19,.7)); border: 1px solid rgba(255,255,255,.07);">
+        <div style="width: 34px; height: 3px; border-radius: 2px; background: #45e08a; margin-bottom: 22px;"></div>
+        <h3 style="font-weight: 600; font-size: 21px; letter-spacing: -.01em; margin: 0 0 10px;">Silence is not a no</h3>
+        <p style="font-size: 15.5px; line-height: 1.6; color: #9aa3b2; margin: 0;">The customer got busy, compared prices, or simply forgot. Without a nudge the quote sits there, and eventually someone else does the job.</p>
+      </div>
+      <div style="padding: 32px 30px; border-radius: 18px; background: linear-gradient(180deg, rgba(20,23,30,.7), rgba(12,14,19,.7)); border: 1px solid rgba(255,255,255,.07);">
+        <div style="width: 34px; height: 3px; border-radius: 2px; background: #45e08a; margin-bottom: 22px;"></div>
+        <h3 style="font-weight: 600; font-size: 21px; letter-spacing: -.01em; margin: 0 0 10px;">You are on the tools</h3>
+        <p style="font-size: 15.5px; line-height: 1.6; color: #9aa3b2; margin: 0;">You are the owner and the estimator. At five o'clock you go home, and the follow-up that would have won the work never happens.</p>
+      </div>
+      <div style="padding: 32px 30px; border-radius: 18px; background: linear-gradient(180deg, rgba(20,23,30,.7), rgba(12,14,19,.7)); border: 1px solid rgba(255,255,255,.07);">
+        <div style="width: 34px; height: 3px; border-radius: 2px; background: #45e08a; margin-bottom: 22px;"></div>
+        <h3 style="font-weight: 600; font-size: 21px; letter-spacing: -.01em; margin: 0 0 10px;">Nothing tracks a quiet quote</h3>
+        <p style="font-size: 15.5px; line-height: 1.6; color: #9aa3b2; margin: 0;">Your invoices are tracked. Your jobs are tracked. The quote that never became an invoice is tracked by nobody, and quiet looks the same as lost.</p>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR MODULE -->
+  <section id="calculator" style="max-width: 1200px; margin: 0 auto; padding: 40px 28px 90px;">
+    <div style="position: relative; border-radius: 26px; overflow: hidden; border: 1px solid rgba(255,255,255,.09); background: linear-gradient(180deg, #0e1116, #0a0c10);">
+      <div style="position: absolute; top: -140px; right: -80px; width: 460px; height: 460px; border-radius: 50%; background: radial-gradient(circle, rgba(69,224,138,.16), transparent 64%); filter: blur(10px);"></div>
+      <div id="calculator-grid" style="position: relative; display: grid; grid-template-columns: 1fr 1fr;">
+        <div style="padding: 48px 46px;">
+          <div style="font-family: 'Sora'; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #45e08a; margin-bottom: 14px;">The estimate</div>
+          <h2 style="font-weight: 700; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 10px;">How much is sitting in quotes you never got an answer on?</h2>
+          <p style="font-size: 15.5px; color: #9aa3b2; line-height: 1.55; margin: 0 0 38px;">Slide your own numbers. The figure updates as you go.</p>
+
+          <div style="display: grid; gap: 30px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;">
+                <label style="font-size: 14.5px; font-weight: 600; color: #cdd3dd;">Quotes you send per month</label>
+                <span class="fig" id="quotes-val" style="font-family: 'Sora'; font-weight: 700; font-size: 22px; color: #fff;">18</span>
               </div>
-              <div class="dash-avatar you">EB</div>
+              <input type="range" id="quotes-input" min="2" max="120" step="1" value="18" aria-label="Quotes you send per month">
             </div>
-            <div class="dash-main">
-              <p class="dash-eyebrow"><span class="dash-live-dot"></span> Revenue at risk</p>
-              <div class="dash-figrow">
-                <p class="dash-figure">R1,347,251</p>
-                <svg class="dash-spark" width="58" height="24" viewBox="0 0 58 24" fill="none">
-                  <defs>
-                    <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#1f9d5c" stop-opacity=".28"/>
-                      <stop offset="100%" stop-color="#1f9d5c" stop-opacity="0"/>
-                    </linearGradient>
-                  </defs>
-                  <path d="M0 17 L9 19 L18 12 L27 14 L36 8 L45 10 L58 1 L58 24 L0 24 Z" fill="url(#sparkFill)"/>
-                  <path d="M0 17 L9 19 L18 12 L27 14 L36 8 L45 10 L58 1" stroke="#1f9d5c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                </svg>
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;">
+                <label style="font-size: 14.5px; font-weight: 600; color: #cdd3dd;">Average quote value</label>
+                <span class="fig" id="avg-val" style="font-family: 'Sora'; font-weight: 700; font-size: 22px; color: #fff;">R24 000</span>
               </div>
-              <p class="dash-figuresub">14 quotes with no clear outcome, out of 86 imported <span class="dash-delta">▲ 18%</span></p>
-              <div class="dash-listhead">
-                <span class="t">Needs attention first</span>
-                <span class="l">View full queue →</span>
+              <input type="range" id="avg-input" min="2000" max="250000" step="1000" value="24000" aria-label="Average quote value">
+            </div>
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;">
+                <label style="font-size: 14.5px; font-weight: 600; color: #cdd3dd;">Percentage that go quiet</label>
+                <span class="fig" id="pct-val" style="font-family: 'Sora'; font-weight: 700; font-size: 22px; color: #fff;">32%</span>
               </div>
-              <div class="dash-rows">
-                <div class="dash-row">
-                  <div class="dash-avatar high">WB</div>
-                  <div class="info"><div class="name">Wesbank Body Corporate</div><div class="meta">No recorded outcome · 42 days since sent</div></div>
-                  <div class="val">R412,000</div>
-                </div>
-                <div class="dash-row">
-                  <div class="dash-avatar med">UC</div>
-                  <div class="info"><div class="name">Uitenhage Cold Storage</div><div class="meta">Stale, no follow-up · 35 days since sent</div></div>
-                  <div class="val">R340,000</div>
-                </div>
-                <div class="dash-row">
-                  <div class="dash-avatar low">GM</div>
-                  <div class="info"><div class="name">Greenacres Motors</div><div class="meta">No recorded outcome · 21 days since sent</div></div>
-                  <div class="val">R256,000</div>
-                </div>
-              </div>
+              <input type="range" id="pct-input" min="0" max="100" step="1" value="32" aria-label="Percentage that go quiet">
             </div>
           </div>
         </div>
-        <div class="laptop-base"></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<div class="marquee">
-  <div class="marquee-track">
-    <div class="marquee-group">
-      <span>Quotes followed up</span><span class="dot">·</span><span>Jobs won back</span><span class="dot">·</span><span>Nothing forgotten</span><span class="dot">·</span><span>Who's still interested</span><span class="dot">·</span><span>Recovered in rands</span><span class="dot">·</span>
-    </div>
-    <div class="marquee-group">
-      <span>Quotes followed up</span><span class="dot">·</span><span>Jobs won back</span><span class="dot">·</span><span>Nothing forgotten</span><span class="dot">·</span><span>Who's still interested</span><span class="dot">·</span><span>Recovered in rands</span><span class="dot">·</span>
-    </div>
-  </div>
-</div>
-
-<!-- PROBLEM -->
-<section class="section section-dark">
-  <div class="wrap">
-    <div class="section-head" style="max-width:740px">
-      <div class="eyebrow accent">The quotes that go quiet</div>
-      <h2>The job wasn't lost. <span class="accent">It was forgotten.</span></h2>
-      <p class="section-sub">Most quotes that go cold were never a "no". The customer got busy, compared prices, or simply forgot — and you were on-site, not chasing paperwork. A single friendly follow-up wins a surprising number of them straight back.</p>
-    </div>
-    <div class="grid grid-3">
-      <div class="card-dark">
-        <div class="problem-num">01</div>
-        <div class="hr"></div>
-        <div class="eyebrow accent">Silence isn't rejection</div>
-        <h3>Most "no replies" would still say yes</h3>
-        <p>They meant to get back to you. Life happened. Without a nudge, that quote just sits there — and eventually someone else does the job.</p>
-      </div>
-      <div class="card-dark">
-        <div class="problem-num">02</div>
-        <div class="hr"></div>
-        <div class="eyebrow accent">You're on the tools</div>
-        <h3>You can't work and chase quotes</h3>
-        <p>Following up every quote by hand is exactly the admin you never get to. So the good ones slip through with the bad.</p>
-      </div>
-      <div class="card-dark">
-        <div class="problem-num">03</div>
-        <div class="hr"></div>
-        <div class="eyebrow accent">Money already in reach</div>
-        <h3>This is work you've already quoted</h3>
-        <p>No marketing, no new leads — just recovering jobs already in your pipeline. It's the fastest rand you'll make this month.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- RECOVERED-REVENUE CALCULATOR -->
-<section class="section section-light" id="cost">
-  <div class="wrap">
-    <div class="section-head" style="max-width:720px">
-      <div class="eyebrow">What silent quotes cost you</div>
-      <h2>How much is sitting in <span class="accent">un-followed-up quotes?</span></h2>
-      <p class="section-sub">Use your own numbers. Even winning back a small slice usually pays for the whole service many times over.</p>
-    </div>
-    <div class="calc">
-      <div class="calc-inputs">
-        <div class="calc-field">
-          <label for="q">Quotes you send a month</label>
-          <input id="q" type="number" min="0" max="500" value="25" inputmode="numeric">
-        </div>
-        <div class="calc-field">
-          <label for="qval">Average quote value (R)</label>
-          <input id="qval" type="number" min="0" step="500" value="45000" inputmode="numeric">
+        <div style="padding: 48px 44px; background: linear-gradient(180deg, rgba(69,224,138,.05), rgba(255,255,255,.015)); border-left: 1px solid rgba(255,255,255,.07); display: flex; flex-direction: column; justify-content: center;">
+          <div style="font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #7c8494; font-weight: 600; margin-bottom: 12px;">Estimated value going quiet — a year</div>
+          <div class="fig" id="figure-val" style="font-family: 'Sora'; font-weight: 700; font-size: clamp(48px, 6.4vw, 76px); line-height: .96; letter-spacing: -.035em; background: linear-gradient(100deg, #45e08a, #38c8ff); -webkit-background-clip: text; background-clip: text; color: transparent;">R0</div>
+          <p class="fig" style="font-size: 15px; color: #9aa3b2; margin: 16px 0 0;">About <span id="monthly-val">R0</span> a month you're leaving on the table.</p>
+          <a href="https://wa.me/27827900255?text=Hi%20Ewan%2C%20I%27d%20like%20to%20book%20the%20free%2015-minute%20audit." style="display: inline-flex; align-items: center; justify-content: center; gap: 9px; margin-top: 28px; padding: 15px 26px; border-radius: 12px; background: #45e08a; color: #05130a; font-family: 'Sora'; font-weight: 600; font-size: 16px; box-shadow: 0 14px 34px rgba(69,224,138,.26);">Get the real number — free audit →</a>
+          <p style="font-size: 12.5px; color: #6b7280; margin: 14px 0 0; line-height: 1.5;">An estimate from your own numbers, not a promise. The real figure comes from your records in the audit.</p>
         </div>
       </div>
-      <div class="calc-out">
-        <div class="calc-line"><span>Quotes that go quiet a month</span><b id="o-silent">≈ 8</b></div>
-        <div class="calc-big">
-          <span>Win back just 1 in 4 of those, and that's</span>
-          <strong id="o-year">R0</strong>
-          <em>a year recovered</em>
+    </div>
+  </section>
+
+  <!-- 02 AUDIT -->
+  <section id="audit" style="position: relative; padding: 76px 28px 90px; overflow: hidden;">
+    <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100vw; height: 100%; z-index: 0; background: url('assets/audit-bg.png') center / cover no-repeat;"></div>
+    <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100vw; height: 100%; z-index: 0; background: linear-gradient(180deg, rgba(8,9,12,.9) 0%, rgba(8,9,12,.74) 42%, rgba(8,9,12,.9) 100%);"></div>
+    <div style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto;">
+    <div style="max-width: 680px; margin-bottom: 48px;">
+      <div style="font-family: 'Sora'; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #45e08a; margin-bottom: 18px;">What happens in the audit</div>
+      <h2 style="font-weight: 700; font-size: clamp(34px, 4.8vw, 56px); line-height: 1.03; letter-spacing: -.03em; margin: 0;">Fifteen minutes. Your screen, your records.</h2>
+    </div>
+    <div id="audit-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;">
+      <div style="padding: 28px 24px; border-radius: 18px; background: linear-gradient(180deg, rgba(20,23,30,.6), rgba(12,14,19,.6)); border: 1px solid rgba(255,255,255,.07);">
+        <div style="font-family: 'Sora'; font-weight: 700; font-size: 15px; color: #05130a; width: 34px; height: 34px; border-radius: 9px; background: #45e08a; display: grid; place-items: center; margin-bottom: 20px;">1</div>
+        <h3 style="font-weight: 600; font-size: 18px; letter-spacing: -.01em; margin: 0 0 9px;">Book a time</h3>
+        <p style="font-size: 14.5px; line-height: 1.55; color: #9aa3b2; margin: 0;">A WhatsApp message and a slot that fits around your day. Fifteen minutes, nothing more committed than that.</p>
+      </div>
+      <div style="padding: 28px 24px; border-radius: 18px; background: linear-gradient(180deg, rgba(20,23,30,.6), rgba(12,14,19,.6)); border: 1px solid rgba(255,255,255,.07);">
+        <div style="font-family: 'Sora'; font-weight: 700; font-size: 15px; color: #05130a; width: 34px; height: 34px; border-radius: 9px; background: #45e08a; display: grid; place-items: center; margin-bottom: 20px;">2</div>
+        <h3 style="font-weight: 600; font-size: 18px; letter-spacing: -.01em; margin: 0 0 9px;">Meet on WhatsApp video</h3>
+        <p style="font-size: 14.5px; line-height: 1.55; color: #9aa3b2; margin: 0;">No new software and no meeting links to work out. The tool you already use all day.</p>
+      </div>
+      <div style="padding: 28px 24px; border-radius: 18px; background: linear-gradient(180deg, rgba(20,23,30,.6), rgba(12,14,19,.6)); border: 1px solid rgba(255,255,255,.07);">
+        <div style="font-family: 'Sora'; font-weight: 700; font-size: 15px; color: #05130a; width: 34px; height: 34px; border-radius: 9px; background: #45e08a; display: grid; place-items: center; margin-bottom: 20px;">3</div>
+        <h3 style="font-weight: 600; font-size: 18px; letter-spacing: -.01em; margin: 0 0 9px;">Share your screen</h3>
+        <p style="font-size: 14.5px; line-height: 1.55; color: #9aa3b2; margin: 0;">You open your own quotes — email, a spreadsheet, your accounting system. I watch and take notes.</p>
+      </div>
+      <div style="padding: 28px 24px; border-radius: 18px; background: linear-gradient(180deg, rgba(20,23,30,.6), rgba(12,14,19,.6)); border: 1px solid rgba(255,255,255,.07);">
+        <div style="font-family: 'Sora'; font-weight: 700; font-size: 15px; color: #05130a; width: 34px; height: 34px; border-radius: 9px; background: #45e08a; display: grid; place-items: center; margin-bottom: 20px;">4</div>
+        <h3 style="font-weight: 600; font-size: 18px; letter-spacing: -.01em; margin: 0 0 9px;">Get your real number</h3>
+        <p style="font-size: 14.5px; line-height: 1.55; color: #9aa3b2; margin: 0;">By the end you know what is genuinely sitting in unanswered quotes. Nothing leaves your machine to get it.</p>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- COST + STATS + POPIA (shared background band) -->
+  <div style="position: relative; overflow: hidden;">
+    <div style="position: absolute; inset: 0; z-index: 0; background: url('assets/cost-bg.png') center / cover no-repeat; background-attachment: fixed;"></div>
+    <div style="position: absolute; inset: 0; z-index: 0; background: linear-gradient(180deg, rgba(8,9,12,.92) 0%, rgba(8,9,12,.8) 45%, rgba(8,9,12,.92) 100%);"></div>
+    <div style="position: relative; z-index: 1;">
+  <section id="honest" style="max-width: 1200px; margin: 0 auto; padding: 76px 28px 40px;">
+    <div id="honest-grid" style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 20px; align-items: stretch;">
+      <div style="padding: 48px 44px; border-radius: 22px; background: linear-gradient(180deg, rgba(20,23,30,.7), rgba(12,14,19,.7)); border: 1px solid rgba(255,255,255,.07); display: flex; flex-direction: column;">
+        <div style="font-family: 'Sora'; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #45e08a; margin-bottom: 18px;">What it costs</div>
+        <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px;">
+          <span style="font-family: 'Sora'; font-weight: 700; font-size: clamp(48px, 6vw, 72px); letter-spacing: -.03em; color: #fff; line-height: 1;">R0</span>
+          <span style="font-size: 16px; color: #9aa3b2;">for the audit</span>
         </div>
-        <div class="calc-sub" id="o-mo">About R0/month you're currently leaving on the table.</div>
-        <p class="calc-note">A rough estimate from your own numbers — not a promise. Recovering even a slice of these is exactly what Quote Recovery is built to do.</p>
+        <h3 style="font-weight: 600; font-size: 22px; letter-spacing: -.01em; margin: 0 0 16px;">Nothing is charged until money comes back.</h3>
+        <p style="font-size: 15.5px; line-height: 1.6; color: #9aa3b2; margin: 0 0 14px;">I am not naming a price on this page, because there isn't one to name yet. You pay nothing to find out what your quiet quotes are worth.</p>
+        <p style="font-size: 15.5px; line-height: 1.6; color: #9aa3b2; margin: 0;">If there is real money in your records, we talk about recovering it then. If there isn't, the audit still told you something useful.</p>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- HOW IT WORKS -->
-<section class="section section-dark" id="how">
-  <div class="wrap">
-    <div class="section-head" style="max-width:760px">
-      <div class="eyebrow">How Quote Recovery works</div>
-      <h2>Log the quote once. <span class="accent">We do the chasing.</span></h2>
-      <p class="section-sub">No new software to learn and nothing to install. It works with the way you already quote — by WhatsApp, email or on paper.</p>
-    </div>
-    <div class="qsteps">
-      <div class="qstep">
-        <div class="qico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg></div>
-        <div class="qnum">01</div>
-        <h3>You log the quote</h3>
-        <p>Send us the customer, amount and number — a quick WhatsApp, email or one line in a shared sheet. That's your whole job done.</p>
-      </div>
-      <div class="qstep">
-        <div class="qico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
-        <div class="qnum">02</div>
-        <h3>We follow up for you</h3>
-        <p>A friendly, professional reminder goes out in your voice after a few days — and again if needed — so no quote is ever forgotten.</p>
-      </div>
-      <div class="qstep">
-        <div class="qico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
-        <div class="qnum">03</div>
-        <h3>You see who's interested</h3>
-        <p>Every reply is tracked. You get told exactly which customers are keen, so you can close them while they're warm.</p>
-      </div>
-      <div class="qstep">
-        <div class="qico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
-        <div class="qnum">04</div>
-        <h3>We total the rands recovered</h3>
-        <p>At month-end you get one clear number: the value of the jobs Quote Recovery won back for you. Proof, in rands.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- THE SYSTEM / STAGES -->
-<section class="section section-dark" id="stages">
-  <div class="wrap">
-    <div class="section-head" style="max-width:760px">
-      <div class="eyebrow accent">The bigger picture</div>
-      <h2>Quote Recovery is <span class="accent">step one</span>.</h2>
-      <p class="section-sub">It's the start of a system that follows the money all the way through your business — from first enquiry to final payment. You start where the return is fastest, and grow from there.</p>
-    </div>
-    <div class="stages">
-      <div class="stage live">
-        <span class="badge">Available now</span>
-        <h3>1 · Quote Recovery</h3>
-        <p>Automatically follow up the quotes you've already sent, track who's interested, and win back forgotten jobs.</p>
-      </div>
-      <div class="stage soon">
-        <span class="badge">Next</span>
-        <h3>2 · Lead Capture</h3>
-        <p>Answer new enquiries from WhatsApp, your website and email instantly — qualify them and turn them into quote requests, 24/7.</p>
-      </div>
-      <div class="stage soon">
-        <span class="badge">Then</span>
-        <h3>3 · Payment Recovery</h3>
-        <p>Once a job's done, send professional reminders on unpaid invoices — so you get paid without the awkward chasing.</p>
-      </div>
-    </div>
-    <p class="section-sub" style="margin-top:28px; max-width:760px">The full picture: <strong style="color:#fff">enquiry → follow-up → quote → acceptance → job → invoice → payment</strong> — every stage covered, so nothing worth money slips through.</p>
-  </div>
-</section>
-
-<!-- WORKS WITH YOUR TOOLS -->
-<section class="section section-dark" id="tools">
-  <div class="wrap">
-    <div class="section-head" style="max-width:700px">
-      <div class="eyebrow accent">No new software to learn</div>
-      <h2>Works with what <span class="accent">you already use</span>.</h2>
-      <p class="section-sub">GrowMatic sits alongside your existing tools and watches — it never asks you to switch, migrate, or learn something new.</p>
-    </div>
-    <div class="tools-hub">
-      <div class="tool-icons">
-        <div class="tool-icon" title="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
-        <div class="tool-icon" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22 6 12 13 2 6"></polyline></svg></div>
-        <div class="tool-icon" title="Excel / spreadsheets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg></div>
-        <div class="tool-icon" title="Sage / Pastel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg></div>
-      </div>
-      <svg class="tools-lines" viewBox="0 0 400 70" width="308" height="60" fill="none">
-        <path d="M50 0 C 50 42, 190 34, 200 70" stroke="rgba(79,224,160,.4)" stroke-width="1.5"></path>
-        <path d="M150 0 C 150 30, 195 30, 200 70" stroke="rgba(79,224,160,.4)" stroke-width="1.5"></path>
-        <path d="M250 0 C 250 30, 205 30, 200 70" stroke="rgba(79,224,160,.4)" stroke-width="1.5"></path>
-        <path d="M350 0 C 350 42, 210 34, 200 70" stroke="rgba(79,224,160,.4)" stroke-width="1.5"></path>
-      </svg>
-      <div class="tools-logo"><img src="assets/logo.png" alt="GrowMatic"></div>
-    </div>
-    <div class="tools-checklist">
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Works with WhatsApp &amp; email</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Nothing to migrate or switch</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Set up in days, not weeks</span>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="section section-dark" id="pricing">
-  <div class="wrap">
-    <div class="section-head" style="max-width:700px">
-      <div class="eyebrow accent">Pricing</div>
-      <h2>One simple <span class="accent">Founding Pilot</span>.</h2>
-      <p class="section-sub">No tiers to compare, no hidden fees — this is the real price, plainly.</p>
-    </div>
-    <div class="price-wrap">
-      <div class="price-card">
-        <span class="price-badge">Founding Pilot</span>
-        <div class="price-figure">
-          <span class="setup">R3,500</span><span class="sep">once-off +</span><span class="monthly">R1,800<small>/mo</small></span>
+      <div style="position: relative; padding: 48px 44px; border-radius: 22px; overflow: hidden; background: linear-gradient(150deg, rgba(69,224,138,.1), rgba(12,14,19,.72)); border: 1px solid rgba(69,224,138,.18);">
+        <div style="position: absolute; top: -80px; right: -60px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(69,224,138,.18), transparent 66%); filter: blur(10px); pointer-events: none;"></div>
+        <div style="position: relative;">
+          <div style="font-family: 'Sora'; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #8ff0b3; margin-bottom: 18px;">Why quotes slip away</div>
+          <h2 style="font-weight: 700; font-size: clamp(26px, 3.2vw, 36px); line-height: 1.06; letter-spacing: -.02em; margin: 0 0 28px;">The problem isn't the quote. It's the follow-up that never happens.</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 26px 24px;">
+            <div>
+              <div class="fig" style="font-family: 'Sora'; font-weight: 700; font-size: clamp(34px, 3.6vw, 44px); letter-spacing: -.03em; background: linear-gradient(160deg, #7ff0ac, #2fa862); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1;">48%</div>
+              <div style="font-size: 14.5px; line-height: 1.5; color: #b7bdc8; margin-top: 9px;">of salespeople never make a single follow-up after first contact.</div>
+            </div>
+            <div>
+              <div class="fig" style="font-family: 'Sora'; font-weight: 700; font-size: clamp(34px, 3.6vw, 44px); letter-spacing: -.03em; background: linear-gradient(160deg, #7ff0ac, #2fa862); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1;">80%</div>
+              <div style="font-size: 14.5px; line-height: 1.5; color: #b7bdc8; margin-top: 9px;">of deals that close need five or more follow-ups to get there.</div>
+            </div>
+            <div>
+              <div class="fig" style="font-family: 'Sora'; font-weight: 700; font-size: clamp(34px, 3.6vw, 44px); letter-spacing: -.03em; background: linear-gradient(160deg, #7ff0ac, #2fa862); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1;">2%</div>
+              <div style="font-size: 14.5px; line-height: 1.5; color: #b7bdc8; margin-top: 9px;">of sales happen on first contact — the rest come from following up.</div>
+            </div>
+            <div>
+              <div class="fig" style="font-family: 'Sora'; font-weight: 700; font-size: clamp(34px, 3.6vw, 44px); letter-spacing: -.03em; background: linear-gradient(160deg, #7ff0ac, #2fa862); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1;">63%</div>
+              <div style="font-size: 14.5px; line-height: 1.5; color: #b7bdc8; margin-top: 9px;">of buyers not ready at first still buy later, if someone stays in touch.</div>
+            </div>
+          </div>
+          <p style="font-size: 12.5px; color: #6b7280; margin: 28px 0 0; line-height: 1.5;">General sales-research findings across industries. Your own number comes from your records in the audit.</p>
         </div>
-        <p class="price-note">Setup takes days, not weeks. Month-to-month after that — cancel anytime.</p>
-        <ul class="price-features">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Import your existing quote history</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Revenue-at-risk dashboard</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Recovery queue, prioritised automatically</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Ongoing daily monitoring</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Month-to-month, cancel anytime</li>
-        </ul>
-        <a href="https://wa.me/27827900255?text=Hi!%20I%27d%20like%20to%20get%20started%20with%20the%20Founding%20Pilot." class="btn-primary wa-call" target="_blank" rel="noopener noreferrer">Get started <span>→</span></a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FAQ -->
-<section class="section section-light" id="faq">
-  <div class="wrap wrap-narrow">
-    <div class="section-head" style="max-width:700px">
-      <div class="eyebrow">Questions</div>
-      <h2>Common questions.</h2>
-    </div>
-    <div class="faq-list">
-      <details class="faq-item">
-        <summary><span class="faq-q">Is this a CRM I have to switch to?</span><span class="faq-plus">+</span></summary>
-        <p>No. GrowMatic isn't a CRM or a replacement for Sage, Pastel, WhatsApp or Excel — it sits alongside whatever you already use and watches for quotes going quiet. There's nothing to migrate.</p>
-      </details>
-      <details class="faq-item">
-        <summary><span class="faq-q">What does it cost?</span><span class="faq-plus">+</span></summary>
-        <p>The Founding Pilot is R3,500 once-off for setup, then R1,800/month. That's the whole price — no hidden tiers or surprise fees.</p>
-      </details>
-      <details class="faq-item">
-        <summary><span class="faq-q">How long until I see value?</span><span class="faq-plus">+</span></summary>
-        <p>The first thing we do — before any commitment — is show you the real rand value sitting in your own stale quotes. That's usually within a day of getting your data.</p>
-      </details>
-      <details class="faq-item">
-        <summary><span class="faq-q">Is my data safe?</span><span class="faq-plus">+</span></summary>
-        <p>Yes. Your company's data is isolated at the database level so no other business can ever see it, and it's never sold, shared, or used for anything beyond running the service for you.</p>
-      </details>
-      <details class="faq-item">
-        <summary><span class="faq-q">Which industries is this for?</span><span class="faq-plus">+</span></summary>
-        <p>Solar installers, security/CCTV/access-control companies, gate-automation and electric-fencing installers, and commercial HVAC/refrigeration businesses — any installation trade that sends real quotes and loses track of some of them.</p>
-      </details>
-      <details class="faq-item">
-        <summary><span class="faq-q">What if I want to stop?</span><span class="faq-plus">+</span></summary>
-        <p>Every plan is month-to-month — cancel anytime, no penalties, no long contracts.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section section-dark cta-section" id="cta">
-  <div class="wrap">
-    <div class="cta-inner">
-      <div class="eyebrow accent">Now onboarding our first installation &amp; trades businesses</div>
-      <h2 class="heading-xl">Let's recover the quotes <span class="accent">already sitting in your phone</span>.</h2>
-      <p class="cta-sub">Send us your last month's open quotes and we'll start following them up — you'll see for yourself how many turn back into jobs. No setup cost to start, no long contracts.</p>
-      <div class="cta-ctas">
-        <a href="https://wa.me/27827900255?text=Hi!%20I%20want%20GrowMatic%20to%20follow%20up%20my%20outstanding%20quotes." class="btn-primary wa-call" target="_blank" rel="noopener noreferrer">WhatsApp us now <span>→</span></a>
-        <a href="#how" class="btn-outline">See how it works</a>
-      </div>
-      <div class="cta-tags">
-        <span>Works with WhatsApp &amp; email</span>
-        <span>Up in days, not weeks</span>
-        <span>Cancel anytime</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-top">
+  <!-- POPIA -->
+  <section style="max-width: 1200px; margin: 0 auto; padding: 0 28px 84px;">
+    <div id="popia-grid" style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; align-items: start; padding: 48px 44px; border-radius: 22px; background: rgba(10,12,16,.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.08);">
       <div>
-        <img src="assets/logo-horizontal.png" alt="GrowMatic SA" class="footer-logo">
-        <p>Quote Recovery follows up the quotes you've already sent — so potential jobs don't get forgotten while you're busy on-site.</p>
-        <div class="footer-ctas">
-          <a href="https://wa.me/27827900255?text=Hi!%20I%20want%20GrowMatic%20to%20follow%20up%20my%20outstanding%20quotes." class="btn-primary-sm wa-call" target="_blank" rel="noopener noreferrer">WhatsApp us</a>
-          <a href="#how" class="btn-outline-sm">How it works</a>
-        </div>
+        <div style="font-family: 'Sora'; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #45e08a; margin-bottom: 18px;">Your data · POPIA</div>
+        <h2 style="font-weight: 700; font-size: clamp(28px, 3.6vw, 42px); line-height: 1.04; letter-spacing: -.025em; margin: 0;">Nothing leaves your systems.</h2>
       </div>
-      <div class="footer-cols">
-        <div>
-          <div class="eyebrow">GrowMatic</div>
-          <div class="footer-links">
-            <a href="/">Home</a>
-            <a href="#how">How it works</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#faq">FAQ</a>
+      <div>
+        <div style="display: grid; gap: 14px;">
+          <div style="display: flex; gap: 14px; align-items: flex-start;">
+            <span style="flex-shrink: 0; width: 24px; height: 24px; border-radius: 7px; background: rgba(69,224,138,.14); color: #45e08a; font-size: 13px; font-weight: 800; display: grid; place-items: center; margin-top: 2px;">✓</span>
+            <p style="font-size: 16px; line-height: 1.55; color: #aab2c0; margin: 0;">The audit is done over WhatsApp video with you sharing your screen — your quote records, customer details and prices stay on your machine.</p>
           </div>
-        </div>
-        <div>
-          <div class="eyebrow">Legal</div>
-          <div class="footer-links">
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="popia.html">POPIA Notice</a>
-            <a href="terms.html">Terms of Service</a>
+          <div style="display: flex; gap: 14px; align-items: flex-start;">
+            <span style="flex-shrink: 0; width: 24px; height: 24px; border-radius: 7px; background: rgba(69,224,138,.14); color: #45e08a; font-size: 13px; font-weight: 800; display: grid; place-items: center; margin-top: 2px;">✓</span>
+            <p style="font-size: 16px; line-height: 1.55; color: #aab2c0; margin: 0;">I do not ask you to upload a database or hand over any logins.</p>
           </div>
-        </div>
-        <div>
-          <div class="eyebrow">Get in touch</div>
-          <div class="footer-links">
-            <a href="mailto:ewan@growmaticsa.com">ewan@growmaticsa.com</a>
-            <a href="https://wa.me/27827900255" class="wa-general" target="_blank" rel="noopener noreferrer">+27 82 790 0255</a>
-            <span class="muted">Gqeberha · Eastern Cape</span>
+          <div style="display: flex; gap: 14px; align-items: flex-start;">
+            <span style="flex-shrink: 0; width: 24px; height: 24px; border-radius: 7px; background: rgba(69,224,138,.14); color: #45e08a; font-size: 13px; font-weight: 800; display: grid; place-items: center; margin-top: 2px;">✓</span>
+            <p style="font-size: 16px; line-height: 1.55; color: #aab2c0; margin: 0;">Anything you share is used only to give you your number, kept in line with POPIA, and never passed to anyone else.</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
+  </section>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <section style="max-width: 1200px; margin: 0 auto; padding: 0 28px 90px;">
+    <div style="position: relative; border-radius: 28px; overflow: hidden; padding: clamp(48px, 7vw, 88px) 48px; background: linear-gradient(140deg, #0e2b1c, #0a0f16 60%); border: 1px solid rgba(69,224,138,.22);">
+      <div style="position: absolute; inset: 0; background: radial-gradient(760px 420px at 50% -14%, rgba(69,224,138,.26), transparent 66%); pointer-events: none;"></div>
+      <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size: 54px 54px; -webkit-mask-image: radial-gradient(600px 300px at 50% 0%, #000, transparent 75%); mask-image: radial-gradient(600px 300px at 50% 0%, #000, transparent 75%); pointer-events: none;"></div>
+      <div id="cta-grid" style="position: relative; display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center;">
+        <div>
+          <h2 style="font-weight: 700; font-size: clamp(32px, 4.4vw, 54px); line-height: 1.02; letter-spacing: -.03em; margin: 0 0 20px; max-width: 16ch;">See what your quiet quotes are worth.</h2>
+          <p style="font-size: 18px; line-height: 1.5; color: #b7bdc8; margin: 0; max-width: 46ch;">Send me last month's open quotes and I'll show you the real number. Fifteen minutes, no card, no sign-up, no long contract.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 13px;">
+          <a href="https://wa.me/27827900255?text=Hi%20Ewan%2C%20I%27d%20like%20to%20book%20the%20free%2015-minute%20audit." style="display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 17px 30px; border-radius: 12px; background: #16a34a; color: #fff; font-family: 'Sora'; font-weight: 600; font-size: 17px; box-shadow: 0 16px 40px rgba(22,163,74,.4);">Book on WhatsApp →</a>
+          <a href="mailto:ewan@growmaticsa.com" style="display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 17px 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.03); color: #eef1f5; font-family: 'Sora'; font-weight: 500; font-size: 17px;">Email instead</a>
+          <div style="text-align: center; font-size: 13px; color: #7c8494; margin-top: 4px;">+27 82 790 0255 · Gqeberha</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="position: relative; border-top: 1px solid rgba(255,255,255,.06); background: radial-gradient(900px 300px at 20% 0%, rgba(69,224,138,.05), transparent 70%);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 72px 28px 40px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.1fr; gap: 40px;">
+      <div style="max-width: 360px;">
+        <img src="assets/logo-mono-white.png" alt="GrowMatic SA" style="height: 42px; width: auto; display: block; margin-bottom: 24px;">
+        <p style="font-size: 15px; line-height: 1.65; color: #8b93a2; margin: 0 0 30px;">Quote Recovery follows up the quotes you've already sent — so potential jobs don't get forgotten while you're busy on-site.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <a href="https://wa.me/27827900255?text=Hi%20Ewan%2C%20I%27d%20like%20to%20book%20the%20free%2015-minute%20audit." style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 999px; background: #16a34a; color: #fff; font-family: 'Sora'; font-weight: 600; font-size: 15px; box-shadow: 0 10px 28px rgba(22,163,74,.32);">WhatsApp us</a>
+          <a href="#audit" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); color: #fff; font-family: 'Sora'; font-weight: 600; font-size: 15px;">How it works</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family: 'Sora'; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #45e08a; font-weight: 600; margin-bottom: 20px;">GrowMatic</div>
+        <div style="display: grid; gap: 14px; font-size: 15px;">
+          <a href="#top" style="color: #aab2c0;">Home</a>
+          <a href="#audit" style="color: #aab2c0;">How it works</a>
+          <a href="#honest" style="color: #aab2c0;">Pricing</a>
+          <a href="#calculator" style="color: #aab2c0;">Calculator</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family: 'Sora'; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #45e08a; font-weight: 600; margin-bottom: 20px;">Legal</div>
+        <div style="display: grid; gap: 14px; font-size: 15px;">
+          <a href="privacy.html" style="color: #aab2c0;">Privacy Policy</a>
+          <a href="popia.html" style="color: #aab2c0;">POPIA Notice</a>
+          <a href="terms.html" style="color: #aab2c0;">Terms of Service</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family: 'Sora'; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #45e08a; font-weight: 600; margin-bottom: 20px;">Get in touch</div>
+        <div style="display: grid; gap: 14px; font-size: 15px;">
+          <a href="mailto:ewan@growmaticsa.com" style="color: #dfe4ec;">ewan@growmaticsa.com</a>
+          <a href="tel:+27827900255" style="color: #dfe4ec;">+27 82 790 0255</a>
+          <span style="color: #7c8494;">Gqeberha · Eastern Cape</span>
+        </div>
+      </div>
+    </div>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 24px 28px; border-top: 1px solid rgba(255,255,255,.06); display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; font-family: 'Sora'; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #5f6675;">
       <span>© 2026 GrowMatic SA · All rights reserved</span>
-      <span>growmaticsa.com</span>
-      <span>Proudly Eastern Cape</span>
+      <span style="text-align: center;">growmaticsa.com</span>
+      <span style="text-align: right;">Proudly Eastern Cape</span>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<a href="https://wa.me/27827900255?text=Hi!%20I%20want%20GrowMatic%20to%20follow%20up%20my%20outstanding%20quotes." class="wa-float wa-general" id="wa-float-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp us">
-  <svg width="30" height="30" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
-</a>
-
-<!-- Matt — the site chat assistant (shared widget, styles in styles.css, logic in chat-widget.js) -->
-<div class="chat-teaser" id="chat-teaser" hidden>
-  <button type="button" id="chat-teaser-open">Hi, I'm Matt 👋 — questions about recovering your quotes?</button>
-  <button type="button" id="chat-teaser-dismiss" aria-label="Dismiss">&times;</button>
-</div>
-
-<button type="button" class="chat-launcher" id="chat-launcher" aria-label="Chat with Matt" aria-expanded="false">
-  <svg class="icon-bubble" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-  <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-</button>
-
-<div class="chat-panel" id="chat-panel" role="dialog" aria-label="Chat with Matt" hidden>
-  <div class="chat-panel-header">
-    <div class="chat-avatar"><img src="assets/logo.png" alt=""><span class="chat-status-dot"></span></div>
-    <div>
-      <div class="chat-panel-name">Matt</div>
-      <div class="chat-panel-sub">GrowMatic SA &middot; usually replies in seconds</div>
-    </div>
-  </div>
-  <div class="chat-messages" id="chat-messages"></div>
-  <div class="chat-escalation" id="chat-escalation" hidden>
-    <a href="https://wa.me/27827900255?text=Hi!%20I'd%20like%20GrowMatic%20to%20follow%20up%20my%20outstanding%20quotes." class="wa-call" target="_blank" rel="noopener noreferrer"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> WhatsApp</a>
-    <a href="mailto:ewan@growmaticsa.com"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> Email</a>
-  </div>
-  <div class="chat-input-row">
-    <textarea id="chat-input" placeholder="Tell Matt about your business&hellip;" rows="1" maxlength="4000"></textarea>
-    <button type="button" id="chat-send" aria-label="Send message" disabled>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-    </button>
   </div>
 </div>
 
 <script>
-  // Minimal, homepage-only JS. No dependency on the old app.js (retired along
-  // with the previous generic-automation homepage it was written for).
-  (function () {
-    // Mobile nav toggle.
-    var nav = document.getElementById('nav');
-    var toggle = document.getElementById('nav-toggle');
-    if (nav && toggle) {
-      toggle.addEventListener('click', function () {
-        var open = nav.classList.toggle('menu-open');
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-    }
+(function () {
+  "use strict";
 
-    // Recovered-revenue calculator — honest, uses the visitor's own numbers.
-    var q = document.getElementById('q');
-    var qval = document.getElementById('qval');
-    var oSilent = document.getElementById('o-silent');
-    var oYear = document.getElementById('o-year');
-    var oMo = document.getElementById('o-mo');
-    if (q && qval && oYear) {
-      var zar = new Intl.NumberFormat('en-ZA', { style: 'currency', currency: 'ZAR', maximumFractionDigits: 0 });
-      var calc = function () {
-        var quotes = Math.max(0, Number(q.value) || 0);
-        var val = Math.max(0, Number(qval.value) || 0);
-        var silent = Math.round(quotes * 0.40);      // ~40% of quotes go quiet
-        var recoveredMonth = (silent / 4) * val;      // win back a conservative 1 in 4
-        var recoveredYear = recoveredMonth * 12;
-        oSilent.textContent = '≈ ' + silent;
-        oYear.textContent = zar.format(recoveredYear);
-        oMo.textContent = 'About ' + zar.format(recoveredMonth) + '/month you’re currently leaving on the table.';
-      };
-      q.addEventListener('input', calc);
-      qval.addEventListener('input', calc);
-      calc();
+  // ---------- Trust band (build twice for the seamless marquee loop) ----------
+  var trust = [
+    { n: "15 min", label: "All the audit takes" },
+    { n: "R0", label: "To find your number" },
+    { n: "0", label: "Software to install" },
+    { n: "1", label: "Person on the job — me" }
+  ];
+  var tape = document.getElementById("trust-tape");
+  var tapeHtml = "";
+  [0, 1].forEach(function () {
+    trust.forEach(function (t) {
+      tapeHtml +=
+        '<div style="display: flex; align-items: center; gap: 16px; padding: 30px 46px; border-left: 1px solid rgba(255,255,255,.06); white-space: nowrap;">' +
+        '<span class="fig" style="font-family: \'Sora\'; font-weight: 700; font-size: 42px; letter-spacing: -.03em; background: linear-gradient(160deg, #7ff0ac, #2fa862); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1;">' + t.n + '</span>' +
+        '<span style="font-size: 14px; color: #9aa3b2; line-height: 1.3; white-space: normal; max-width: 160px;">' + t.label + '</span>' +
+        '</div>';
+    });
+  });
+  tape.innerHTML = tapeHtml;
+
+  // ---------- Calculator ----------
+  function fmt(n) {
+    return "R" + Math.round(n).toLocaleString("en-ZA").replace(/[, ]/g, " ");
+  }
+  function pctOf(v, min, max) {
+    return (((v - min) / (max - min)) * 100).toFixed(1) + "%";
+  }
+
+  var quotesInput = document.getElementById("quotes-input");
+  var avgInput = document.getElementById("avg-input");
+  var pctInput = document.getElementById("pct-input");
+  var quotesVal = document.getElementById("quotes-val");
+  var avgVal = document.getElementById("avg-val");
+  var pctVal = document.getElementById("pct-val");
+  var figureVal = document.getElementById("figure-val");
+  var monthlyVal = document.getElementById("monthly-val");
+
+  var displayed = 0;
+  var raf = null;
+
+  function target() {
+    var q = Number(quotesInput.value) || 0;
+    var a = Number(avgInput.value) || 0;
+    var p = Number(pctInput.value) || 0;
+    return q * a * (p / 100) * 12;
+  }
+
+  function animateTo(dest) {
+    if (raf) cancelAnimationFrame(raf);
+    var start = displayed;
+    var t0 = performance.now();
+    var dur = 420;
+    function step(now) {
+      var p = Math.min(1, (now - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      displayed = start + (dest - start) * e;
+      figureVal.textContent = fmt(displayed);
+      monthlyVal.textContent = fmt(displayed / 12);
+      if (p < 1) raf = requestAnimationFrame(step);
     }
-  })();
+    raf = requestAnimationFrame(step);
+  }
+
+  function updateTrack(input) {
+    var min = Number(input.min), max = Number(input.max), v = Number(input.value);
+    input.style.setProperty("--p", pctOf(v, min, max));
+  }
+
+  quotesInput.addEventListener("input", function () {
+    quotesVal.textContent = quotesInput.value;
+    updateTrack(quotesInput);
+    animateTo(target());
+  });
+  avgInput.addEventListener("input", function () {
+    avgVal.textContent = fmt(Number(avgInput.value));
+    updateTrack(avgInput);
+    animateTo(target());
+  });
+  pctInput.addEventListener("input", function () {
+    pctVal.textContent = pctInput.value + "%";
+    updateTrack(pctInput);
+    animateTo(target());
+  });
+
+  updateTrack(quotesInput);
+  updateTrack(avgInput);
+  updateTrack(pctInput);
+  animateTo(target());
+})();
 </script>
-<script src="chat-widget.js?v=20260727a"></script>
-
 </body>
 </html>
